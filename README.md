@@ -1,6 +1,6 @@
 # <img src="/Meta/logo.png?raw=true" height="42" alt="Anymotion" />
 
-Anymotion provides one unified API for animations with support for UIKit, CoreAnimation, POP and your library of choice
+Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and your library of choice.
 
 ### Installation
 
