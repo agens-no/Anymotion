@@ -1,6 +1,6 @@
 //
-// Authors: Mats Hauge <mats@agens.no"
-//          Håvard Fossli <hfossli@agens.no"
+// Authors: Mats Hauge <mats@agens.no>
+//          Håvard Fossli <hfossli@agens.no>
 //
 // Copyright (c) 2013 Agens AS (http://agens.no/)
 //
@@ -22,12 +22,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ANYActivity.h"
+#import <QuartzCore/QuartzCore.h>
 #import "ANYAnimation.h"
-#import "ANYSubscriber.h"
-#import "CoreAnimation+ANYAnimation.h"
-#import "POPAnimation+ANYAnimation.h"
-#import "ANYBasicCoreAnimation.h"
-#import "ANYBasicPOP.h"
-#import "ANYDecayPOP.h"
-#import "ANYSpringPOP.h"
+
+@interface CABasicAnimation (ANYAnimation)
+
+- (ANYAnimation *)animation:(CALayer *)layer;
+- (ANYAnimation *)animation:(CALayer *)layer toValue:(id)toValue;
+- (ANYAnimation *)animation:(CALayer *)layer resetBlock:(void(^)(void))reset;
+
+@end

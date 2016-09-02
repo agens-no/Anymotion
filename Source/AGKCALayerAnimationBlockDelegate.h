@@ -1,6 +1,5 @@
 //
-// Authors: Mats Hauge <mats@agens.no"
-//          Håvard Fossli <hfossli@agens.no"
+// Author: Håvard Fossli <hfossli@agens.no>
 //
 // Copyright (c) 2013 Agens AS (http://agens.no/)
 //
@@ -22,12 +21,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ANYActivity.h"
-#import "ANYAnimation.h"
-#import "ANYSubscriber.h"
-#import "CoreAnimation+ANYAnimation.h"
-#import "POPAnimation+ANYAnimation.h"
-#import "ANYBasicCoreAnimation.h"
-#import "ANYBasicPOP.h"
-#import "ANYDecayPOP.h"
-#import "ANYSpringPOP.h"
+#import <Foundation/Foundation.h>
+#import <QuartzCore/CAAnimation.h>
+
+@interface AGKCALayerAnimationBlockDelegate : NSObject
+
+@property (nonatomic, copy) void (^onStart)();
+@property (nonatomic, copy) void (^onStop)(BOOL completed);
+@property (nonatomic, assign) BOOL autoRemoveBlocks; // defaults to YES - will clear blocks after calling onAnimationDidStop
+
++ (instancetype)newWithAnimationDidStart:(void(^)(void))onStart didStop:(void(^)(BOOL completed))onStop;
++ (instancetype)newWithAnimationDidStop:(void(^)(BOOL completed))onStop;
+
+@end

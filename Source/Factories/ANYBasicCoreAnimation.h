@@ -1,6 +1,6 @@
 //
-// Authors: Mats Hauge <mats@agens.no"
-//          Håvard Fossli <hfossli@agens.no"
+// Authors: Mats Hauge <mats@agens.no>
+//          Håvard Fossli <hfossli@agens.no>
 //
 // Copyright (c) 2013 Agens AS (http://agens.no/)
 //
@@ -22,12 +22,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ANYActivity.h"
 #import "ANYAnimation.h"
-#import "ANYSubscriber.h"
-#import "CoreAnimation+ANYAnimation.h"
-#import "POPAnimation+ANYAnimation.h"
-#import "ANYBasicCoreAnimation.h"
-#import "ANYBasicPOP.h"
-#import "ANYDecayPOP.h"
-#import "ANYSpringPOP.h"
+
+#import <Foundation/Foundation.h>
+#import <pop/pop.h>
+
+@interface ANYBasicCoreAnimation : NSObject <NSCopying>
+
++ (instancetype)animationWithKeyPath:(NSString *)keyPath;
+
+- (instancetype)animationWithKeyPath:(NSString *)keyPath;
+- (instancetype)toValue:(id)toValue;
+- (instancetype)byValue:(id)byValue;
+- (instancetype)fromValue:(id)fromValue;
+- (instancetype)additive:(BOOL)additive;
+- (instancetype)cumulative:(BOOL)cumulative;
+- (instancetype)duration:(NSTimeInterval)duration;
+- (instancetype)removedOnCompletion:(BOOL)removedOnCompletion;
+- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
+
+- (CABasicAnimation *)build;
+- (ANYAnimation *)animation:(CALayer *)layer;
+
+@end
