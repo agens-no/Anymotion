@@ -168,7 +168,7 @@
     return factory;
 }
 
-- (id)buildAnimation
+- (POPSpringAnimation *)build;
 {
     POPSpringAnimation *anim = [POPSpringAnimation new];
     anim.property = self.property;

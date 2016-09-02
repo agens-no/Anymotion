@@ -28,30 +28,40 @@
     view1.alpha = 0.0;
     [self.view addSubview:view1];
     
-    POPBasicAnimation *alpha0 = [[[[ANYBasicPOP propertyNamed:kPOPViewAlpha] duration:3] toValue:@0] build];
-    POPBasicAnimation *alpha1 = [[[[ANYBasicPOP propertyNamed:kPOPViewAlpha] duration:3] toValue:@1] build];
-    POPBasicAnimation *frame0 = [[[[ANYBasicPOP propertyNamed:kPOPViewFrame] duration:5] toValue:[NSValue valueWithCGRect:CGRectMake(100.0, 300.0, 50.0, 50.0)]] build];
-    POPBasicAnimation *frame1 = [[[[ANYBasicPOP propertyNamed:kPOPViewFrame] duration:5] toValue:[NSValue valueWithCGRect:CGRectMake(100.0, 0.0, 50.0, 50.0)]] build];
+    CABasicAnimation *alpha0 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"opacity"] duration:3] toValue:@0] build];
+    CABasicAnimation *alpha1 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"opacity"] duration:3] toValue:@1] build];
+    CABasicAnimation *size0 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"bounds"] duration:5] toValue:[NSValue valueWithCGSize:CGSizeMake(50.0, 50.0)]] build];
+    CABasicAnimation *size1 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"bounds"] duration:5] toValue:[NSValue valueWithCGSize:CGSizeMake(50.0, 50.0)]] build];
+    CABasicAnimation *pos0 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"position"] duration:5] toValue:[NSValue valueWithCGPoint:CGPointMake(100.0, 300.0)]] build];
+    CABasicAnimation *pos1 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"position"] duration:5] toValue:[NSValue valueWithCGPoint:CGPointMake(100.0, 0.0)]] build];
     
-    POPBasicAnimation *alpha2 = [[[[ANYBasicPOP propertyNamed:kPOPViewAlpha] duration:3] toValue:@1] build];
-    POPBasicAnimation *alpha3 = [[[[ANYBasicPOP propertyNamed:kPOPViewAlpha] duration:3] toValue:@0] build];
-    POPBasicAnimation *frame2 = [[[[ANYBasicPOP propertyNamed:kPOPViewFrame] duration:5] toValue:[NSValue valueWithCGRect:CGRectMake(200.0, 200.0, 200.0, 200.0)]] build];
-    POPBasicAnimation *frame3 = [[[[ANYBasicPOP propertyNamed:kPOPViewFrame] duration:5] toValue:[NSValue valueWithCGRect:CGRectMake(100.0, 100.0, 50.0, 50.0)]] build];
+    CABasicAnimation *alpha2 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"opacity"] duration:3] toValue:@1] build];
+    CABasicAnimation *alpha3 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"opacity"] duration:3] toValue:@0] build];
+    CABasicAnimation *size2 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"bounds"] duration:5] toValue:[NSValue valueWithCGSize:CGSizeMake(200.0, 200.0)]] build];
+    CABasicAnimation *size3 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"bounds"] duration:5] toValue:[NSValue valueWithCGSize:CGSizeMake(50.0, 50.0)]] build];
+    CABasicAnimation *pos2 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"position"] duration:5] toValue:[NSValue valueWithCGPoint:CGPointMake(200.0, 200.0)]] build];
+    CABasicAnimation *pos3 = [[[[ANYBasicCoreAnimation animationWithKeyPath:@"position"] duration:5] toValue:[NSValue valueWithCGPoint:CGPointMake(100.0, 100.0)]] build];
     
     ANYAnimation *group0 = [ANYAnimation group:@[
-                                               [alpha0 animation:view0],
-                                               [frame0 animation:view0],
-                                               [alpha1 animation:view1],
-                                               [frame1 animation:view1],
+                                               [alpha0 animation:view0.layer],
+                                               [size0 animation:view0.layer],
+                                               [pos0 animation:view0.layer],
+                                               [alpha1 animation:view1.layer],
+                                               [size1 animation:view1.layer],
+                                               [pos1 animation:view0.layer]
                                                ]];
     
     ANYAnimation *group1 = [ANYAnimation group:@[
-                                               [alpha2 animation:view0],
-                                               [frame2 animation:view0],
-                                               [alpha3 animation:view1],
-                                               [frame3 animation:view1],
+                                               [alpha2 animation:view0.layer],
+                                               [size2 animation:view0.layer],
+                                               [pos2 animation:view0.layer],
+                                               [alpha3 animation:view1.layer],
+                                               [size3 animation:view1.layer],
+                                               [pos3 animation:view0.layer]
                                                ]];
     
-    [[[[ANYAnimation group:@[group0]] then:group1] repeat] start];
+    [[[[ANYAnimation group:@[group0]] then:group1] onCompletion:^{
+        NSLog(@"ALL ANIMATIONS DONE!");
+    }] start];
 }
 @end
