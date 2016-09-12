@@ -26,7 +26,7 @@
 
 @interface ANYActivity : NSObject
 
-+ (instancetype)activityWithBlock:(dispatch_block_t)block;
++ (instancetype)activityWithTearDownBlock:(dispatch_block_t)block;
 
 - (void)cancel;
 - (BOOL)cancelled;

@@ -54,7 +54,7 @@
 
     return ^ANYActivity * (ANYSubscriber *s) {
 
-        ANYActivity *masterActivity = [ANYActivity activityWithBlock:nil];
+        ANYActivity *masterActivity = [ANYActivity new];
 
         ANYSubscriber *intermediate = [[ANYSubscriber alloc] initWithOnWrite:^{
             [s write];
@@ -67,11 +67,7 @@
         }];
 
         ANYActivity *activity = create(intermediate);
-
-        [masterActivity addBlock:^{
-            [activity cancel];
-        }];
-
+        [masterActivity add:activity];
         return masterActivity;
 
     }(subscriber);
@@ -200,7 +196,7 @@
 {
     return [ANYAnimation createAnimation:^ANYActivity * (ANYSubscriber *subscriber) {
 
-        ANYActivity *master = [ANYActivity activityWithBlock:nil];
+        ANYActivity *master = [ANYActivity new];
 
         ANYActivity *first = [self subscribeWrite:^{
             [subscriber write];
@@ -247,7 +243,7 @@
             }
         }];
 
-        return [ANYActivity activityWithBlock:^{
+        return [ANYActivity activityWithTearDownBlock:^{
             cancelled = YES;
             [current cancel];
         }];

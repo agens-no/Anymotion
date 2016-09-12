@@ -53,7 +53,7 @@
     return self;
 }
 
-+ (instancetype)activityWithBlock:(dispatch_block_t)block
++ (instancetype)activityWithTearDownBlock:(dispatch_block_t)block
 {
     return [[self alloc] initWithBlock:block];
 }

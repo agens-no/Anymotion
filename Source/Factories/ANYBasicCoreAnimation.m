@@ -141,7 +141,7 @@
         [layer removeAnimationForKey:key];
         [layer addAnimation:basic forKey:key];
         
-        return [ANYActivity activityWithBlock:^{
+        return [ANYActivity activityWithTearDownBlock:^{
             
             @strongify(layer);
             [layer removeAnimationForKey:key];

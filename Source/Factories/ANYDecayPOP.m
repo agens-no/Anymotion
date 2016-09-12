@@ -108,7 +108,7 @@
         [object pop_removeAnimationForKey:key];
         [object pop_addAnimation:basic forKey:key];
         
-        return [ANYActivity activityWithBlock:^{
+        return [ANYActivity activityWithTearDownBlock:^{
             
             @strongify(object);
             [object pop_removeAnimationForKey:key];
