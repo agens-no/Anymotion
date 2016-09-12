@@ -32,6 +32,6 @@
 - (BOOL)cancelled;
 
 - (void)add:(ANYActivity *)activity;
-- (void)addBlock:(dispatch_block_t)block;
+- (void)addTearDownBlock:(dispatch_block_t)block;
 
 @end

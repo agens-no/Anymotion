@@ -67,7 +67,7 @@
     }
 }
 
-- (void)addBlock:(dispatch_block_t)block
+- (void)addTearDownBlock:(dispatch_block_t)block
 {
     if(self.cancelled)
     {
@@ -85,7 +85,7 @@
 
 - (void)add:(ANYActivity *)activity
 {
-    [self addBlock:^{
+    [self addTearDownBlock:^{
         [activity cancel];
     }];
 }
