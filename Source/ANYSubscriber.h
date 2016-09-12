@@ -32,4 +32,7 @@
 - (void)completed;
 - (void)failed;
 
+// Convenience
+- (void)completed:(BOOL)completed;
+
 @end

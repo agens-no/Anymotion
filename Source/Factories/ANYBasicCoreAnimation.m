@@ -23,129 +23,132 @@
 // THE SOFTWARE.
 
 #import "ANYBasicCoreAnimation.h"
-#import "CoreAnimation+ANYAnimation.h"
-
 #import <QuartzCore/QuartzCore.h>
+#import "ANYEXTScope.h"
+#import "ANYCALayerAnimationBlockDelegate.h"
+
 
 @interface ANYBasicCoreAnimation ()
-
-@property (nonatomic, strong) NSString *keyPath;
-@property (nonatomic, strong) id toValue;
-@property (nonatomic, strong) id byValue;
-@property (nonatomic, strong) id fromValue;
-@property (nonatomic, assign) BOOL additive;
-@property (nonatomic, assign) BOOL cumulative;
-@property (nonatomic, assign) NSTimeInterval duration;
-@property (nonatomic, assign) BOOL removedOnCompletion;
-@property (nonatomic, strong) CAMediaTimingFunction *timingFunction;
-
+@property (nonatomic, copy) void (^configure)(CABasicAnimation *anim);
 @end
 
 @implementation ANYBasicCoreAnimation
 
+- (ANYBasicCoreAnimation *)configure:(void (^)(CABasicAnimation *anim))configure
+{
+    ANYBasicCoreAnimation *instance = [ANYBasicCoreAnimation new];
+    instance.configure = ^(CABasicAnimation *basic){
+        if(self.configure)
+        {
+            self.configure(basic);
+        }
+        if(configure)
+        {
+            configure(basic);
+        }
+    };
+    return instance;
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
-    ANYBasicCoreAnimation *factory = [ANYBasicCoreAnimation new];
-    factory.keyPath = self.keyPath;
-    factory.toValue = self.toValue;
-    factory.byValue = self.byValue;
-    factory.fromValue = self.fromValue;
-    factory.additive = self.additive;
-    factory.cumulative = self.cumulative;
-    factory.duration = self.duration;
-    factory.removedOnCompletion = self.removedOnCompletion;
-    factory.timingFunction = self.timingFunction;
-    return factory;
-}
-
-+ (instancetype)animationWithKeyPath:(NSString *)keyPath;
-{
-    ANYBasicCoreAnimation *factory = [self new];
-    factory.keyPath = keyPath;
-    return factory;
-}
-
-- (instancetype)animationWithKeyPath:(NSString *)keyPath;
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.keyPath = keyPath;
-    return factory;
-}
-
-- (instancetype)toValue:(id)toValue
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.toValue = toValue;
-    return factory;
-}
-
-- (instancetype)byValue:(id)byValue
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.byValue = byValue;
-    return factory;
-}
-
-- (instancetype)fromValue:(id)fromValue
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.fromValue = fromValue;
-    return factory;
-}
-
-- (instancetype)additive:(BOOL)additive
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.additive = additive;
-    return factory;
-}
-
-- (instancetype)cumulative:(BOOL)cumulative
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.cumulative = cumulative;
-    return factory;
-}
-
-- (instancetype)duration:(NSTimeInterval)duration
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.duration = duration;
-    return factory;
-}
-
-- (instancetype)removedOnCompletion:(BOOL)removedOnCompletion
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.removedOnCompletion = removedOnCompletion;
-    return factory;
-}
-
-- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction
-{
-    ANYBasicCoreAnimation *factory = [self copy];
-    factory.timingFunction = timingFunction;
-    return factory;
+    return [self configure:nil];
 }
 
 - (CABasicAnimation *)build
 {
     CABasicAnimation *anim = [CABasicAnimation animation];
-    anim.keyPath = self.keyPath;
-    anim.toValue = self.toValue;
-    anim.byValue = self.byValue;
-    anim.fromValue = self.fromValue;
-    anim.additive = self.additive;
-    anim.cumulative = self.cumulative;
-    anim.duration = self.duration;
-    anim.removedOnCompletion = self.removedOnCompletion;
-    anim.timingFunction = self.timingFunction;
+    self.configure(anim);
     return anim;
 }
 
-- (ANYAnimation *)animation:(CALayer *)layer
+- (instancetype)toValue:(id)toValue
 {
-    return [[self build] animation:layer];
+    return [self configure:^(CABasicAnimation *anim) {
+        anim.toValue = toValue;
+    }];
+}
+
+- (instancetype)byValue:(id)byValue
+{
+    return [self configure:^(CABasicAnimation *anim) {
+        anim.byValue = byValue;
+    }];
+}
+
+- (instancetype)fromValue:(id)fromValue
+{
+    return [self configure:^(CABasicAnimation *anim) {
+        anim.fromValue = fromValue;
+    }];
+}
+
+- (instancetype)additive:(BOOL)additive
+{
+    return [self configure:^(CABasicAnimation *anim) {
+        anim.additive = additive;
+    }];
+}
+
+- (instancetype)cumulative:(BOOL)cumulative
+{
+    return [self configure:^(CABasicAnimation *anim) {
+        anim.cumulative = cumulative;
+    }];
+}
+
+- (instancetype)duration:(NSTimeInterval)duration
+{
+    return [self configure:^(CABasicAnimation *anim) {
+        anim.duration = duration;
+    }];
+}
+
+- (instancetype)removedOnCompletion:(BOOL)removedOnCompletion
+{
+    return [self configure:^(CABasicAnimation *anim) {
+        anim.removedOnCompletion = removedOnCompletion;
+    }];
+}
+
+- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction
+{
+    return [self configure:^(CABasicAnimation *anim) {
+        anim.timingFunction = timingFunction;
+    }];
+}
+
+- (ANYAnimation *)animationFor:(CALayer *)layer keyPath:(NSString *)keyPath
+{
+    NSString *key = [NSString stringWithFormat:@"ag.%@", keyPath];
+    
+    @weakify(layer);
+    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
+        @strongify(layer);
+        
+        CABasicAnimation *basic = [self build];
+        basic.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStop:^(BOOL completed){
+            if(completed)
+            {
+                [subscriber completed];
+            }
+            else
+            {
+                [subscriber failed];
+            }
+        }];
+        
+        [layer removeAnimationForKey:key];
+        [layer addAnimation:basic forKey:key];
+        
+        return [ANYActivity activityWithBlock:^{
+            
+            @strongify(layer);
+            [layer removeAnimationForKey:key];
+            
+        }];
+        
+    }];
 }
 
 @end

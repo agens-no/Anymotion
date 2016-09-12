@@ -23,101 +23,100 @@
 // THE SOFTWARE.
 
 #import "ANYBasicPOP.h"
-#import "POPAnimation+ANYAnimation.h"
+#import "ANYEXTScope.h"
 
 @interface ANYBasicPOP ()
-
-@property (nonatomic, strong) POPAnimatableProperty *property;
-@property (nonatomic, strong) id fromValue;
-@property (nonatomic, strong) id toValue;
-@property (nonatomic, assign) NSTimeInterval duration;
-@property (nonatomic, strong) CAMediaTimingFunction *timingFunction;
-
+@property (nonatomic, copy) void (^configure)(POPBasicAnimation *anim);
 @end
 
 @implementation ANYBasicPOP
 
+- (ANYBasicPOP *)configure:(void (^)(POPBasicAnimation *anim))configure
+{
+    ANYBasicPOP *instance = [ANYBasicPOP new];
+    instance.configure = ^(POPBasicAnimation *basic){
+        if(self.configure)
+        {
+            self.configure(basic);
+        }
+        if(configure)
+        {
+            configure(basic);
+        }
+    };
+    return instance;
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
-    ANYBasicPOP *factory = [ANYBasicPOP new];
-    factory.property = self.property;
-    factory.fromValue = self.fromValue;
-    factory.toValue = self.toValue;
-    factory.duration = self.duration;
-    factory.timingFunction = self.timingFunction;
-    return factory;
-}
-
-+ (instancetype)propertyNamed:(NSString *)property
-{
-    ANYBasicPOP *factory = [self new];
-    factory.property = [POPAnimatableProperty propertyWithName:property];
-    return factory;
-}
-
-+ (instancetype)property:(POPAnimatableProperty *)property
-{
-    ANYBasicPOP *factory = [self new];
-    factory.property = property;
-    return factory;
-}
-
-- (instancetype)propertyNamed:(NSString *)property
-{
-    ANYBasicPOP *factory = [self copy];
-    factory.property = [POPAnimatableProperty propertyWithName:property];
-    return factory;
-}
-
-- (instancetype)property:(POPAnimatableProperty *)property
-{
-    ANYBasicPOP *factory = [self copy];
-    factory.property = property;
-    return factory;
-}
-
-- (instancetype)fromValue:(id)fromValue
-{
-    ANYBasicPOP *factory = [self copy];
-    factory.fromValue = fromValue;
-    return factory;
-}
-
-- (instancetype)toValue:(id)toValue
-{
-    ANYBasicPOP *factory = [self copy];
-    factory.toValue = toValue;
-    return factory;
-}
-
-- (instancetype)duration:(NSTimeInterval)duration
-{
-    ANYBasicPOP *factory = [self copy];
-    factory.duration = duration;
-    return factory;
-}
-
-- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction
-{
-    ANYBasicPOP *factory = [self copy];
-    factory.timingFunction = timingFunction;
-    return factory;
+    return [self configure:nil];
 }
 
 - (POPBasicAnimation *)build
 {
-    POPBasicAnimation *anim = [POPBasicAnimation new];
-    anim.property = self.property;
-    anim.fromValue = self.fromValue;
-    anim.toValue = self.toValue;
-    anim.duration = self.duration;
-    anim.timingFunction = self.timingFunction;
+    POPBasicAnimation *anim = [POPBasicAnimation animation];
+    self.configure(anim);
     return anim;
 }
 
-- (ANYAnimation *)animation:(NSObject *)object
+- (instancetype)fromValue:(id)fromValue
 {
-    return [[self build] animation:object];
+    return [self configure:^(POPBasicAnimation *anim) {
+        anim.fromValue = fromValue;
+    }];
+}
+
+- (instancetype)toValue:(id)toValue
+{
+    return [self configure:^(POPBasicAnimation *anim) {
+        anim.toValue = toValue;
+    }];
+}
+
+- (instancetype)duration:(NSTimeInterval)duration
+{
+    return [self configure:^(POPBasicAnimation *anim) {
+        anim.duration = duration;
+    }];
+}
+
+- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction
+{
+    return [self configure:^(POPBasicAnimation *anim) {
+        anim.timingFunction = timingFunction;
+    }];
+}
+
+- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name
+{
+    return [self animationFor:object property:[POPAnimatableProperty propertyWithName:name]];
+}
+
+- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property
+{
+    NSString *key = [NSString stringWithFormat:@"ag.%@", property.name];
+    
+    @weakify(object);
+    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
+        @strongify(object);
+        
+        POPBasicAnimation *basic = [self build];
+        basic.property = property;
+        basic.completionBlock = ^(POPAnimation *anim, BOOL completed) {
+            [subscriber completed:completed];
+        };
+        
+        [object pop_removeAnimationForKey:key];
+        [object pop_addAnimation:basic forKey:key];
+        
+        return [ANYActivity activityWithBlock:^{
+            
+            @strongify(object);
+            [object pop_removeAnimationForKey:key];
+            
+        }];
+        
+    }];
 }
 
 @end

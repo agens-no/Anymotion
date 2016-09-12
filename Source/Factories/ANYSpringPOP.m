@@ -23,170 +23,134 @@
 // THE SOFTWARE.
 
 #import "ANYSpringPOP.h"
-#import "POPAnimation+ANYAnimation.h"
+#import "ANYEXTScope.h"
 
 @interface ANYSpringPOP ()
-
-@property (nonatomic, strong) POPAnimatableProperty *property;
-@property (nonatomic, strong) id fromValue;
-@property (nonatomic, strong) id toValue;
-@property (nonatomic, assign) CFTimeInterval beginTime;
-@property (nonatomic, assign) id velocity;
-@property (nonatomic, assign) CGFloat springSpeed;
-@property (nonatomic, assign) CGFloat dynamicsMass;
-@property (nonatomic, assign) CGFloat dynamicsTension;
-@property (nonatomic, assign) CGFloat dynamicsFriction;
-@property (nonatomic, assign) CGFloat springBounciness;
-
+@property (nonatomic, copy) void (^configure)(POPSpringAnimation *anim);
 @end
 
 @implementation ANYSpringPOP
 
-- (instancetype)init
+- (ANYSpringPOP *)configure:(void (^)(POPSpringAnimation *anim))configure
 {
-    self = [super init];
-    if (self)
-    {
-        POPSpringAnimation *anim = [POPSpringAnimation animation];
-        self.fromValue = anim.fromValue;
-        self.toValue = anim.toValue;
-        self.beginTime = anim.beginTime;
-        self.velocity = anim.velocity;
-        self.springSpeed = anim.springSpeed;
-        self.dynamicsMass = anim.dynamicsMass;
-        self.dynamicsTension = anim.dynamicsTension;
-        self.dynamicsFriction = anim.dynamicsFriction;
-        self.springBounciness = anim.springBounciness;
-    }
-    return self;
+    ANYSpringPOP *instance = [ANYSpringPOP new];
+    instance.configure = ^(POPSpringAnimation *basic){
+        if(self.configure)
+        {
+            self.configure(basic);
+        }
+        if(configure)
+        {
+            configure(basic);
+        }
+    };
+    return instance;
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    ANYSpringPOP *factory = [ANYSpringPOP new];
-    factory.property = self.property;
-    factory.fromValue = self.fromValue;
-    factory.toValue = self.toValue;
-    factory.beginTime = self.beginTime;
-    factory.velocity = self.velocity;
-    factory.springSpeed = self.springSpeed;
-    factory.dynamicsMass = self.dynamicsMass;
-    factory.dynamicsTension = self.dynamicsTension;
-    factory.dynamicsFriction = self.dynamicsFriction;
-    factory.springBounciness = self.springBounciness;
-    return factory;
+    return [self configure:nil];
 }
 
-- (instancetype)propertyNamed:(NSString *)property
+- (POPSpringAnimation *)build
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.property = [POPAnimatableProperty propertyWithName:property];
-    return factory;
-}
-
-+ (instancetype)propertyNamed:(NSString *)property
-{
-    ANYSpringPOP *factory = [self new];
-    factory.property = [POPAnimatableProperty propertyWithName:property];
-    return factory;
-}
-
-- (instancetype)property:(POPAnimatableProperty *)property
-{
-    ANYSpringPOP *factory = [self copy];
-    factory.property = property;
-    return factory;
-}
-
-+ (instancetype)property:(POPAnimatableProperty *)property
-{
-    ANYSpringPOP *factory = [self new];
-    factory.property = property;
-    return factory;
+    POPSpringAnimation *anim = [POPSpringAnimation animation];
+    self.configure(anim);
+    return anim;
 }
 
 - (instancetype)fromValue:(id)fromValue
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.fromValue = fromValue;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.fromValue = fromValue;
+    }];
 }
 
 - (instancetype)toValue:(id)toValue
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.toValue = toValue;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.toValue = toValue;
+    }];
 }
 
 - (instancetype)beginTime:(CFTimeInterval)beginTime
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.beginTime = beginTime;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.beginTime = beginTime;
+    }];
 }
 
 - (instancetype)velocity:(id)velocity
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.velocity = velocity;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.velocity = velocity;
+    }];
 }
 
 - (instancetype)springSpeed:(CGFloat)springSpeed
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.springSpeed = springSpeed;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.springSpeed = springSpeed;
+    }];
 }
 
 - (instancetype)dynamicsMass:(CGFloat)dynamicsMass
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.dynamicsMass = dynamicsMass;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.dynamicsMass = dynamicsMass;
+    }];
 }
 
 - (instancetype)dynamicsTension:(CGFloat)dynamicsTension
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.dynamicsTension = dynamicsTension;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.dynamicsTension = dynamicsTension;
+    }];
 }
 
 - (instancetype)dynamicsFriction:(CGFloat)dynamicsFriction
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.dynamicsFriction = dynamicsFriction;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.dynamicsFriction = dynamicsFriction;
+    }];
 }
 
 - (instancetype)springBounciness:(CGFloat)springBounciness
 {
-    ANYSpringPOP *factory = [self copy];
-    factory.springBounciness = springBounciness;
-    return factory;
+    return [self configure:^(POPSpringAnimation *anim) {
+        anim.springBounciness = springBounciness;
+    }];
 }
 
-- (POPSpringAnimation *)build;
+- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name
 {
-    POPSpringAnimation *anim = [POPSpringAnimation new];
-    anim.property = self.property;
-    anim.fromValue = self.fromValue;
-    anim.toValue = self.toValue;
-    anim.beginTime = self.beginTime;
-    anim.velocity = self.velocity;
-    anim.springSpeed = self.springSpeed;
-    anim.dynamicsMass = self.dynamicsMass;
-    anim.dynamicsTension = self.dynamicsTension;
-    anim.dynamicsFriction = self.dynamicsFriction;
-    anim.springBounciness = self.springBounciness;
-    return anim;
+    return [self animationFor:object property:[POPAnimatableProperty propertyWithName:name]];
 }
 
-- (ANYAnimation *)animation:(NSObject *)object
+- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property
 {
-    return [[self build] animation:object];
+    NSString *key = [NSString stringWithFormat:@"ag.%@", property.name];
+    
+    @weakify(object);
+    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
+        @strongify(object);
+        
+        POPSpringAnimation *basic = [self build];
+        basic.completionBlock = ^(POPAnimation *anim, BOOL completed) {
+            [subscriber completed:completed];
+        };
+        
+        [object pop_removeAnimationForKey:key];
+        [object pop_addAnimation:basic forKey:key];
+        
+        return [ANYActivity activityWithBlock:^{
+            
+            @strongify(object);
+            [object pop_removeAnimationForKey:key];
+            
+        }];
+        
+    }];
 }
 
 @end

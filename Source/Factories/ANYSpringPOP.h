@@ -28,11 +28,8 @@
 
 @interface ANYSpringPOP : NSObject <NSCopying>
 
-+ (instancetype)propertyNamed:(NSString *)property;
-+ (instancetype)property:(POPAnimatableProperty *)property;
+- (ANYSpringPOP *)configure:(void (^)(POPSpringAnimation *anim))configure;
 
-- (instancetype)propertyNamed:(NSString *)property;
-- (instancetype)property:(POPAnimatableProperty *)property;
 - (instancetype)fromValue:(id)fromValue;
 - (instancetype)toValue:(id)toValue;
 - (instancetype)beginTime:(CFTimeInterval)beginTime;
@@ -43,7 +40,7 @@
 - (instancetype)dynamicsFriction:(CGFloat)dynamicsFriction;
 - (instancetype)springBounciness:(CGFloat)springBounciness;
 
-- (POPSpringAnimation *)build;
-- (ANYAnimation *)animation:(NSObject *)object;
+- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name;
+- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property;
 
 @end

@@ -30,6 +30,7 @@
 
 + (instancetype)createAnimation:(ANYActivity * (^)(ANYSubscriber *subscriber))create;
 
+- (ANYActivity *)subscribe:(ANYSubscriber *)subscriber;
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next;
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next error:(dispatch_block_t)error;
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next completed:(dispatch_block_t)completed;

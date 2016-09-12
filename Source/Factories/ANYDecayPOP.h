@@ -28,17 +28,14 @@
 
 @interface ANYDecayPOP : NSObject <NSCopying>
 
-+ (instancetype)propertyNamed:(NSString *)property;
-+ (instancetype)property:(POPAnimatableProperty *)property;
+- (ANYDecayPOP *)configure:(void (^)(POPDecayAnimation *anim))configure;
 
-- (instancetype)propertyNamed:(NSString *)property;
-- (instancetype)property:(POPAnimatableProperty *)property;
 - (instancetype)fromValue:(id)fromValue;
 - (instancetype)beginTime:(CFTimeInterval)beginTime;
 - (instancetype)velocity:(id)velocity;
 - (instancetype)deceleration:(CGFloat)deceleration;
 
-- (POPDecayAnimation *)build;
-- (ANYAnimation *)animation:(NSObject *)object;
+- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name;
+- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property;
 
 @end

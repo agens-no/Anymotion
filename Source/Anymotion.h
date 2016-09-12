@@ -25,8 +25,6 @@
 #import "ANYActivity.h"
 #import "ANYAnimation.h"
 #import "ANYSubscriber.h"
-#import "CoreAnimation+ANYAnimation.h"
-#import "POPAnimation+ANYAnimation.h"
 #import "ANYBasicCoreAnimation.h"
 #import "ANYBasicPOP.h"
 #import "ANYDecayPOP.h"

@@ -23,115 +23,99 @@
 // THE SOFTWARE.
 
 #import "ANYDecayPOP.h"
-#import "POPAnimation+ANYAnimation.h"
+#import "ANYEXTScope.h"
 
 @interface ANYDecayPOP ()
-
-@property (nonatomic, strong) POPAnimatableProperty *property;
-@property (nonatomic, strong) id fromValue;
-@property (nonatomic, assign) CFTimeInterval beginTime;
-@property (nonatomic, assign) id velocity;
-@property (nonatomic, assign) CGFloat deceleration;
-
+@property (nonatomic, copy) void (^configure)(POPDecayAnimation *anim);
 @end
 
 @implementation ANYDecayPOP
 
-- (instancetype)init
+- (ANYDecayPOP *)configure:(void (^)(POPDecayAnimation *anim))configure
 {
-    self = [super init];
-    if (self)
-    {
-        POPDecayAnimation *anim = [POPDecayAnimation animation];
-        self.fromValue = anim.fromValue;
-        self.beginTime = anim.beginTime;
-        self.velocity = anim.velocity;
-        self.deceleration = anim.deceleration;
-    }
-    return self;
+    ANYDecayPOP *instance = [ANYDecayPOP new];
+    instance.configure = ^(POPDecayAnimation *basic){
+        if(self.configure)
+        {
+            self.configure(basic);
+        }
+        if(configure)
+        {
+            configure(basic);
+        }
+    };
+    return instance;
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    ANYDecayPOP *factory = [ANYDecayPOP new];
-    factory.property = self.property;
-    factory.fromValue = self.fromValue;
-    factory.beginTime = self.beginTime;
-    factory.velocity = self.velocity;
-    factory.deceleration = self.deceleration;
-    return factory;
-}
-
-- (instancetype)propertyNamed:(NSString *)property
-{
-    ANYDecayPOP *factory = [self copy];
-    factory.property = [POPAnimatableProperty propertyWithName:property];
-    return factory;
-}
-
-+ (instancetype)propertyNamed:(NSString *)property
-{
-    ANYDecayPOP *factory = [self new];
-    factory.property = [POPAnimatableProperty propertyWithName:property];
-    return factory;
-}
-
-- (instancetype)property:(POPAnimatableProperty *)property
-{
-    ANYDecayPOP *factory = [self copy];
-    factory.property = property;
-    return factory;
-}
-
-+ (instancetype)property:(POPAnimatableProperty *)property
-{
-    ANYDecayPOP *factory = [self new];
-    factory.property = property;
-    return factory;
-}
-
-- (instancetype)fromValue:(id)fromValue;
-{
-    ANYDecayPOP *factory = [self copy];
-    factory.fromValue = fromValue;
-    return factory;
-}
-
-- (instancetype)beginTime:(CFTimeInterval)beginTime
-{
-    ANYDecayPOP *factory = [self copy];
-    factory.beginTime = beginTime;
-    return factory;
-}
-
-- (instancetype)velocity:(id)velocity
-{
-    ANYDecayPOP *factory = [self copy];
-    factory.velocity = velocity;
-    return factory;
-}
-
-- (instancetype)deceleration:(CGFloat)deceleration
-{
-    ANYDecayPOP *factory = [self copy];
-    factory.deceleration = deceleration;
-    return factory;
+    return [self configure:nil];
 }
 
 - (POPDecayAnimation *)build
 {
-    POPDecayAnimation *anim = [POPDecayAnimation new];
-    anim.property = self.property;
-    anim.fromValue = self.fromValue;
-    anim.beginTime = self.beginTime;
-    anim.velocity = self.velocity;
-    anim.deceleration = self.deceleration;
+    POPDecayAnimation *anim = [POPDecayAnimation animation];
+    self.configure(anim);
     return anim;
 }
 
-- (ANYAnimation *)animation:(NSObject *)object
+- (instancetype)fromValue:(id)fromValue
 {
-    return [[self build] animation:object];
+    return [self configure:^(POPDecayAnimation *anim) {
+        anim.fromValue = fromValue;
+    }];
+}
+
+- (instancetype)beginTime:(CFTimeInterval)beginTime
+{
+    return [self configure:^(POPDecayAnimation *anim) {
+        anim.beginTime = beginTime;
+    }];
+}
+
+- (instancetype)velocity:(id)velocity
+{
+    return [self configure:^(POPDecayAnimation *anim) {
+        anim.velocity = velocity;
+    }];
+}
+
+- (instancetype)deceleration:(CGFloat)deceleration
+{
+    return [self configure:^(POPDecayAnimation *anim) {
+        anim.deceleration = deceleration;
+    }];
+}
+
+- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name
+{
+    return [self animationFor:object property:[POPAnimatableProperty propertyWithName:name]];
+}
+
+- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property
+{
+    NSString *key = [NSString stringWithFormat:@"ag.%@", property.name];
+    
+    @weakify(object);
+    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
+        @strongify(object);
+        
+        POPDecayAnimation *basic = [self build];
+        basic.completionBlock = ^(POPAnimation *anim, BOOL completed) {
+            [subscriber completed:completed];
+        };
+        
+        [object pop_removeAnimationForKey:key];
+        [object pop_addAnimation:basic forKey:key];
+        
+        return [ANYActivity activityWithBlock:^{
+            
+            @strongify(object);
+            [object pop_removeAnimationForKey:key];
+            
+        }];
+        
+    }];
 }
 
 @end

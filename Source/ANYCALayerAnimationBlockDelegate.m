@@ -21,16 +21,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AGKCALayerAnimationBlockDelegate.h"
+#import "ANYCALayerAnimationBlockDelegate.h"
 
-@interface AGKCALayerAnimationBlockDelegate ()
+@interface ANYCALayerAnimationBlockDelegate ()
+
+@property (nonatomic, copy) void (^onStart)();
+@property (nonatomic, copy) void (^onStop)(BOOL completed);
+
 @end
 
-@implementation AGKCALayerAnimationBlockDelegate
+@implementation ANYCALayerAnimationBlockDelegate
 
 + (instancetype)newWithAnimationDidStart:(void(^)(void))onStart didStop:(void(^)(BOOL completed))onStop
 {
-    AGKCALayerAnimationBlockDelegate *instance = [[self alloc] init];
+    ANYCALayerAnimationBlockDelegate *instance = [[self alloc] init];
     instance.onStart = onStart;
     instance.onStop = onStop;
     return instance;
@@ -38,19 +42,9 @@
 
 + (instancetype)newWithAnimationDidStop:(void(^)(BOOL completed))onStop
 {
-    AGKCALayerAnimationBlockDelegate *instance = [[self alloc] init];
+    ANYCALayerAnimationBlockDelegate *instance = [[self alloc] init];
     instance.onStop = onStop;
     return instance;
-}
-
-- (id)init
-{
-    self = [super init];
-    if(self)
-    {
-        _autoRemoveBlocks = YES;
-    }
-    return self;
 }
 
 - (void)animationDidStart:(CAAnimation *)anim
@@ -59,10 +53,6 @@
     {
         self.onStart();
     }
-    if(self.autoRemoveBlocks)
-    {
-        self.onStart = nil;
-    }
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
@@ -70,10 +60,6 @@
     if(self.onStop)
     {
         self.onStop(flag);
-    }
-    if(self.autoRemoveBlocks)
-    {
-        self.onStop = nil;
     }
 }
 

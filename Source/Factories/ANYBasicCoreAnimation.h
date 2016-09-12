@@ -23,15 +23,13 @@
 // THE SOFTWARE.
 
 #import "ANYAnimation.h"
-
 #import <Foundation/Foundation.h>
 #import <pop/pop.h>
 
 @interface ANYBasicCoreAnimation : NSObject <NSCopying>
 
-+ (instancetype)animationWithKeyPath:(NSString *)keyPath;
+- (ANYBasicCoreAnimation *)configure:(void (^)(CABasicAnimation *anim))configure;
 
-- (instancetype)animationWithKeyPath:(NSString *)keyPath;
 - (instancetype)toValue:(id)toValue;
 - (instancetype)byValue:(id)byValue;
 - (instancetype)fromValue:(id)fromValue;
@@ -41,7 +39,6 @@
 - (instancetype)removedOnCompletion:(BOOL)removedOnCompletion;
 - (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
 
-- (CABasicAnimation *)build;
-- (ANYAnimation *)animation:(CALayer *)layer;
+- (ANYAnimation *)animationFor:(CALayer *)layer keyPath:(NSString *)keyPath;
 
 @end

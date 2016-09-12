@@ -70,4 +70,16 @@
     }
 }
 
+- (void)completed:(BOOL)completed
+{
+    if(completed)
+    {
+        [self completed];
+    }
+    else
+    {
+        [self failed];
+    }
+}
+
 @end

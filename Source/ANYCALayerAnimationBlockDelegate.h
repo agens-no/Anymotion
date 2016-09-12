@@ -1,6 +1,5 @@
 //
-// Authors: Mats Hauge <mats@agens.no>
-//          Håvard Fossli <hfossli@agens.no>
+// Author: Håvard Fossli <hfossli@agens.no>
 //
 // Copyright (c) 2013 Agens AS (http://agens.no/)
 //
@@ -22,13 +21,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <pop/pop.h>
-#import "ANYAnimation.h"
+#import <Foundation/Foundation.h>
+#import <QuartzCore/CAAnimation.h>
 
-@interface POPPropertyAnimation (ANYAnimation)
+@interface ANYCALayerAnimationBlockDelegate : NSObject <CAAnimationDelegate>
 
-- (ANYAnimation *)animation:(NSObject *)object;
-- (ANYAnimation *)animation:(NSObject *)object toValue:(id)toValue;
-- (ANYAnimation *)animation:(NSObject *)object resetBlock:(void(^)(void))reset;
++ (instancetype)newWithAnimationDidStart:(void(^)(void))onStart didStop:(void(^)(BOOL completed))onStop;
++ (instancetype)newWithAnimationDidStop:(void(^)(BOOL completed))onStop;
 
 @end

@@ -28,17 +28,14 @@
 
 @interface ANYBasicPOP : NSObject <NSCopying>
 
-+ (instancetype)propertyNamed:(NSString *)property;
-+ (instancetype)property:(POPAnimatableProperty *)property;
+- (ANYBasicPOP *)configure:(void (^)(POPBasicAnimation *anim))configure;
 
-- (instancetype)propertyNamed:(NSString *)property;
-- (instancetype)property:(POPAnimatableProperty *)property;
 - (instancetype)fromValue:(id)fromValue;
 - (instancetype)toValue:(id)toValue;
 - (instancetype)duration:(NSTimeInterval)duration;
 - (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
 
-- (POPBasicAnimation *)build;
-- (ANYAnimation *)animation:(NSObject *)object;
+- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name;
+- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property;
 
 @end
