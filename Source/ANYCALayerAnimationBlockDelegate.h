@@ -24,6 +24,8 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/CAAnimation.h>
 
+@protocol CAAnimationDelegate;
+
 @interface ANYCALayerAnimationBlockDelegate : NSObject <CAAnimationDelegate>
 
 + (instancetype)newWithAnimationDidStart:(void(^)(void))onStart didStop:(void(^)(BOOL completed))onStop;
