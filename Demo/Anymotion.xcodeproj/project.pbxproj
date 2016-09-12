@@ -22,6 +22,7 @@
 		A341B1E11D78218A00FF7EB4 /* ANYBasicPOP.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1D71D78218A00FF7EB4 /* ANYBasicPOP.m */; };
 		A341B1E21D78218A00FF7EB4 /* ANYDecayPOP.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1D91D78218A00FF7EB4 /* ANYDecayPOP.m */; };
 		A341B1E31D78218A00FF7EB4 /* ANYSpringPOP.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1DB1D78218A00FF7EB4 /* ANYSpringPOP.m */; };
+		A35EE2E51D869FBF0005FF4B /* ANYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = A35EE2E41D869FBF0005FF4B /* ANYUIView.m */; };
 		FC7A6A121D78707F00A91B5B /* ANYBasicCoreAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7A6A111D78707F00A91B5B /* ANYBasicCoreAnimation.m */; };
 		FCD401B91D7995FC004A4B66 /* ANYCALayerAnimationBlockDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD401B81D7995FC004A4B66 /* ANYCALayerAnimationBlockDelegate.m */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,8 @@
 		A341B1DB1D78218A00FF7EB4 /* ANYSpringPOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYSpringPOP.m; sourceTree = "<group>"; };
 		A341B1E51D78220900FF7EB4 /* ANYEXTScope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANYEXTScope.h; sourceTree = "<group>"; };
 		A341B1E61D78221D00FF7EB4 /* ANYEXTMetamacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANYEXTMetamacros.h; sourceTree = "<group>"; };
+		A35EE2E31D869FBF0005FF4B /* ANYUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYUIView.h; sourceTree = "<group>"; };
+		A35EE2E41D869FBF0005FF4B /* ANYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYUIView.m; sourceTree = "<group>"; };
 		C97D79EAB56CE315A1E2E1BD /* Pods-Anymotion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anymotion.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anymotion/Pods-Anymotion.release.xcconfig"; sourceTree = "<group>"; };
 		FC7A6A101D78707F00A91B5B /* ANYBasicCoreAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYBasicCoreAnimation.h; sourceTree = "<group>"; };
 		FC7A6A111D78707F00A91B5B /* ANYBasicCoreAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYBasicCoreAnimation.m; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 			children = (
 				FC7A6A101D78707F00A91B5B /* ANYBasicCoreAnimation.h */,
 				FC7A6A111D78707F00A91B5B /* ANYBasicCoreAnimation.m */,
+				A35EE2E31D869FBF0005FF4B /* ANYUIView.h */,
+				A35EE2E41D869FBF0005FF4B /* ANYUIView.m */,
 				A341B1D61D78218A00FF7EB4 /* ANYBasicPOP.h */,
 				A341B1D71D78218A00FF7EB4 /* ANYBasicPOP.m */,
 				A341B1D81D78218A00FF7EB4 /* ANYDecayPOP.h */,
@@ -419,6 +424,7 @@
 				FCD401B91D7995FC004A4B66 /* ANYCALayerAnimationBlockDelegate.m in Sources */,
 				A341B19F1D781FF000FF7EB4 /* AppDelegate.m in Sources */,
 				A341B19C1D781FF000FF7EB4 /* main.m in Sources */,
+				A35EE2E51D869FBF0005FF4B /* ANYUIView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
