@@ -47,7 +47,7 @@
     return self;
 }
 
-- (void)write
+- (void)wrote
 {
     self.onWrite();
 }

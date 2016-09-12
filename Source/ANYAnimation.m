@@ -57,7 +57,7 @@
         ANYActivity *masterActivity = [ANYActivity new];
 
         ANYSubscriber *intermediate = [[ANYSubscriber alloc] initWithOnWrite:^{
-            [s write];
+            [s wrote];
         } onCompletion:^{
             [masterActivity cancel];
             [s completed];
@@ -119,7 +119,7 @@
 {
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         return [self subscribeWrite:^{
-            [subscriber write];
+            [subscriber wrote];
         } error:^{
             onFailure();
             [subscriber failed];
@@ -133,7 +133,7 @@
 {
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         return [self subscribeWrite:^{
-            [subscriber write];
+            [subscriber wrote];
         } error:^{
             [subscriber failed];
         } completed:^{
@@ -159,7 +159,7 @@
         for(ANYAnimation *anim in animations)
         {
             ANYActivity *d = [anim subscribeWrite:^{
-                [subscriber write];
+                [subscriber wrote];
             } error:^{
                 [subscriber failed];
             } completed:^{
@@ -199,7 +199,7 @@
         ANYActivity *master = [ANYActivity new];
 
         ANYActivity *first = [self subscribeWrite:^{
-            [subscriber write];
+            [subscriber wrote];
         } error:^{
             [subscriber failed];
         } completed:^{
@@ -208,7 +208,7 @@
             // What happens if some activity is cancelled? Should the signal fail?
             
             ANYActivity *second = [animation subscribeWrite:^{
-                [subscriber write];
+                [subscriber wrote];
             } error:^{
                 [subscriber failed];
             } completed:^{
@@ -233,7 +233,7 @@
         __block ANYActivity *current = nil;
 
         current = [self subscribeWrite:^{
-            [subscriber write];
+            [subscriber wrote];
         } error:^{
             [subscriber failed];
         } completed:^{

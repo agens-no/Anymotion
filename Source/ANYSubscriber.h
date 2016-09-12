@@ -28,7 +28,7 @@
 
 - (instancetype)initWithOnWrite:(dispatch_block_t)onWrite onCompletion:(dispatch_block_t)onCompletion onFailure:(dispatch_block_t)onFailure;
 
-- (void)write;
+- (void)wrote;
 - (void)completed;
 - (void)failed;
 
