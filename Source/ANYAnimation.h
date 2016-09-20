@@ -43,8 +43,11 @@
 
 - (ANYActivity *)start;
 
-- (instancetype)onFailure:(dispatch_block_t)onFailure;
+- (instancetype)onError:(dispatch_block_t)onError;
+- (instancetype)onError:(dispatch_block_t)onError onCompletion:(dispatch_block_t)onCompletion;
+
 - (instancetype)onCompletion:(dispatch_block_t)onCompletion;
+- (instancetype)onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError;
 
 - (instancetype)groupWith:(ANYAnimation *)animation;
 + (instancetype)group:(NSArray <ANYAnimation *> *)animations;

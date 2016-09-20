@@ -100,14 +100,14 @@
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         @strongify(object);
         
-        POPBasicAnimation *basic = [self build];
-        basic.property = property;
-        basic.completionBlock = ^(POPAnimation *anim, BOOL completed) {
+        POPBasicAnimation *anim = [self build];
+        anim.property = property;
+        anim.completionBlock = ^(POPAnimation *anim, BOOL completed) {
             [subscriber completed:completed];
         };
         
         [object pop_removeAnimationForKey:key];
-        [object pop_addAnimation:basic forKey:key];
+        [object pop_addAnimation:anim forKey:key];
         
         return [ANYActivity activityWithTearDownBlock:^{
             

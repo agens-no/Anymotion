@@ -61,7 +61,7 @@
         } onCompletion:^{
             [masterActivity cancel];
             [s completed];
-        } onFailure:^{
+        } onError:^{
             [masterActivity cancel];
             [s failed];
         }];
@@ -75,69 +75,77 @@
 
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:nil onFailure:nil]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:nil onError:nil]];
 }
 
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next error:(dispatch_block_t)error
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:nil onFailure:error]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:nil onError:error]];
 }
 
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next completed:(dispatch_block_t)completed
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:completed onFailure:nil]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:completed onError:nil]];
 }
 
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next error:(dispatch_block_t)error completed:(dispatch_block_t)completed
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:completed onFailure:error]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:completed onError:error]];
 }
 
 - (ANYActivity *)subscribeError:(dispatch_block_t)error
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:nil onFailure:error]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:nil onError:error]];
 }
 
 - (ANYActivity *)subscribeError:(dispatch_block_t)error completed:(dispatch_block_t)completed
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:completed onFailure:error]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:completed onError:error]];
 }
 
 - (ANYActivity *)subscribeCompleted:(dispatch_block_t)completed
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:completed onFailure:nil]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:completed onError:nil]];
 }
 
 #pragma mark - Operators
 
 - (ANYActivity *)start
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:nil onFailure:nil]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:nil onError:nil]];
 }
 
-- (instancetype)onFailure:(dispatch_block_t)onFailure
+- (instancetype)onError:(dispatch_block_t)onError
 {
-    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-        return [self subscribeWrite:^{
-            [subscriber wrote];
-        } error:^{
-            onFailure();
-            [subscriber failed];
-        } completed:^{
-            [subscriber completed];
-        }];
-    }];
+    return [self onError:onError onCompletion:nil];
 }
 
 - (instancetype)onCompletion:(dispatch_block_t)onCompletion
 {
+    return [self onError:nil onCompletion:onCompletion];
+}
+
+- (instancetype)onError:(dispatch_block_t)onError onCompletion:(dispatch_block_t)onCompletion
+{
+    return [self onCompletion:onError onError:onCompletion];
+}
+
+- (instancetype)onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError
+{
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         return [self subscribeWrite:^{
             [subscriber wrote];
         } error:^{
+            if(onError)
+            {
+                onError();
+            }
             [subscriber failed];
         } completed:^{
-            onCompletion();
+            if(onCompletion)
+            {
+                onCompletion();
+            }
             [subscriber completed];
         }];
     }];
