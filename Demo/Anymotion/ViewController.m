@@ -28,17 +28,10 @@
     view1.alpha = 0.0;
     [self.view addSubview:view1];
     
-    [[[[[ANYBasicPOP new] duration:5] toValue:@0] animationFor:view0 propertyNamed:kPOPViewAlpha] start];
-    
-    [[[[[[[ANYUIView new] duration:5] delay:1] options:0] block:^{
-        view1.alpha = 1.0;
-    }] animation] start];
-    
-    [UIView animateWithDuration:5 delay:1 options:0 animations:^{
-        view1.alpha = 1.0;
-    } completion:nil];
-    
-    [ANYUIView animationWithDuration:5 delay:1 options:0 block:^{
+    ANYAnimation *anim = [[[ANYSpringPOP new] toValue:@1.0] animationFor:view1 propertyNamed:kPOPViewAlpha];
+    [[anim delay:1.0] subscribeError:^{
+        
+    } completed:^{
         
     }];
 }
