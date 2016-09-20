@@ -24,7 +24,7 @@
 
 #import "ANYAnimation.h"
 #import <Foundation/Foundation.h>
-#import <pop/pop.h>
+#import <POP/POP.h>
 
 @interface ANYBasicCoreAnimation : NSObject <NSCopying>
 

@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     s.platform      = :ios, '8.0'
     s.requires_arc  = true
     s.authors       = {
-      "Håvard Fossli" => "hfossli@agens.no"
+        "Håvard Fossli" => "hfossli@agens.no",
     	"Mats Hauge" => "mats@agens.no"
     	}
     s.source        = {
