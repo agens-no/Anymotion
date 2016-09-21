@@ -107,7 +107,7 @@
 {
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         
-        [UIView animateWithDuration:0 delay:0 options:0 animations:^{
+        [UIView animateWithDuration:duration delay:delay options:options animations:^{
             block();
         } completion:^(BOOL finished) {
             [subscriber completed:finished];
