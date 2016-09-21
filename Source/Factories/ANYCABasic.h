@@ -22,20 +22,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import <pop/pop.h>
 #import "ANYAnimation.h"
+#import <Foundation/Foundation.h>
+#import <POP/POP.h>
 
-@interface ANYBasicPOP : NSObject <NSCopying>
+@interface ANYCABasic : NSObject <NSCopying>
 
-- (ANYBasicPOP *)configure:(void (^)(POPBasicAnimation *anim))configure;
+- (ANYCABasic *)configure:(void (^)(CABasicAnimation *anim))configure;
 
-- (instancetype)fromValue:(id)fromValue;
 - (instancetype)toValue:(id)toValue;
+- (instancetype)byValue:(id)byValue;
+- (instancetype)fromValue:(id)fromValue;
+- (instancetype)additive:(BOOL)additive;
+- (instancetype)cumulative:(BOOL)cumulative;
 - (instancetype)duration:(NSTimeInterval)duration;
+- (instancetype)removedOnCompletion:(BOOL)removedOnCompletion;
 - (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
 
-- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name;
-- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property;
+- (ANYAnimation *)animationFor:(CALayer *)layer keyPath:(NSString *)keyPath;
 
 @end

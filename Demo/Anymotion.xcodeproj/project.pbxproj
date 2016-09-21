@@ -19,11 +19,11 @@
 		A341B1DE1D78218A00FF7EB4 /* ANYActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1CF1D78218A00FF7EB4 /* ANYActivity.m */; };
 		A341B1DF1D78218A00FF7EB4 /* ANYAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1D11D78218A00FF7EB4 /* ANYAnimation.m */; };
 		A341B1E01D78218A00FF7EB4 /* ANYSubscriber.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1D41D78218A00FF7EB4 /* ANYSubscriber.m */; };
-		A341B1E11D78218A00FF7EB4 /* ANYBasicPOP.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1D71D78218A00FF7EB4 /* ANYBasicPOP.m */; };
-		A341B1E21D78218A00FF7EB4 /* ANYDecayPOP.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1D91D78218A00FF7EB4 /* ANYDecayPOP.m */; };
-		A341B1E31D78218A00FF7EB4 /* ANYSpringPOP.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1DB1D78218A00FF7EB4 /* ANYSpringPOP.m */; };
+		A341B1E11D78218A00FF7EB4 /* ANYPOPBasic.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1D71D78218A00FF7EB4 /* ANYPOPBasic.m */; };
+		A341B1E21D78218A00FF7EB4 /* ANYPOPDecay.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1D91D78218A00FF7EB4 /* ANYPOPDecay.m */; };
+		A341B1E31D78218A00FF7EB4 /* ANYPOPSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = A341B1DB1D78218A00FF7EB4 /* ANYPOPSpring.m */; };
 		A35EE2E51D869FBF0005FF4B /* ANYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = A35EE2E41D869FBF0005FF4B /* ANYUIView.m */; };
-		FC7A6A121D78707F00A91B5B /* ANYBasicCoreAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7A6A111D78707F00A91B5B /* ANYBasicCoreAnimation.m */; };
+		FC7A6A121D78707F00A91B5B /* ANYCABasic.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7A6A111D78707F00A91B5B /* ANYCABasic.m */; };
 		FCD401B91D7995FC004A4B66 /* ANYCALayerAnimationBlockDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD401B81D7995FC004A4B66 /* ANYCALayerAnimationBlockDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -70,21 +70,22 @@
 		A341B1D21D78218A00FF7EB4 /* Anymotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Anymotion.h; sourceTree = "<group>"; };
 		A341B1D31D78218A00FF7EB4 /* ANYSubscriber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYSubscriber.h; sourceTree = "<group>"; };
 		A341B1D41D78218A00FF7EB4 /* ANYSubscriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYSubscriber.m; sourceTree = "<group>"; };
-		A341B1D61D78218A00FF7EB4 /* ANYBasicPOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYBasicPOP.h; sourceTree = "<group>"; };
-		A341B1D71D78218A00FF7EB4 /* ANYBasicPOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYBasicPOP.m; sourceTree = "<group>"; };
-		A341B1D81D78218A00FF7EB4 /* ANYDecayPOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYDecayPOP.h; sourceTree = "<group>"; };
-		A341B1D91D78218A00FF7EB4 /* ANYDecayPOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYDecayPOP.m; sourceTree = "<group>"; };
-		A341B1DA1D78218A00FF7EB4 /* ANYSpringPOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYSpringPOP.h; sourceTree = "<group>"; };
-		A341B1DB1D78218A00FF7EB4 /* ANYSpringPOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYSpringPOP.m; sourceTree = "<group>"; };
+		A341B1D61D78218A00FF7EB4 /* ANYPOPBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYPOPBasic.h; sourceTree = "<group>"; };
+		A341B1D71D78218A00FF7EB4 /* ANYPOPBasic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYPOPBasic.m; sourceTree = "<group>"; };
+		A341B1D81D78218A00FF7EB4 /* ANYPOPDecay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYPOPDecay.h; sourceTree = "<group>"; };
+		A341B1D91D78218A00FF7EB4 /* ANYPOPDecay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYPOPDecay.m; sourceTree = "<group>"; };
+		A341B1DA1D78218A00FF7EB4 /* ANYPOPSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYPOPSpring.h; sourceTree = "<group>"; };
+		A341B1DB1D78218A00FF7EB4 /* ANYPOPSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYPOPSpring.m; sourceTree = "<group>"; };
 		A341B1E51D78220900FF7EB4 /* ANYEXTScope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANYEXTScope.h; sourceTree = "<group>"; };
 		A341B1E61D78221D00FF7EB4 /* ANYEXTMetamacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANYEXTMetamacros.h; sourceTree = "<group>"; };
 		A35EE2E31D869FBF0005FF4B /* ANYUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYUIView.h; sourceTree = "<group>"; };
 		A35EE2E41D869FBF0005FF4B /* ANYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYUIView.m; sourceTree = "<group>"; };
 		C97D79EAB56CE315A1E2E1BD /* Pods-Anymotion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anymotion.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anymotion/Pods-Anymotion.release.xcconfig"; sourceTree = "<group>"; };
-		FC7A6A101D78707F00A91B5B /* ANYBasicCoreAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYBasicCoreAnimation.h; sourceTree = "<group>"; };
-		FC7A6A111D78707F00A91B5B /* ANYBasicCoreAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYBasicCoreAnimation.m; sourceTree = "<group>"; };
+		FC7A6A101D78707F00A91B5B /* ANYCABasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYCABasic.h; sourceTree = "<group>"; };
+		FC7A6A111D78707F00A91B5B /* ANYCABasic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYCABasic.m; sourceTree = "<group>"; };
 		FCD401B71D7995FC004A4B66 /* ANYCALayerAnimationBlockDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYCALayerAnimationBlockDelegate.h; sourceTree = "<group>"; };
 		FCD401B81D7995FC004A4B66 /* ANYCALayerAnimationBlockDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYCALayerAnimationBlockDelegate.m; sourceTree = "<group>"; };
+		FCE191AF1D928C9D0044CA8C /* Anymotion.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Anymotion.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +117,7 @@
 		A341B18E1D781FF000FF7EB4 = {
 			isa = PBXGroup;
 			children = (
+				FCE191AF1D928C9D0044CA8C /* Anymotion.playground */,
 				A341B1CD1D78218A00FF7EB4 /* Source */,
 				A341B1991D781FF000FF7EB4 /* Anymotion */,
 				A341B1B31D781FF000FF7EB4 /* AnymotionTests */,
@@ -201,16 +203,16 @@
 		A341B1D51D78218A00FF7EB4 /* Factories */ = {
 			isa = PBXGroup;
 			children = (
-				FC7A6A101D78707F00A91B5B /* ANYBasicCoreAnimation.h */,
-				FC7A6A111D78707F00A91B5B /* ANYBasicCoreAnimation.m */,
+				FC7A6A101D78707F00A91B5B /* ANYCABasic.h */,
+				FC7A6A111D78707F00A91B5B /* ANYCABasic.m */,
 				A35EE2E31D869FBF0005FF4B /* ANYUIView.h */,
 				A35EE2E41D869FBF0005FF4B /* ANYUIView.m */,
-				A341B1D61D78218A00FF7EB4 /* ANYBasicPOP.h */,
-				A341B1D71D78218A00FF7EB4 /* ANYBasicPOP.m */,
-				A341B1D81D78218A00FF7EB4 /* ANYDecayPOP.h */,
-				A341B1D91D78218A00FF7EB4 /* ANYDecayPOP.m */,
-				A341B1DA1D78218A00FF7EB4 /* ANYSpringPOP.h */,
-				A341B1DB1D78218A00FF7EB4 /* ANYSpringPOP.m */,
+				A341B1D61D78218A00FF7EB4 /* ANYPOPBasic.h */,
+				A341B1D71D78218A00FF7EB4 /* ANYPOPBasic.m */,
+				A341B1D81D78218A00FF7EB4 /* ANYPOPDecay.h */,
+				A341B1D91D78218A00FF7EB4 /* ANYPOPDecay.m */,
+				A341B1DA1D78218A00FF7EB4 /* ANYPOPSpring.h */,
+				A341B1DB1D78218A00FF7EB4 /* ANYPOPSpring.m */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -414,13 +416,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A341B1DE1D78218A00FF7EB4 /* ANYActivity.m in Sources */,
-				A341B1E21D78218A00FF7EB4 /* ANYDecayPOP.m in Sources */,
+				A341B1E21D78218A00FF7EB4 /* ANYPOPDecay.m in Sources */,
 				A341B1DF1D78218A00FF7EB4 /* ANYAnimation.m in Sources */,
-				A341B1E11D78218A00FF7EB4 /* ANYBasicPOP.m in Sources */,
+				A341B1E11D78218A00FF7EB4 /* ANYPOPBasic.m in Sources */,
 				A341B1A21D781FF000FF7EB4 /* ViewController.m in Sources */,
 				A341B1E01D78218A00FF7EB4 /* ANYSubscriber.m in Sources */,
-				FC7A6A121D78707F00A91B5B /* ANYBasicCoreAnimation.m in Sources */,
-				A341B1E31D78218A00FF7EB4 /* ANYSpringPOP.m in Sources */,
+				FC7A6A121D78707F00A91B5B /* ANYCABasic.m in Sources */,
+				A341B1E31D78218A00FF7EB4 /* ANYPOPSpring.m in Sources */,
 				FCD401B91D7995FC004A4B66 /* ANYCALayerAnimationBlockDelegate.m in Sources */,
 				A341B19F1D781FF000FF7EB4 /* AppDelegate.m in Sources */,
 				A341B19C1D781FF000FF7EB4 /* main.m in Sources */,

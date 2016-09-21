@@ -22,21 +22,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ANYBasicCoreAnimation.h"
+#import "ANYCABasic.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ANYEXTScope.h"
 #import "ANYCALayerAnimationBlockDelegate.h"
 
 
-@interface ANYBasicCoreAnimation ()
+@interface ANYCABasic ()
 @property (nonatomic, copy) void (^configure)(CABasicAnimation *anim);
 @end
 
-@implementation ANYBasicCoreAnimation
+@implementation ANYCABasic
 
-- (ANYBasicCoreAnimation *)configure:(void (^)(CABasicAnimation *anim))configure
+- (ANYCABasic *)configure:(void (^)(CABasicAnimation *anim))configure
 {
-    ANYBasicCoreAnimation *instance = [ANYBasicCoreAnimation new];
+    ANYCABasic *instance = [ANYCABasic new];
     instance.configure = ^(CABasicAnimation *basic){
         if(self.configure)
         {

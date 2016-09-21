@@ -22,18 +22,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ANYDecayPOP.h"
+#import "ANYPOPDecay.h"
 #import "ANYEXTScope.h"
 
-@interface ANYDecayPOP ()
+@interface ANYPOPDecay ()
 @property (nonatomic, copy) void (^configure)(POPDecayAnimation *anim);
 @end
 
-@implementation ANYDecayPOP
+@implementation ANYPOPDecay
 
-- (ANYDecayPOP *)configure:(void (^)(POPDecayAnimation *anim))configure
++ (instancetype)propertyNamed:(NSString *)name
 {
-    ANYDecayPOP *instance = [ANYDecayPOP new];
+    return [self property:[POPAnimatableProperty propertyWithName:name]];
+}
+
++ (instancetype)property:(POPAnimatableProperty *)property
+{
+    return [[self new] configure:^(POPDecayAnimation *anim) {
+        anim.property = property;
+    }];
+}
+
+- (ANYPOPDecay *)configure:(void (^)(POPDecayAnimation *anim))configure
+{
+    ANYPOPDecay *instance = [ANYPOPDecay new];
     instance.configure = ^(POPDecayAnimation *basic){
         if(self.configure)
         {
@@ -87,21 +99,17 @@
     }];
 }
 
-- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name
+- (ANYAnimation *)animationFor:(NSObject *)object
 {
-    return [self animationFor:object property:[POPAnimatableProperty propertyWithName:name]];
-}
-
-- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property
-{
-    NSString *key = [NSString stringWithFormat:@"ag.%@", property.name];
-    
     @weakify(object);
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         @strongify(object);
         
         POPDecayAnimation *anim = [self build];
-        anim.property = property;
+        NSAssert(anim.property, @"No property specified for animation %@", anim);
+        
+        NSString *key = [NSString stringWithFormat:@"ag.%@", anim.property.name];
+        
         anim.completionBlock = ^(POPAnimation *anim, BOOL completed) {
             [subscriber completed:completed];
         };
@@ -117,6 +125,26 @@
         }];
         
     }];
+}
+
+@end
+
+
+@implementation ANYPOPDecay (Convenience)
+
+- (instancetype)fromValueWithPoint:(CGPoint)point
+{
+    return [self fromValue:[NSValue valueWithCGPoint:point]];
+}
+
+- (instancetype)fromValueWithSize:(CGSize)size
+{
+    return [self fromValue:[NSValue valueWithCGSize:size]];
+}
+
+- (instancetype)fromValueWithRect:(CGRect)rect
+{
+    return [self fromValue:[NSValue valueWithCGRect:rect]];
 }
 
 @end

@@ -22,23 +22,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ANYAnimation.h"
 #import <Foundation/Foundation.h>
-#import <POP/POP.h>
+#import <pop/pop.h>
+#import "ANYAnimation.h"
 
-@interface ANYBasicCoreAnimation : NSObject <NSCopying>
+@interface ANYPOPSpring : NSObject <NSCopying>
 
-- (ANYBasicCoreAnimation *)configure:(void (^)(CABasicAnimation *anim))configure;
++ (instancetype)propertyNamed:(NSString *)name;
++ (instancetype)property:(POPAnimatableProperty *)property;
 
-- (instancetype)toValue:(id)toValue;
-- (instancetype)byValue:(id)byValue;
+- (ANYPOPSpring *)configure:(void (^)(POPSpringAnimation *anim))configure;
+
 - (instancetype)fromValue:(id)fromValue;
-- (instancetype)additive:(BOOL)additive;
-- (instancetype)cumulative:(BOOL)cumulative;
-- (instancetype)duration:(NSTimeInterval)duration;
-- (instancetype)removedOnCompletion:(BOOL)removedOnCompletion;
-- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
+- (instancetype)toValue:(id)toValue;
+- (instancetype)beginTime:(CFTimeInterval)beginTime;
+- (instancetype)velocity:(id)velocity;
+- (instancetype)springSpeed:(CGFloat)springSpeed;
+- (instancetype)dynamicsMass:(CGFloat)dynamicsMass;
+- (instancetype)dynamicsTension:(CGFloat)dynamicsTension;
+- (instancetype)dynamicsFriction:(CGFloat)dynamicsFriction;
+- (instancetype)springBounciness:(CGFloat)springBounciness;
 
-- (ANYAnimation *)animationFor:(CALayer *)layer keyPath:(NSString *)keyPath;
+- (ANYAnimation *)animationFor:(NSObject *)object;
+
+@end
+
+@interface ANYPOPSpring (Convenience)
+
+- (instancetype)fromValueWithPoint:(CGPoint)point;
+- (instancetype)fromValueWithSize:(CGSize)size;
+- (instancetype)fromValueWithRect:(CGRect)rect;
+
+- (instancetype)toValueWithPoint:(CGPoint)point;
+- (instancetype)toValueWithSize:(CGSize)size;
+- (instancetype)toValueWithRect:(CGRect)rect;
 
 @end

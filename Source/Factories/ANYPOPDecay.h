@@ -26,16 +26,26 @@
 #import <pop/pop.h>
 #import "ANYAnimation.h"
 
-@interface ANYDecayPOP : NSObject <NSCopying>
+@interface ANYPOPDecay : NSObject <NSCopying>
 
-- (ANYDecayPOP *)configure:(void (^)(POPDecayAnimation *anim))configure;
++ (instancetype)propertyNamed:(NSString *)name;
++ (instancetype)property:(POPAnimatableProperty *)property;
+
+- (ANYPOPDecay *)configure:(void (^)(POPDecayAnimation *anim))configure;
 
 - (instancetype)fromValue:(id)fromValue;
 - (instancetype)beginTime:(CFTimeInterval)beginTime;
 - (instancetype)velocity:(id)velocity;
 - (instancetype)deceleration:(CGFloat)deceleration;
 
-- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name;
-- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property;
+- (ANYAnimation *)animationFor:(NSObject *)object;
+
+@end
+
+@interface ANYPOPDecay (Convenience)
+
+- (instancetype)fromValueWithPoint:(CGPoint)point;
+- (instancetype)fromValueWithSize:(CGSize)size;
+- (instancetype)fromValueWithRect:(CGRect)rect;
 
 @end

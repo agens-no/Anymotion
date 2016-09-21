@@ -26,21 +26,30 @@
 #import <pop/pop.h>
 #import "ANYAnimation.h"
 
-@interface ANYSpringPOP : NSObject <NSCopying>
+@interface ANYPOPBasic : NSObject <NSCopying>
 
-- (ANYSpringPOP *)configure:(void (^)(POPSpringAnimation *anim))configure;
++ (instancetype)propertyNamed:(NSString *)name;
++ (instancetype)property:(POPAnimatableProperty *)property;
+
+- (ANYPOPBasic *)configure:(void (^)(POPBasicAnimation *anim))configure;
 
 - (instancetype)fromValue:(id)fromValue;
 - (instancetype)toValue:(id)toValue;
-- (instancetype)beginTime:(CFTimeInterval)beginTime;
-- (instancetype)velocity:(id)velocity;
-- (instancetype)springSpeed:(CGFloat)springSpeed;
-- (instancetype)dynamicsMass:(CGFloat)dynamicsMass;
-- (instancetype)dynamicsTension:(CGFloat)dynamicsTension;
-- (instancetype)dynamicsFriction:(CGFloat)dynamicsFriction;
-- (instancetype)springBounciness:(CGFloat)springBounciness;
+- (instancetype)duration:(NSTimeInterval)duration;
+- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
 
-- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name;
-- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property;
+- (ANYAnimation *)animationFor:(NSObject *)object;
+
+@end
+
+@interface ANYPOPBasic (Convenience)
+
+- (instancetype)fromValueWithPoint:(CGPoint)point;
+- (instancetype)fromValueWithSize:(CGSize)size;
+- (instancetype)fromValueWithRect:(CGRect)rect;
+
+- (instancetype)toValueWithPoint:(CGPoint)point;
+- (instancetype)toValueWithSize:(CGSize)size;
+- (instancetype)toValueWithRect:(CGRect)rect;
 
 @end

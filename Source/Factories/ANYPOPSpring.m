@@ -22,18 +22,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ANYSpringPOP.h"
+#import "ANYPOPSpring.h"
 #import "ANYEXTScope.h"
 
-@interface ANYSpringPOP ()
+@interface ANYPOPSpring ()
 @property (nonatomic, copy) void (^configure)(POPSpringAnimation *anim);
 @end
 
-@implementation ANYSpringPOP
+@implementation ANYPOPSpring
 
-- (ANYSpringPOP *)configure:(void (^)(POPSpringAnimation *anim))configure
++ (instancetype)propertyNamed:(NSString *)name
 {
-    ANYSpringPOP *instance = [ANYSpringPOP new];
+    return [self property:[POPAnimatableProperty propertyWithName:name]];
+}
+
++ (instancetype)property:(POPAnimatableProperty *)property
+{
+    return [[self new] configure:^(POPSpringAnimation *anim) {
+        anim.property = property;
+    }];
+}
+
+- (ANYPOPSpring *)configure:(void (^)(POPSpringAnimation *anim))configure
+{
+    ANYPOPSpring *instance = [ANYPOPSpring new];
     instance.configure = ^(POPSpringAnimation *basic){
         if(self.configure)
         {
@@ -122,21 +134,17 @@
     }];
 }
 
-- (ANYAnimation *)animationFor:(NSObject *)object propertyNamed:(NSString *)name
+- (ANYAnimation *)animationFor:(NSObject *)object
 {
-    return [self animationFor:object property:[POPAnimatableProperty propertyWithName:name]];
-}
-
-- (ANYAnimation *)animationFor:(NSObject *)object property:(POPAnimatableProperty *)property
-{
-    NSString *key = [NSString stringWithFormat:@"ag.%@", property.name];
-    
     @weakify(object);
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         @strongify(object);
         
         POPSpringAnimation *anim = [self build];
-        anim.property = property;
+        NSAssert(anim.property, @"No property specified for animation %@", anim);
+        
+        NSString *key = [NSString stringWithFormat:@"ag.%@", anim.property.name];
+        
         anim.completionBlock = ^(POPAnimation *anim, BOOL completed) {
             [subscriber completed:completed];
         };
@@ -152,6 +160,41 @@
         }];
         
     }];
+}
+
+@end
+
+
+@implementation ANYPOPSpring (Convenience)
+
+- (instancetype)fromValueWithPoint:(CGPoint)point
+{
+    return [self fromValue:[NSValue valueWithCGPoint:point]];
+}
+
+- (instancetype)fromValueWithSize:(CGSize)size
+{
+    return [self fromValue:[NSValue valueWithCGSize:size]];
+}
+
+- (instancetype)fromValueWithRect:(CGRect)rect
+{
+    return [self fromValue:[NSValue valueWithCGRect:rect]];
+}
+
+- (instancetype)toValueWithPoint:(CGPoint)point
+{
+    return [self toValue:[NSValue valueWithCGPoint:point]];
+}
+
+- (instancetype)toValueWithSize:(CGSize)size
+{
+    return [self toValue:[NSValue valueWithCGSize:size]];
+}
+
+- (instancetype)toValueWithRect:(CGRect)rect
+{
+    return [self toValue:[NSValue valueWithCGRect:rect]];
 }
 
 @end
