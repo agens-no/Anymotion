@@ -59,15 +59,18 @@
         ANYSubscriber *intermediate = [[ANYSubscriber alloc] initWithOnWrite:^{
             [s wrote];
         } onCompletion:^{
-            [masterActivity cancel];
             [s completed];
-        } onError:^{
             [masterActivity cancel];
+        } onError:^{
             [s failed];
+            [masterActivity cancel];
         }];
 
         ANYActivity *activity = create(intermediate);
         [masterActivity add:activity];
+        [masterActivity addTearDownBlock:^{
+            [s failed];
+        }];
         return masterActivity;
 
     }(subscriber);
