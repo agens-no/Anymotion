@@ -151,6 +151,27 @@
     }];
 }
 
+- (instancetype)onCompletionOrError:(void(^)(BOOL success))onCompletionOrError
+{
+    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
+        return [self subscribeWrite:^{
+            [subscriber wrote];
+        } error:^{
+            if(onCompletionOrError)
+            {
+                onCompletionOrError(NO);
+            }
+            [subscriber failed];
+        } completed:^{
+            if(onCompletionOrError)
+            {
+                onCompletionOrError(YES);
+            }
+            [subscriber completed];
+        }];
+    }];
+}
+
 - (instancetype)groupWith:(ANYAnimation *)animation
 {
     return [ANYAnimation group:@[self, animation]];

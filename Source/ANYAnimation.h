@@ -49,6 +49,8 @@
 - (instancetype)onCompletion:(dispatch_block_t)onCompletion;
 - (instancetype)onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError;
 
+- (instancetype)onCompletionOrError:(void(^)(BOOL success))onCompletionOrError;
+
 - (instancetype)groupWith:(ANYAnimation *)animation;
 + (instancetype)group:(NSArray <ANYAnimation *> *)animations;
 
