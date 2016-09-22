@@ -19,20 +19,23 @@
 {
     [super viewDidLoad];
     
-    UIView *view0 = [[UIView alloc] initWithFrame:CGRectMake(200.0, 200.0, 200.0, 200.0)];
-    view0.backgroundColor = [UIColor greenColor];
-    [self.view addSubview:view0];
+    // Repeat
     
-    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(100.0, 100.0, 50.0, 50.0)];
-    view1.backgroundColor = [UIColor blueColor];
-    view1.alpha = 0.0;
-    [self.view addSubview:view1];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200.0, 200.0, 200.0, 200.0)];
+    view.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:view];
     
-    ANYAnimation *anim = [[[ANYSpringPOP new] toValue:@1.0] animationFor:view1 propertyNamed:kPOPViewAlpha];
-    [[anim delay:1.0] subscribeError:^{
-        
-    } completed:^{
-        
-    }];
+    CGPoint left = CGPointMake(50, view.center.y);
+    CGPoint right = CGPointMake(self.view.bounds.size.width, view.center.y);
+    ANYAnimation *goRight = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValueWithPoint:left] animationFor:view];
+    ANYAnimation *goLeft = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValueWithPoint:right] animationFor:view];
+    
+    __block int count = 0;
+    [[[[[goRight then:goLeft] onCompletion:^{
+        NSLog(@"Completed cycle %i", count++);
+    }] repeat] onCompletionOrError:^(BOOL success) {
+        NSLog(@"hmm");
+    }] start];
+    
 }
 @end
