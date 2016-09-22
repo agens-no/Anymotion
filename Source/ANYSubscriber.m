@@ -26,7 +26,6 @@
 
 @interface ANYSubscriber () 
 
-@property (nonatomic, copy) dispatch_block_t onWrite;
 @property (nonatomic, copy) void (^onCompletion)();
 @property (nonatomic, copy) dispatch_block_t onError;
 @property (nonatomic, assign) BOOL finalized;
@@ -35,21 +34,15 @@
 
 @implementation ANYSubscriber
 
-- (instancetype)initWithOnWrite:(dispatch_block_t)onWrite onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError
+- (instancetype)initWithOnCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError
 {
     self = [self init];
     if(self)
     {
-        _onWrite = onWrite ? [onWrite copy] : [^{} copy];
         _onCompletion = onCompletion ? [onCompletion copy] : [^{} copy];
         _onError = onError ? [onError copy] : [^{} copy];
     }
     return self;
-}
-
-- (void)wrote
-{
-    self.onWrite();
 }
 
 - (void)completed

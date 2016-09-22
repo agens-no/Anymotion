@@ -26,9 +26,8 @@
 
 @interface ANYSubscriber : NSObject
 
-- (instancetype)initWithOnWrite:(dispatch_block_t)onWrite onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError;
+- (instancetype)initWithOnCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError;
 
-- (void)wrote;
 - (void)completed;
 - (void)failed;
 

@@ -53,7 +53,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
 
 - (ANYActivity *)start
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:nil onError:nil]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnCompletion:nil onError:nil]];
 }
 
 - (ANYActivity *)subscribe:(ANYSubscriber *)subscriber
@@ -67,10 +67,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
         
         __block BOOL cancelTriggersError = YES;
 
-        ANYSubscriber *intermediate = [[ANYSubscriber alloc] initWithOnWrite:^{
-            NSString *name USE_ME_TO_DEBUG = masterActivity.name;
-            [s wrote];
-        } onCompletion:^{
+        ANYSubscriber *intermediate = [[ANYSubscriber alloc] initWithOnCompletion:^{
             NSString *name USE_ME_TO_DEBUG = masterActivity.name;
             cancelTriggersError = NO;
             [masterActivity cancel];
@@ -98,39 +95,19 @@ static NSString *ANYAnimationDefaultName = @"anim";
     }(subscriber);
 }
 
-- (ANYActivity *)subscribeWrite:(dispatch_block_t)next
-{
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:nil onError:nil]];
-}
-
-- (ANYActivity *)subscribeWrite:(dispatch_block_t)next error:(dispatch_block_t)error
-{
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:nil onError:error]];
-}
-
-- (ANYActivity *)subscribeWrite:(dispatch_block_t)next completed:(dispatch_block_t)completed
-{
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:completed onError:nil]];
-}
-
-- (ANYActivity *)subscribeWrite:(dispatch_block_t)next error:(dispatch_block_t)error completed:(dispatch_block_t)completed
-{
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:next onCompletion:completed onError:error]];
-}
-
 - (ANYActivity *)subscribeError:(dispatch_block_t)error
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:nil onError:error]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnCompletion:nil onError:error]];
 }
 
 - (ANYActivity *)subscribeError:(dispatch_block_t)error completed:(dispatch_block_t)completed
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:completed onError:error]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnCompletion:completed onError:error]];
 }
 
 - (ANYActivity *)subscribeCompleted:(dispatch_block_t)completed
 {
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:completed onError:nil]];
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnCompletion:completed onError:nil]];
 }
 
 @end
@@ -156,9 +133,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
 - (instancetype)onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError
 {
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-        return [self subscribeWrite:^{
-            [subscriber wrote];
-        } error:^{
+        return [self subscribeError:^{
             if(onError)
             {
                 onError();
@@ -237,9 +212,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
         
         for(ANYAnimation *anim in animations)
         {
-            ANYActivity *d = [anim subscribeWrite:^{
-                [subscriber wrote];
-            } error:^{
+            ANYActivity *d = [anim subscribeError:^{
                 [subscriber failed];
             } completed:^{
                 completed++;
@@ -285,15 +258,11 @@ static NSString *ANYAnimationDefaultName = @"anim";
         ANYActivity *master = [ANYActivity new];
         [master name:@"(? then ?)"];
 
-        ANYActivity *first = [self subscribeWrite:^{
-            [subscriber wrote];
-        } error:^{
+        ANYActivity *first = [self subscribeError:^{
             [subscriber failed];
         } completed:^{
             
-            ANYActivity *second = [animation subscribeWrite:^{
-                [subscriber wrote];
-            } error:^{
+            ANYActivity *second = [animation subscribeError:^{
                 [subscriber failed];
             } completed:^{
                 [subscriber completed];
@@ -320,9 +289,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
         __block BOOL cancelled = NO;
         __block ANYActivity *current = nil;
 
-        current = [self subscribeWrite:^{
-            [subscriber wrote];
-        } error:^{
+        current = [self subscribeError:^{
             [master nameFormat:@"(repeat %@)", current.name];
             [subscriber failed];
         } completed:^{
