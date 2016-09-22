@@ -24,7 +24,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/CAAnimation.h>
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED <= 100000
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 100000
 @protocol CAAnimationDelegate <NSObject>
 @end
 #endif
