@@ -31,8 +31,6 @@
 + (instancetype)propertyNamed:(NSString *)name;
 + (instancetype)property:(POPAnimatableProperty *)property;
 
-- (ANYPOPSpring *)configure:(void (^)(POPSpringAnimation *anim))configure;
-
 - (instancetype)fromValue:(id)fromValue;
 - (instancetype)toValue:(id)toValue;
 - (instancetype)beginTime:(CFTimeInterval)beginTime;
@@ -42,12 +40,16 @@
 - (instancetype)dynamicsTension:(CGFloat)dynamicsTension;
 - (instancetype)dynamicsFriction:(CGFloat)dynamicsFriction;
 - (instancetype)springBounciness:(CGFloat)springBounciness;
+- (instancetype)configure:(void (^)(POPSpringAnimation *anim))configure;
 
 - (ANYAnimation *)animationFor:(NSObject *)object;
 
 @end
 
 @interface ANYPOPSpring (Convenience)
+
++ (POPSpringAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
++ (POPSpringAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
 
 - (instancetype)fromValueWithPoint:(CGPoint)point;
 - (instancetype)fromValueWithSize:(CGSize)size;

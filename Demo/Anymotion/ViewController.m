@@ -19,23 +19,37 @@
 {
     [super viewDidLoad];
     
-    // Repeat
+    // then + repeat
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200.0, 200.0, 200.0, 200.0)];
     view.backgroundColor = [UIColor greenColor];
     [self.view addSubview:view];
     
-    CGPoint left = CGPointMake(50, view.center.y);
+    CGPoint left = CGPointMake(0, view.center.y);
     CGPoint right = CGPointMake(self.view.bounds.size.width, view.center.y);
-    ANYAnimation *goRight = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValueWithPoint:left] animationFor:view];
-    ANYAnimation *goLeft = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValueWithPoint:right] animationFor:view];
+    ANYAnimation *goLeft = [[[[ANYPOPBasic propertyNamed:kPOPViewCenter] toValueWithPoint:left] duration:3.0] animationFor:view];
+    ANYAnimation *goRight = [[[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:right] springSpeed:1] animationFor:view];
     
     __block int count = 0;
-    [[[[[goRight then:goLeft] onCompletion:^{
+    ANYActivity *activity = [[[[[goRight then:goLeft] onCompletion:^{
         NSLog(@"Completed cycle %i", count++);
-    }] repeat] onCompletionOrError:^(BOOL success) {
-        NSLog(@"hmm");
+    }] repeat] onError:^{
+        NSLog(@"Error after cycle %i", count);
     }] start];
     
+    
+    // Cancel and continue with velocity
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//        [activity cancel];
+//
+//        [[[[[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:CGPointMake(0., 0.)] springSpeed:1] configure:^(POPSpringAnimation *anim) {
+//            anim.velocity = [ANYPOPSpring lastActiveAnimationForPropertyNamed:kPOPViewCenter object:view].velocity;
+//        }] animationFor:view] start];
+//        
+//    });
+    
 }
+
 @end

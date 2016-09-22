@@ -120,7 +120,7 @@
 
 - (ANYAnimation *)animationFor:(CALayer *)layer keyPath:(NSString *)keyPath
 {
-    NSString *key = [NSString stringWithFormat:@"ag.%@", keyPath];
+    NSString *key = [NSString stringWithFormat:@"any.%@", keyPath];
     
     @weakify(layer);
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
@@ -141,12 +141,12 @@
         [layer removeAnimationForKey:key];
         [layer addAnimation:basic forKey:key];
         
-        return [ANYActivity activityWithTearDownBlock:^{
+        return [[ANYActivity activityWithTearDownBlock:^{
             
             @strongify(layer);
             [layer removeAnimationForKey:key];
             
-        }];
+        }] nameFormat:@"(CA.basic key: '%@', layer '<%@ %p>')", keyPath, layer.class, layer];
         
     }];
 }

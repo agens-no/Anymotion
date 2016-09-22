@@ -32,7 +32,10 @@
 - (void)completed;
 - (void)failed;
 
-// Convenience
+@end
+
+@interface ANYSubscriber (Convenience)
+
 - (void)completed:(BOOL)completed;
 
 @end

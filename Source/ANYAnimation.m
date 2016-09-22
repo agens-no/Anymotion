@@ -24,8 +24,11 @@
 
 #import "ANYAnimation.h"
 #import "ANYSubscriber.h"
+#import "ANYDefines.h"
 
-@interface ANYAnimation ()
+static NSString *ANYAnimationDefaultName = @"anim";
+
+@interface ANYAnimation () <NSCopying>
 
 @property (nonatomic, copy) ANYActivity * (^create)(ANYSubscriber *subscriber);
 
@@ -48,29 +51,48 @@
     return [[self alloc] initWithBlock:create];
 }
 
+- (ANYActivity *)start
+{
+    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:nil onError:nil]];
+}
+
 - (ANYActivity *)subscribe:(ANYSubscriber *)subscriber
 {
     __typeof__(self.create) create = self.create;
 
     return ^ANYActivity * (ANYSubscriber *s) {
-
+        
         ANYActivity *masterActivity = [ANYActivity new];
+        [masterActivity name:ANYAnimationDefaultName];
+        
+        __block BOOL cancelTriggersError = YES;
 
         ANYSubscriber *intermediate = [[ANYSubscriber alloc] initWithOnWrite:^{
+            NSString *name USE_ME_TO_DEBUG = masterActivity.name;
             [s wrote];
         } onCompletion:^{
+            NSString *name USE_ME_TO_DEBUG = masterActivity.name;
+            cancelTriggersError = NO;
+            [masterActivity cancel];
             [s completed];
-            [masterActivity cancel];
         } onError:^{
-            [s failed];
+            NSString *name USE_ME_TO_DEBUG = masterActivity.name;
+            cancelTriggersError = NO;
             [masterActivity cancel];
+            [s failed];
         }];
 
         ANYActivity *activity = create(intermediate);
-        [masterActivity add:activity];
+        [masterActivity name:activity.name];
         [masterActivity addTearDownBlock:^{
-            [s failed];
+            NSString *name USE_ME_TO_DEBUG = activity.name;
+            [activity cancel];
+            if(cancelTriggersError)
+            {
+                [s failed];
+            }
         }];
+        
         return masterActivity;
 
     }(subscriber);
@@ -111,12 +133,10 @@
     return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:completed onError:nil]];
 }
 
-#pragma mark - Operators
+@end
 
-- (ANYActivity *)start
-{
-    return [self subscribe:[[ANYSubscriber alloc] initWithOnWrite:nil onCompletion:nil onError:nil]];
-}
+
+@implementation ANYAnimation (Operators)
 
 - (instancetype)onError:(dispatch_block_t)onError
 {
@@ -130,7 +150,7 @@
 
 - (instancetype)onError:(dispatch_block_t)onError onCompletion:(dispatch_block_t)onCompletion
 {
-    return [self onCompletion:onError onError:onCompletion];
+    return [self onCompletion:onCompletion onError:onError];
 }
 
 - (instancetype)onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError
@@ -156,22 +176,48 @@
 
 - (instancetype)onCompletionOrError:(void(^)(BOOL success))onCompletionOrError
 {
+    return [self onCompletion:^{
+        if(onCompletionOrError)
+        {
+            onCompletionOrError(YES);
+        }
+    } onError:^{
+        if(onCompletionOrError)
+        {
+            onCompletionOrError(NO);
+        }
+    }];
+}
+
+- (instancetype)before:(dispatch_block_t)before
+{
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-        return [self subscribeWrite:^{
-            [subscriber wrote];
-        } error:^{
-            if(onCompletionOrError)
-            {
-                onCompletionOrError(NO);
-            }
-            [subscriber failed];
-        } completed:^{
-            if(onCompletionOrError)
-            {
-                onCompletionOrError(YES);
-            }
-            [subscriber completed];
-        }];
+        if(before)
+        {
+            before();
+        }
+        return [self subscribe:subscriber];
+    }];
+}
+
+- (instancetype)after:(dispatch_block_t)after
+{
+    return [self onCompletionOrError:^(BOOL success) {
+        if(after)
+        {
+            after();
+        }
+    }];
+}
+
++ (instancetype)defer:(ANYAnimation *(^)(void))defer
+{
+    return [ANYAnimation createAnimation:^ANYActivity * (ANYSubscriber *subscriber) {
+        
+        ANYAnimation *deferred = defer();
+        
+        return [deferred subscribe:subscriber];
+        
     }];
 }
 
@@ -183,11 +229,12 @@
 + (instancetype)group:(NSArray <ANYAnimation *> *)animations
 {
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-
-        ANYActivity *activity = [ANYActivity new];
         
         __block NSUInteger completed = 0;
-
+        
+        ANYActivity *activity = [ANYActivity new];
+        NSMutableString *name = [@"(group " mutableCopy];
+        
         for(ANYAnimation *anim in animations)
         {
             ANYActivity *d = [anim subscribeWrite:^{
@@ -202,8 +249,11 @@
                 }
             }]; 
             [activity add:d];
+            [name appendString:activity.name];
         }
-
+        
+        [name appendString:@")"];
+        [activity name:name];
         return activity;
     }];
 }
@@ -212,12 +262,16 @@
 {
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         ANYActivity *master = [ANYActivity new];
+        [master nameFormat:@"(delayed ? %.3f seconds)", delay];
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            // TODO: Investigate wether we should first check if `master` is cancelled
-            // What happens if some activity is cancelled? Should the signal fail?
-            ANYActivity *activity = [self subscribe:subscriber];
-            [master add:activity];
+            if(![master cancelled])
+            {
+                ANYActivity *activity = [self subscribe:subscriber];
+                [master nameFormat:@"(delayed %@ %.3f seconds)", activity.name, delay];
+                [master add:activity];
+            }
             
         });
         return master;
@@ -229,15 +283,13 @@
     return [ANYAnimation createAnimation:^ANYActivity * (ANYSubscriber *subscriber) {
 
         ANYActivity *master = [ANYActivity new];
+        [master name:@"(? then ?)"];
 
         ANYActivity *first = [self subscribeWrite:^{
             [subscriber wrote];
         } error:^{
             [subscriber failed];
         } completed:^{
-            
-            // TODO: Investigate wether we should first check if `master` is cancelled
-            // What happens if some activity is cancelled? Should the signal fail?
             
             ANYActivity *second = [animation subscribeWrite:^{
                 [subscriber wrote];
@@ -248,9 +300,11 @@
             }];
             
             [master add:second];
+            [master name:[master.name stringByReplacingCharactersInRange:NSMakeRange(master.name.length - 2, 1) withString:second.name]];
         }];
 
         [master add:first];
+        [master nameFormat:@"(%@ then ?)", first.name];
 
         return master;
 
@@ -260,27 +314,61 @@
 - (instancetype)repeat
 {
     return [ANYAnimation createAnimation:^ANYActivity * (ANYSubscriber *subscriber) {
-
+        
+        ANYActivity *master = [ANYActivity new];
+        
         __block BOOL cancelled = NO;
         __block ANYActivity *current = nil;
 
         current = [self subscribeWrite:^{
             [subscriber wrote];
         } error:^{
+            [master nameFormat:@"(repeat %@)", current.name];
             [subscriber failed];
         } completed:^{
+            [master nameFormat:@"(repeat %@)", current.name];
             if(!cancelled)
             {
                 current = [[self repeat] subscribe:subscriber];
             }
         }];
-
-        return [ANYActivity activityWithTearDownBlock:^{
+        
+        [master nameFormat:@"(repeat %@)", current.name];
+        [master addTearDownBlock:^{
             cancelled = YES;
             [current cancel];
         }];
+        return master;
 
     }];
+}
+
+@end
+
+
+@implementation ANYAnimation (Debug)
+
+- (instancetype)name:(NSString *)name
+{
+    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
+        ANYActivity *activity = [self subscribe:subscriber];
+        return [[ANYActivity activityWithTearDownBlock:^{
+            [activity cancel];
+        }] name:activity.name];
+    }];
+}
+
+- (instancetype)nameFormat:(NSString *)format, ...
+{
+    NSCParameterAssert(format != nil);
+    
+    va_list args;
+    va_start(args, format);
+    
+    NSString *string = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    
+    return [self name:string];
 }
 
 @end

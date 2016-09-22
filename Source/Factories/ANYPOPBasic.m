@@ -24,6 +24,7 @@
 
 #import "ANYPOPBasic.h"
 #import "ANYEXTScope.h"
+#import "ANYPOPMemoryTable.h"
 
 @interface ANYPOPBasic ()
 @property (nonatomic, copy) void (^configure)(POPBasicAnimation *anim);
@@ -99,6 +100,16 @@
     }];
 }
 
++ (ANYPOPMemoryTable <POPSpringAnimation *> *)sharedTable
+{
+    static ANYPOPMemoryTable <POPSpringAnimation *> *instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [ANYPOPMemoryTable new];
+    });
+    return instance;
+}
+
 - (ANYAnimation *)animationFor:(NSObject *)object
 {
     @weakify(object);
@@ -107,8 +118,7 @@
         
         POPBasicAnimation *anim = [self build];
         NSAssert(anim.property, @"No property specified for animation %@", anim);
-        
-        NSString *key = [NSString stringWithFormat:@"ag.%@", anim.property.name];
+        NSString *key = [NSString stringWithFormat:@"any.%@", anim.property.name];
         
         anim.completionBlock = ^(POPAnimation *anim, BOOL completed) {
             [subscriber completed:completed];
@@ -116,20 +126,32 @@
         
         [object pop_removeAnimationForKey:key];
         [object pop_addAnimation:anim forKey:key];
+        [[self.class sharedTable] setAnimation:anim forProperty:anim.property object:object];
         
-        return [ANYActivity activityWithTearDownBlock:^{
+        return [[ANYActivity activityWithTearDownBlock:^{
             
             @strongify(object);
             [object pop_removeAnimationForKey:key];
             
-        }];
+        }] nameFormat:@"(pop.basic key: '%@', toValue: %@, object: <%@ %p>)", key, anim.toValue, object.class, object];
         
     }];
 }
 
+
 @end
 
 @implementation ANYPOPBasic (Convenience)
+
++ (POPSpringAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object
+{
+    return [self lastActiveAnimationForProperty:[POPAnimatableProperty propertyWithName:name] object:object];
+}
+
++ (POPSpringAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object
+{
+    return [[self sharedTable] animationForProperty:property object:object];
+}
 
 - (instancetype)fromValueWithPoint:(CGPoint)point
 {

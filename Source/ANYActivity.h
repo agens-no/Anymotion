@@ -35,3 +35,11 @@
 - (void)addTearDownBlock:(dispatch_block_t)block;
 
 @end
+
+@interface ANYActivity (Debug)
+
+- (NSString *)name;
+- (instancetype)name:(NSString *)name;
+- (instancetype)nameFormat:(NSString *)format, ...;
+
+@end

@@ -113,9 +113,10 @@
             [subscriber completed:finished];
         }];
         
-        return [ANYActivity activityWithTearDownBlock:^{
+        return [[ANYActivity activityWithTearDownBlock:^{
             // TODO: Can we know which views properties to cancel?
-        }];
+        }] nameFormat:@"(UIView duration: %.2f, delay: %.2f)", duration, delay];
+        
     }];
 }
 

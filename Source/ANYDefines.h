@@ -22,33 +22,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import <pop/pop.h>
-#import "ANYAnimation.h"
+#ifndef ANYDefines_h
+#define ANYDefines_h
 
-@interface ANYPOPDecay : NSObject <NSCopying>
+#define USE_ME_TO_DEBUG __attribute__((unused))
 
-+ (instancetype)propertyNamed:(NSString *)name;
-+ (instancetype)property:(POPAnimatableProperty *)property;
-
-- (ANYPOPDecay *)configure:(void (^)(POPDecayAnimation *anim))configure;
-
-- (instancetype)fromValue:(id)fromValue;
-- (instancetype)beginTime:(CFTimeInterval)beginTime;
-- (instancetype)velocity:(id)velocity;
-- (instancetype)deceleration:(CGFloat)deceleration;
-
-- (ANYAnimation *)animationFor:(NSObject *)object;
-
-@end
-
-@interface ANYPOPDecay (Convenience)
-
-+ (POPDecayAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
-+ (POPDecayAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
-
-- (instancetype)fromValueWithPoint:(CGPoint)point;
-- (instancetype)fromValueWithSize:(CGSize)size;
-- (instancetype)fromValueWithRect:(CGRect)rect;
-
-@end
+#endif 

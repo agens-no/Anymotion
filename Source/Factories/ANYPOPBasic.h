@@ -44,6 +44,9 @@
 
 @interface ANYPOPBasic (Convenience)
 
++ (POPBasicAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
++ (POPBasicAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
+
 - (instancetype)fromValueWithPoint:(CGPoint)point;
 - (instancetype)fromValueWithSize:(CGSize)size;
 - (instancetype)fromValueWithRect:(CGRect)rect;

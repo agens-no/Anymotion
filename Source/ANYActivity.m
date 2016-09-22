@@ -23,11 +23,13 @@
 // THE SOFTWARE.
 
 #import "ANYActivity.h"
+#import "ANYDefines.h"
 
 @interface ANYActivity ()
 
 @property (nonatomic, copy, readwrite) void (^block)(void);
 @property (nonatomic, assign, readwrite) BOOL cancelled;
+@property (nonatomic, strong, readonly) NSString *name;
 
 @end
 
@@ -43,19 +45,25 @@
     return self;
 }
  
-- (instancetype)initWithBlock:(dispatch_block_t)block
+- (instancetype)initWithBlock:(dispatch_block_t)block name:(NSString *)name
 {
     self = [self init];
     if(self)
     {
         _block = block ? [block copy] : [^{} copy];
+        _name = [name copy];
     }
     return self;
 }
 
 + (instancetype)activityWithTearDownBlock:(dispatch_block_t)block
 {
-    return [[self alloc] initWithBlock:block];
+    return [[self alloc] initWithBlock:block name:nil];
+}
+
++ (instancetype)activityWithTearDownBlock:(dispatch_block_t)block name:(NSString *)name
+{
+    return [[self alloc] initWithBlock:block name:name];
 }
 
 - (void)cancel
@@ -67,27 +75,63 @@
     }
 }
 
+- (void)add:(ANYActivity *)activity
+{
+    NSString *name = self.name;
+    [self addTearDownBlock:^{
+        NSString *debugName USE_ME_TO_DEBUG = name;
+        [activity cancel];
+    }];
+}
+
 - (void)addTearDownBlock:(dispatch_block_t)block
 {
+    NSString *name = self.name;
     if(self.cancelled)
     {
+        NSString *debugName USE_ME_TO_DEBUG = name;
         block();
     }
     else
     {
         void (^current)() = self.block;
         self.block = ^{
+            NSString *debugName USE_ME_TO_DEBUG = name;
             current();
             block();
         };
     }
 }
 
-- (void)add:(ANYActivity *)activity
+
+@end
+
+
+@implementation ANYActivity (Debug)
+
+- (NSString *)name
 {
-    [self addTearDownBlock:^{
-        [activity cancel];
-    }];
+    return _name;
+}
+
+- (instancetype)name:(NSString *)name
+{
+    _name = name;
+    return self;
+}
+
+- (instancetype)nameFormat:(NSString *)format, ...
+{
+    NSCParameterAssert(format != nil);
+    
+    va_list args;
+    va_start(args, format);
+    
+    NSString *string = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    
+    _name = string;
+    return self;
 }
 
 @end

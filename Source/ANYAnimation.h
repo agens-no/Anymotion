@@ -30,6 +30,8 @@
 
 + (instancetype)createAnimation:(ANYActivity * (^)(ANYSubscriber *subscriber))create;
 
+- (ANYActivity *)start;
+
 - (ANYActivity *)subscribe:(ANYSubscriber *)subscriber;
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next;
 - (ANYActivity *)subscribeWrite:(dispatch_block_t)next error:(dispatch_block_t)error;
@@ -39,9 +41,9 @@
 - (ANYActivity *)subscribeError:(dispatch_block_t)error completed:(dispatch_block_t)completed;
 - (ANYActivity *)subscribeCompleted:(dispatch_block_t)completed;
 
-#pragma mark - Operators and methods
+@end
 
-- (ANYActivity *)start;
+@interface ANYAnimation (Operators)
 
 - (instancetype)onError:(dispatch_block_t)onError;
 - (instancetype)onError:(dispatch_block_t)onError onCompletion:(dispatch_block_t)onCompletion;
@@ -50,6 +52,11 @@
 - (instancetype)onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError;
 
 - (instancetype)onCompletionOrError:(void(^)(BOOL success))onCompletionOrError;
+
+- (instancetype)before:(dispatch_block_t)before;
+- (instancetype)after:(dispatch_block_t)after;
+
++ (instancetype)defer:(ANYAnimation *(^)(void))defer;
 
 - (instancetype)groupWith:(ANYAnimation *)animation;
 + (instancetype)group:(NSArray <ANYAnimation *> *)animations;
@@ -62,3 +69,10 @@
 
 @end
 
+
+@interface ANYAnimation (Debug)
+
+- (instancetype)name:(NSString *)name;
+- (instancetype)nameFormat:(NSString *)format, ...;
+
+@end

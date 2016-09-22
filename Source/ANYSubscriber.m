@@ -70,6 +70,11 @@
     }
 }
 
+@end
+
+
+@implementation ANYSubscriber (Convenience)
+
 - (void)completed:(BOOL)completed
 {
     if(completed)
