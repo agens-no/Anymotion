@@ -23,7 +23,6 @@
 // THE SOFTWARE.
 
 #import "ANYCABasic.h"
-#import <QuartzCore/QuartzCore.h>
 #import "ANYEXTScope.h"
 #import "ANYCALayerAnimationBlockDelegate.h"
 

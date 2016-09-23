@@ -26,7 +26,7 @@
 #import "ANYEXTScope.h"
 #import "ANYPOPMemoryTable.h"
 
-@interface ANYPOPSpring ()
+@interface ANYPOPSpring () <NSCopying>
 @property (nonatomic, copy) void (^configure)(POPSpringAnimation *anim);
 @end
 

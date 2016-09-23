@@ -21,35 +21,38 @@
     
     // then + repeat
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200.0, 200.0, 200.0, 200.0)];
-    view.backgroundColor = [UIColor greenColor];
-    [self.view addSubview:view];
+    ANYAnimation *anim = [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200.0, 200.0, 200.0, 200.0)];
+        view.backgroundColor = [UIColor greenColor];
+        [self.view addSubview:view];
+        
+        CGPoint left = CGPointMake(0, view.center.y);
+        CGPoint right = CGPointMake(self.view.bounds.size.width, view.center.y);
+        
+        ANYAnimation *goLeft = [ANYUIView animationWithDuration:0.5 block:^{
+            view.center = left;
+        }];
+        
+        ANYAnimation *goRight = [ANYUIView animationWithDuration:0.5 block:^{
+            view.center = right;
+        }];
+       
+        return [[[[goLeft then:goRight] repeat] after:^{
+            [view removeFromSuperview];
+        }] start];
+    }];
     
-    CGPoint left = CGPointMake(0, view.center.y);
-    CGPoint right = CGPointMake(self.view.bounds.size.width, view.center.y);
-    ANYAnimation *goLeft = [[[[ANYPOPBasic propertyNamed:kPOPViewCenter] toValueWithPoint:left] duration:3.0] animationFor:view];
-    ANYAnimation *goRight = [[[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:right] springSpeed:1] animationFor:view];
+    ANYActivity *activity = [[anim delay:2] start];
     
-    __block int count = 0;
-    ANYActivity *activity = [[[[[goRight then:goLeft] onCompletion:^{
-        NSLog(@"Completed cycle %i", count++);
-    }] repeat] onError:^{
-        NSLog(@"Error after cycle %i", count);
-    }] start];
-    
-    
-    // Cancel and continue with velocity
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//        [activity cancel];
-//
-//        [[[[[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:CGPointMake(0., 0.)] springSpeed:1] configure:^(POPSpringAnimation *anim) {
-//            anim.velocity = [ANYPOPSpring lastActiveAnimationForPropertyNamed:kPOPViewCenter object:view].velocity;
-//        }] animationFor:view] start];
-//        
-//    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+        [activity cancel];
+        NSLog(@"Cancelled. View should be in between animation points");
+        
+    });
     
 }
 
 @end
+	

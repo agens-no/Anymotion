@@ -23,8 +23,8 @@
 // THE SOFTWARE.
 
 #import "ANYAnimation.h"
+#import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
-#import <POP/POP.h>
 
 @interface ANYCABasic : NSObject <NSCopying>
 

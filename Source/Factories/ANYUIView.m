@@ -8,8 +8,9 @@
 
 #import "ANYUIView.h"
 #import <UIKit/UIKit.h>
+#import "ANYCoreAnimationObserver.h"
 
-@interface ANYUIView ()
+@interface ANYUIView () <NSCopying>
 @property (nonatomic, copy) void (^block)(void);
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) NSTimeInterval delay;
@@ -17,22 +18,6 @@
 @end
 
 @implementation ANYUIView
-
-- (ANYUIView *)block:(void (^)(void))block
-{
-    ANYUIView *instance = [self copy];
-    instance.block = ^{
-        if(self.block)
-        {
-            self.block();
-        }
-        if(block)
-        {
-            block();
-        }
-    };
-    return instance;
-}
 
 - (id)copyWithZone:(NSZone *)zone
 {
@@ -72,20 +57,30 @@
     return copy;
 }
 
+- (instancetype)block:(void (^)(void))block
+{
+    ANYUIView *instance = [self copy];
+    instance.block = ^{
+        if(self.block)
+        {
+            self.block();
+        }
+        if(block)
+        {
+            block();
+        }
+    };
+    return instance;
+}
+
+@end
+
+
+@implementation ANYUIView (Clean)
+
 - (ANYAnimation *)animation
 {
-    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-        
-        [UIView animateWithDuration:self.duration delay:self.delay options:self.options animations:^{
-            self.block();
-        } completion:^(BOOL finished) {
-            [subscriber completed:finished];
-        }];
-        
-        return [ANYActivity activityWithTearDownBlock:^{
-           // TODO: Can we know which views properties to cancel?
-        }];
-    }];
+    return [self.class animationWithDuration:self.duration delay:self.delay options:self.options block:self.block];
 }
 
 + (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block
@@ -107,15 +102,89 @@
 {
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         
+        NSMapTable <CALayer *, ANYCoreAnimationChanges *> *added = [[ANYCoreAnimationObserver shared] addedAnimations:^{
+            [UIView animateWithDuration:duration delay:delay options:options animations:^{
+                block();
+            } completion:^(BOOL finished) {
+                [subscriber completed:finished];
+            }];
+        }];
+        
+        return [[ANYActivity activityWithTearDownBlock:^{
+            
+            [self removeAddedAnimation:added];
+            
+        }] nameFormat:@"(UIView, clean, duration: %.2f, delay: %.2f)", duration, delay];
+        
+    }];
+}
+
++ (void)applyValueOfPresentationLayer:(CALayer *)layer animation:(CAAnimation *)animation
+{
+    if([animation isKindOfClass:[CAPropertyAnimation class]])
+    {
+        CAPropertyAnimation *propertyAnim = (id)animation;
+        id value = [layer.presentationLayer valueForKeyPath:propertyAnim.keyPath];
+        [layer setValue:value forKey:propertyAnim.keyPath];
+    }
+}
+
++ (void)removeAddedAnimation:(NSMapTable <CALayer *, ANYCoreAnimationChanges *> *)added
+{
+    for(CALayer *layer in added)
+    {
+        ANYCoreAnimationChanges *addedToLayer = [added objectForKey:layer];
+        
+        for(NSString *key in addedToLayer.animationsWithKeys)
+        {
+            [layer removeAnimationForKey:key];
+            
+            CAAnimation *animation = addedToLayer.animationsWithKeys[key];
+            [self applyValueOfPresentationLayer:layer animation:animation];
+        }
+        
+        for(CAAnimation *animation in addedToLayer.animationsWithoutKeys)
+        {
+            [self applyValueOfPresentationLayer:layer animation:animation];
+        }
+    }
+}
+
+@end
+
+@implementation ANYUIView (NoClean)
+
+- (ANYAnimation *)noCleanAnimation
+{
+    return [self.class animationWithDuration:self.duration delay:self.delay options:self.options block:self.block];
+}
+
++ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block
+{
+    return [self noCleanAnimationWithDuration:duration delay:0 options:0 block:block];
+}
+
++ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options block:(void(^)(void))block
+{
+    return [self noCleanAnimationWithDuration:duration delay:0 options:options block:block];
+}
+
++ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay block:(void(^)(void))block
+{
+    return [self noCleanAnimationWithDuration:duration delay:delay options:0 block:block];
+}
+
++ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block
+{
+    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
+        
         [UIView animateWithDuration:duration delay:delay options:options animations:^{
             block();
         } completion:^(BOOL finished) {
             [subscriber completed:finished];
         }];
         
-        return [[ANYActivity activityWithTearDownBlock:^{
-            // TODO: Can we know which views properties to cancel?
-        }] nameFormat:@"(UIView duration: %.2f, delay: %.2f)", duration, delay];
+        return [[ANYActivity new] nameFormat:@"(UIView, no clean, duration: %.2f, delay: %.2f)", duration, delay];
         
     }];
 }

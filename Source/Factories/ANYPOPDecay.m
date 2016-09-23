@@ -26,7 +26,7 @@
 #import "ANYEXTScope.h"
 #import "ANYPOPMemoryTable.h"
 
-@interface ANYPOPDecay ()
+@interface ANYPOPDecay () <NSCopying>
 @property (nonatomic, copy) void (^configure)(POPDecayAnimation *anim);
 @end
 

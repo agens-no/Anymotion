@@ -26,7 +26,7 @@
 #import <pop/pop.h>
 #import "ANYAnimation.h"
 
-@interface ANYPOPBasic : NSObject <NSCopying>
+@interface ANYPOPBasic : NSObject
 
 + (instancetype)propertyNamed:(NSString *)name;
 + (instancetype)property:(POPAnimatableProperty *)property;

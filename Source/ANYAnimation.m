@@ -28,7 +28,7 @@
 
 static NSString *ANYAnimationDefaultName = @"anim";
 
-@interface ANYAnimation () <NSCopying>
+@interface ANYAnimation ()
 
 @property (nonatomic, copy) ANYActivity * (^create)(ANYSubscriber *subscriber);
 

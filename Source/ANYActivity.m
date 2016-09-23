@@ -29,11 +29,12 @@
 
 @property (nonatomic, copy, readwrite) void (^block)(void);
 @property (nonatomic, assign, readwrite) BOOL cancelled;
-@property (nonatomic, strong, readonly) NSString *name;
 
 @end
 
-@implementation ANYActivity
+@implementation ANYActivity {
+    NSString *_name;
+}
 
 - (instancetype)init
 {

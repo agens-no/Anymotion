@@ -26,7 +26,7 @@
 #import "ANYEXTScope.h"
 #import "ANYPOPMemoryTable.h"
 
-@interface ANYPOPBasic ()
+@interface ANYPOPBasic () <NSCopying>
 @property (nonatomic, copy) void (^configure)(POPBasicAnimation *anim);
 @end
 
@@ -100,9 +100,9 @@
     }];
 }
 
-+ (ANYPOPMemoryTable <POPSpringAnimation *> *)sharedTable
++ (ANYPOPMemoryTable <POPBasicAnimation *> *)sharedTable
 {
-    static ANYPOPMemoryTable <POPSpringAnimation *> *instance;
+    static ANYPOPMemoryTable <POPBasicAnimation *> *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [ANYPOPMemoryTable new];
