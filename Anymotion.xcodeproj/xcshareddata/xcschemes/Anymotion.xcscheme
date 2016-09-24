@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0B6BE74719FFD3B900762101"
-               BuildableName = "pop.framework"
-               BlueprintName = "pop-ios-framework"
-               ReferencedContainer = "container:pop.xcodeproj">
+               BlueprintIdentifier = "EFF050B41D965ED900C2BB91"
+               BuildableName = "Anymotion.framework"
+               BlueprintName = "Anymotion"
+               ReferencedContainer = "container:Anymotion.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ECF01ED218C92B7F009E0AD1"
-               BuildableName = "pop-tests.xctest"
-               BlueprintName = "pop-tests-ios"
-               ReferencedContainer = "container:pop.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
-            BuildableName = "pop.framework"
-            BlueprintName = "pop-ios-framework"
-            ReferencedContainer = "container:pop.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
-            BuildableName = "pop.framework"
-            BlueprintName = "pop-ios-framework"
-            ReferencedContainer = "container:pop.xcodeproj">
+            BlueprintIdentifier = "EFF050B41D965ED900C2BB91"
+            BuildableName = "Anymotion.framework"
+            BlueprintName = "Anymotion"
+            ReferencedContainer = "container:Anymotion.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
-            BuildableName = "pop.framework"
-            BlueprintName = "pop-ios-framework"
-            ReferencedContainer = "container:pop.xcodeproj">
+            BlueprintIdentifier = "EFF050B41D965ED900C2BB91"
+            BuildableName = "Anymotion.framework"
+            BlueprintName = "Anymotion"
+            ReferencedContainer = "container:Anymotion.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

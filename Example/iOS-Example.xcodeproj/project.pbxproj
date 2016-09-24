@@ -69,8 +69,8 @@
 				EFE55A5E1D96778A0006178E /* Playground.playground */,
 				EFE55A281D9675470006178E /* iOS-Example */,
 				EFE55A0F1D9674CC0006178E /* Products */,
-				EFE55A3C1D9675B00006178E /* Anymotion.xcodeproj */,
 				EFE55A441D9676110006178E /* Frameworks */,
+				EFE55A3C1D9675B00006178E /* Anymotion.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
