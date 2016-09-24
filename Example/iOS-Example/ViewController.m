@@ -43,14 +43,7 @@
         }] start];
     }];
     
-    ANYActivity *activity = [[anim delay:2] start];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
-        [activity cancel];
-        NSLog(@"Cancelled. View should be in between animation points");
-        
-    });
+    [[anim delay:2] start];
     
 }
 
