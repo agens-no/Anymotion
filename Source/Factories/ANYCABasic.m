@@ -27,13 +27,13 @@
 #import "ANYCALayerAnimationBlockDelegate.h"
 
 
-@interface ANYCABasic ()
+@interface ANYCABasic () <NSCopying>
 @property (nonatomic, copy) void (^configure)(CABasicAnimation *anim);
 @end
 
 @implementation ANYCABasic
 
-- (ANYCABasic *)configure:(void (^)(CABasicAnimation *anim))configure
+- (instancetype)configure:(void (^)(CABasicAnimation *anim))configure
 {
     ANYCABasic *instance = [ANYCABasic new];
     instance.configure = ^(CABasicAnimation *basic){

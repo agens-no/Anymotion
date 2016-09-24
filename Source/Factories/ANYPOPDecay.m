@@ -44,7 +44,7 @@
     }];
 }
 
-- (ANYPOPDecay *)configure:(void (^)(POPDecayAnimation *anim))configure
+- (instancetype)configure:(void (^)(POPDecayAnimation *anim))configure
 {
     ANYPOPDecay *instance = [ANYPOPDecay new];
     instance.configure = ^(POPDecayAnimation *basic){

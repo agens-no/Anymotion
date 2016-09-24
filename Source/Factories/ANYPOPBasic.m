@@ -44,7 +44,7 @@
     }];
 }
 
-- (ANYPOPBasic *)configure:(void (^)(POPBasicAnimation *anim))configure
+- (instancetype)configure:(void (^)(POPBasicAnimation *anim))configure
 {
     ANYPOPBasic *instance = [ANYPOPBasic new];
     instance.configure = ^(POPBasicAnimation *basic){
@@ -143,12 +143,12 @@
 
 @implementation ANYPOPBasic (Convenience)
 
-+ (POPSpringAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object
++ (POPBasicAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object
 {
     return [self lastActiveAnimationForProperty:[POPAnimatableProperty propertyWithName:name] object:object];
 }
 
-+ (POPSpringAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object
++ (POPBasicAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object
 {
     return [[self sharedTable] animationForProperty:property object:object];
 }

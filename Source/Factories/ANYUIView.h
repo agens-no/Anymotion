@@ -11,6 +11,8 @@
 #import <pop/pop.h>
 #import "ANYAnimation.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ANYUIView : NSObject
 
 - (instancetype)duration:(NSTimeInterval)duration;
@@ -55,3 +57,5 @@
 + (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block;
 
 @end
+
+NS_ASSUME_NONNULL_END

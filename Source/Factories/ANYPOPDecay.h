@@ -26,17 +26,18 @@
 #import <pop/pop.h>
 #import "ANYAnimation.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ANYPOPDecay : NSObject
 
 + (instancetype)propertyNamed:(NSString *)name;
 + (instancetype)property:(POPAnimatableProperty *)property;
 
-- (ANYPOPDecay *)configure:(void (^)(POPDecayAnimation *anim))configure;
-
-- (instancetype)fromValue:(id)fromValue;
+- (instancetype)fromValue:(nullable id)fromValue;
 - (instancetype)beginTime:(CFTimeInterval)beginTime;
-- (instancetype)velocity:(id)velocity;
+- (instancetype)velocity:(nullable id)velocity;
 - (instancetype)deceleration:(CGFloat)deceleration;
+- (instancetype)configure:(nullable void (^)(POPDecayAnimation *anim))configure;
 
 - (ANYAnimation *)animationFor:(NSObject *)object;
 
@@ -44,11 +45,13 @@
 
 @interface ANYPOPDecay (Convenience)
 
-+ (POPDecayAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
-+ (POPDecayAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
++ (nullable POPDecayAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
++ (nullable POPDecayAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
 
 - (instancetype)fromValueWithPoint:(CGPoint)point;
 - (instancetype)fromValueWithSize:(CGSize)size;
 - (instancetype)fromValueWithRect:(CGRect)rect;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -26,19 +26,23 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
 
-@interface ANYCABasic : NSObject <NSCopying>
+NS_ASSUME_NONNULL_BEGIN
 
-- (ANYCABasic *)configure:(void (^)(CABasicAnimation *anim))configure;
+@interface ANYCABasic : NSObject
 
-- (instancetype)toValue:(id)toValue;
-- (instancetype)byValue:(id)byValue;
-- (instancetype)fromValue:(id)fromValue;
+- (instancetype)configure:(nullable void (^)(CABasicAnimation *anim))configure;
+
+- (instancetype)toValue:(nullable id)toValue;
+- (instancetype)byValue:(nullable id)byValue;
+- (instancetype)fromValue:(nullable id)fromValue;
 - (instancetype)additive:(BOOL)additive;
 - (instancetype)cumulative:(BOOL)cumulative;
 - (instancetype)duration:(NSTimeInterval)duration;
 - (instancetype)removedOnCompletion:(BOOL)removedOnCompletion;
-- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
+- (instancetype)timingFunction:(nullable CAMediaTimingFunction *)timingFunction;
 
 - (ANYAnimation *)animationFor:(CALayer *)layer keyPath:(NSString *)keyPath;
 
 @end
+
+NS_ASSUME_NONNULL_END

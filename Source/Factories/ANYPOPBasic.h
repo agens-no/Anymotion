@@ -26,17 +26,18 @@
 #import <pop/pop.h>
 #import "ANYAnimation.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ANYPOPBasic : NSObject
 
 + (instancetype)propertyNamed:(NSString *)name;
 + (instancetype)property:(POPAnimatableProperty *)property;
 
-- (ANYPOPBasic *)configure:(void (^)(POPBasicAnimation *anim))configure;
-
-- (instancetype)fromValue:(id)fromValue;
-- (instancetype)toValue:(id)toValue;
+- (instancetype)fromValue:(nullable id)fromValue;
+- (instancetype)toValue:(nullable id)toValue;
 - (instancetype)duration:(NSTimeInterval)duration;
-- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
+- (instancetype)timingFunction:(nullable CAMediaTimingFunction *)timingFunction;
+- (instancetype)configure:(nullable void (^)(POPBasicAnimation *anim))configure;
 
 - (ANYAnimation *)animationFor:(NSObject *)object;
 
@@ -44,15 +45,17 @@
 
 @interface ANYPOPBasic (Convenience)
 
-+ (POPBasicAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
-+ (POPBasicAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
++ (nullable POPBasicAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
++ (nullable POPBasicAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
 
-- (instancetype)fromValueWithPoint:(CGPoint)point;
-- (instancetype)fromValueWithSize:(CGSize)size;
-- (instancetype)fromValueWithRect:(CGRect)rect;
+- (nullable instancetype)fromValueWithPoint:(CGPoint)point;
+- (nullable instancetype)fromValueWithSize:(CGSize)size;
+- (nullable instancetype)fromValueWithRect:(CGRect)rect;
 
 - (instancetype)toValueWithPoint:(CGPoint)point;
 - (instancetype)toValueWithSize:(CGSize)size;
 - (instancetype)toValueWithRect:(CGRect)rect;
 
 @end
+
+NS_ASSUME_NONNULL_END

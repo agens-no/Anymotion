@@ -26,21 +26,23 @@
 #import <pop/pop.h>
 #import "ANYAnimation.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ANYPOPSpring : NSObject
 
 + (instancetype)propertyNamed:(NSString *)name;
 + (instancetype)property:(POPAnimatableProperty *)property;
 
-- (instancetype)fromValue:(id)fromValue;
-- (instancetype)toValue:(id)toValue;
+- (instancetype)fromValue:(nullable id)fromValue;
+- (instancetype)toValue:(nullable id)toValue;
 - (instancetype)beginTime:(CFTimeInterval)beginTime;
-- (instancetype)velocity:(id)velocity;
+- (instancetype)velocity:(nullable id)velocity;
 - (instancetype)springSpeed:(CGFloat)springSpeed;
 - (instancetype)dynamicsMass:(CGFloat)dynamicsMass;
 - (instancetype)dynamicsTension:(CGFloat)dynamicsTension;
 - (instancetype)dynamicsFriction:(CGFloat)dynamicsFriction;
 - (instancetype)springBounciness:(CGFloat)springBounciness;
-- (instancetype)configure:(void (^)(POPSpringAnimation *anim))configure;
+- (instancetype)configure:(nullable void (^)(POPSpringAnimation *anim))configure;
 
 - (ANYAnimation *)animationFor:(NSObject *)object;
 
@@ -48,8 +50,8 @@
 
 @interface ANYPOPSpring (Convenience)
 
-+ (POPSpringAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
-+ (POPSpringAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
++ (nullable POPSpringAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
++ (nullable POPSpringAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
 
 - (instancetype)fromValueWithPoint:(CGPoint)point;
 - (instancetype)fromValueWithSize:(CGSize)size;
@@ -60,3 +62,5 @@
 - (instancetype)toValueWithRect:(CGRect)rect;
 
 @end
+
+NS_ASSUME_NONNULL_END
