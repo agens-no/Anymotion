@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EF5EDE461D965F6500116AFF /* ANYActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE291D965F6500116AFF /* ANYActivity.h */; };
+		EF5EDE461D965F6500116AFF /* ANYActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE291D965F6500116AFF /* ANYActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE471D965F6500116AFF /* ANYActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE2A1D965F6500116AFF /* ANYActivity.m */; };
-		EF5EDE481D965F6500116AFF /* ANYAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE2B1D965F6500116AFF /* ANYAnimation.h */; };
+		EF5EDE481D965F6500116AFF /* ANYAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE2B1D965F6500116AFF /* ANYAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE491D965F6500116AFF /* ANYAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE2C1D965F6500116AFF /* ANYAnimation.m */; };
 		EF5EDE4A1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE2D1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.h */; };
 		EF5EDE4B1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE2E1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m */; };
@@ -20,23 +20,22 @@
 		EF5EDE501D965F6500116AFF /* ANYDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE331D965F6500116AFF /* ANYDefines.h */; };
 		EF5EDE511D965F6500116AFF /* ANYEXTMetamacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE341D965F6500116AFF /* ANYEXTMetamacros.h */; };
 		EF5EDE521D965F6500116AFF /* ANYEXTScope.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE351D965F6500116AFF /* ANYEXTScope.h */; };
-		EF5EDE531D965F6500116AFF /* Anymotion.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE361D965F6500116AFF /* Anymotion.h */; };
-		EF5EDE541D965F6500116AFF /* ANYSubscriber.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE371D965F6500116AFF /* ANYSubscriber.h */; };
+		EF5EDE531D965F6500116AFF /* Anymotion.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE361D965F6500116AFF /* Anymotion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF5EDE541D965F6500116AFF /* ANYSubscriber.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE371D965F6500116AFF /* ANYSubscriber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE551D965F6500116AFF /* ANYSubscriber.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE381D965F6500116AFF /* ANYSubscriber.m */; };
-		EF5EDE561D965F6500116AFF /* ANYCABasic.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE3A1D965F6500116AFF /* ANYCABasic.h */; };
+		EF5EDE561D965F6500116AFF /* ANYCABasic.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE3A1D965F6500116AFF /* ANYCABasic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE571D965F6500116AFF /* ANYCABasic.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE3B1D965F6500116AFF /* ANYCABasic.m */; };
-		EF5EDE581D965F6500116AFF /* ANYPOPBasic.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE3C1D965F6500116AFF /* ANYPOPBasic.h */; };
+		EF5EDE581D965F6500116AFF /* ANYPOPBasic.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE3C1D965F6500116AFF /* ANYPOPBasic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE591D965F6500116AFF /* ANYPOPBasic.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE3D1D965F6500116AFF /* ANYPOPBasic.m */; };
-		EF5EDE5A1D965F6500116AFF /* ANYPOPDecay.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE3E1D965F6500116AFF /* ANYPOPDecay.h */; };
+		EF5EDE5A1D965F6500116AFF /* ANYPOPDecay.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE3E1D965F6500116AFF /* ANYPOPDecay.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE5B1D965F6500116AFF /* ANYPOPDecay.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE3F1D965F6500116AFF /* ANYPOPDecay.m */; };
 		EF5EDE5C1D965F6500116AFF /* ANYPOPMemoryTable.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE401D965F6500116AFF /* ANYPOPMemoryTable.h */; };
 		EF5EDE5D1D965F6500116AFF /* ANYPOPMemoryTable.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE411D965F6500116AFF /* ANYPOPMemoryTable.m */; };
-		EF5EDE5E1D965F6500116AFF /* ANYPOPSpring.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE421D965F6500116AFF /* ANYPOPSpring.h */; };
+		EF5EDE5E1D965F6500116AFF /* ANYPOPSpring.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE421D965F6500116AFF /* ANYPOPSpring.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE5F1D965F6500116AFF /* ANYPOPSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE431D965F6500116AFF /* ANYPOPSpring.m */; };
-		EF5EDE601D965F6500116AFF /* ANYUIView.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE441D965F6500116AFF /* ANYUIView.h */; };
+		EF5EDE601D965F6500116AFF /* ANYUIView.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE441D965F6500116AFF /* ANYUIView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE611D965F6500116AFF /* ANYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE451D965F6500116AFF /* ANYUIView.m */; };
 		EF5EDE7A1D965F8600116AFF /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5EDE6F1D965F7F00116AFF /* pop.framework */; };
-		EFF050BA1D965ED900C2BB91 /* Anymotion.h in Headers */ = {isa = PBXBuildFile; fileRef = EFF050B81D965ED900C2BB91 /* Anymotion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,7 +121,6 @@
 		EF5EDE451D965F6500116AFF /* ANYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYUIView.m; sourceTree = "<group>"; };
 		EF5EDE621D965F7F00116AFF /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = Carthage/Checkouts/pop/pop.xcodeproj; sourceTree = "<group>"; };
 		EFF050B51D965ED900C2BB91 /* Anymotion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Anymotion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFF050B81D965ED900C2BB91 /* Anymotion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Anymotion.h; sourceTree = "<group>"; };
 		EFF050B91D965ED900C2BB91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,7 +214,6 @@
 		EFF050B71D965ED900C2BB91 /* Anymotion */ = {
 			isa = PBXGroup;
 			children = (
-				EFF050B81D965ED900C2BB91 /* Anymotion.h */,
 				EFF050B91D965ED900C2BB91 /* Info.plist */,
 			);
 			path = Anymotion;
@@ -235,7 +232,6 @@
 				EF5EDE4E1D965F6500116AFF /* ANYCoreAnimationObserver.h in Headers */,
 				EF5EDE4C1D965F6500116AFF /* ANYCoreAnimationChanges.h in Headers */,
 				EF5EDE541D965F6500116AFF /* ANYSubscriber.h in Headers */,
-				EFF050BA1D965ED900C2BB91 /* Anymotion.h in Headers */,
 				EF5EDE481D965F6500116AFF /* ANYAnimation.h in Headers */,
 				EF5EDE531D965F6500116AFF /* Anymotion.h in Headers */,
 				EF5EDE511D965F6500116AFF /* ANYEXTMetamacros.h in Headers */,
