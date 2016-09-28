@@ -7,7 +7,8 @@
 //
 
 #import "ButtonViewController.h"
-#import "ANYUIView.h"
+
+#import <Anymotion/Anymotion.h>
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees) / 180.0)
 

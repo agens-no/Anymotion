@@ -8,8 +8,7 @@
 
 #import "ImageAnimationViewController.h"
 
-#import "ANYPOPSpring.h"
-#import "ANYPOPDecay.h"
+#import <Anymotion/Anymotion.h>
 
 @interface ImageAnimationViewController () <UIGestureRecognizerDelegate>
 
