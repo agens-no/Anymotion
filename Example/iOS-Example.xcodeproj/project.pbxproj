@@ -15,6 +15,9 @@
 		EFE55A3A1D9675470006178E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE55A331D9675470006178E /* ViewController.m */; };
 		EFE55A431D9675B90006178E /* Anymotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE55A421D9675B00006178E /* Anymotion.framework */; };
 		EFE55A461D9676110006178E /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE55A451D9676110006178E /* pop.framework */; };
+		FC67EE571D9BF62A001E3314 /* ButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC67EE531D9BF62A001E3314 /* ButtonViewController.m */; };
+		FC67EE581D9BF62A001E3314 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC67EE541D9BF62A001E3314 /* image.jpg */; };
+		FC67EE591D9BF62A001E3314 /* ImageAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC67EE561D9BF62A001E3314 /* ImageAnimationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,11 @@
 		EFE55A3C1D9675B00006178E /* Anymotion.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Anymotion.xcodeproj; path = ../Anymotion.xcodeproj; sourceTree = "<group>"; };
 		EFE55A451D9676110006178E /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = "../Carthage/Checkouts/pop/build/Debug-iphoneos/pop.framework"; sourceTree = "<group>"; };
 		EFE55A5E1D96778A0006178E /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Playground.playground; path = ../Playgrounds/Playground.playground; sourceTree = "<group>"; };
+		FC67EE521D9BF62A001E3314 /* ButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonViewController.h; sourceTree = "<group>"; };
+		FC67EE531D9BF62A001E3314 /* ButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonViewController.m; sourceTree = "<group>"; };
+		FC67EE541D9BF62A001E3314 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		FC67EE551D9BF62A001E3314 /* ImageAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimationViewController.h; sourceTree = "<group>"; };
+		FC67EE561D9BF62A001E3314 /* ImageAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAnimationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +102,11 @@
 				EFE55A311D9675470006178E /* main.m */,
 				EFE55A321D9675470006178E /* ViewController.h */,
 				EFE55A331D9675470006178E /* ViewController.m */,
+				FC67EE521D9BF62A001E3314 /* ButtonViewController.h */,
+				FC67EE531D9BF62A001E3314 /* ButtonViewController.m */,
+				FC67EE541D9BF62A001E3314 /* image.jpg */,
+				FC67EE551D9BF62A001E3314 /* ImageAnimationViewController.h */,
+				FC67EE561D9BF62A001E3314 /* ImageAnimationViewController.m */,
 			);
 			path = "iOS-Example";
 			sourceTree = "<group>";
@@ -192,6 +205,7 @@
 				EFE55A371D9675470006178E /* Main.storyboard in Resources */,
 				EFE55A351D9675470006178E /* Assets.xcassets in Resources */,
 				EFE55A361D9675470006178E /* LaunchScreen.storyboard in Resources */,
+				FC67EE581D9BF62A001E3314 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +216,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC67EE571D9BF62A001E3314 /* ButtonViewController.m in Sources */,
 				EFE55A3A1D9675470006178E /* ViewController.m in Sources */,
+				FC67EE591D9BF62A001E3314 /* ImageAnimationViewController.m in Sources */,
 				EFE55A391D9675470006178E /* main.m in Sources */,
 				EFE55A341D9675470006178E /* AppDelegate.m in Sources */,
 			);

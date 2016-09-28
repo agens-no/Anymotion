@@ -7,9 +7,15 @@
 //
 
 #import "ViewController.h"
+#import "ButtonViewController.h"
+#import "ImageAnimationViewController.h"
+
 #import <Anymotion/Anymotion.h>
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) UINavigationController *navigationController;
 
 @end
 
@@ -19,32 +25,71 @@
 {
     [super viewDidLoad];
     
-    // then + repeat
+    NSArray *items = @[
+                       [ButtonViewController class],
+                       [ImageAnimationViewController class]
+                       ];
+    self.items = items;
     
-    ANYAnimation *anim = [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(200.0, 200.0, 200.0, 200.0)];
-        view.backgroundColor = [UIColor greenColor];
-        [self.view addSubview:view];
-        
-        CGPoint left = CGPointMake(0, view.center.y);
-        CGPoint right = CGPointMake(self.view.bounds.size.width, view.center.y);
-        
-        ANYAnimation *goLeft = [ANYUIView animationWithDuration:0.5 block:^{
-            view.center = left;
-        }];
-        
-        ANYAnimation *goRight = [ANYUIView animationWithDuration:0.5 block:^{
-            view.center = right;
-        }];
-       
-        return [[[[goLeft then:goRight] repeat] after:^{
-            [view removeFromSuperview];
-        }] start];
-    }];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    tableView.delegate = self;
+    tableView.dataSource = self;
     
-    [[anim delay:2] start];
+    UIViewController *viewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    viewController.view.frame = self.view.bounds;
+    viewController.title = @"Animations";
+    [viewController.view addSubview:tableView];
     
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self addChildViewController:navigationController];
+    [self.view addSubview:navigationController.view];
+    self.navigationController = navigationController;
+    
+}
+
+
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIViewController *viewController = [self viewControllerAtIndexPath:indexPath];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.items.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"tableView.cell";
+    UIViewController *viewController = [self viewControllerAtIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    cell.textLabel.text = viewController.title;
+    return cell;
+}
+
+
+
+#pragma mark - Internals
+
+- (UIViewController *)viewControllerAtIndexPath:(NSIndexPath *)indexPath
+{
+    Class className = (Class)self.items[indexPath.row];
+    UIViewController *viewController = [(UIViewController *)[className alloc] init];
+    return viewController;
 }
 
 @end
