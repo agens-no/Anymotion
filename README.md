@@ -1,4 +1,4 @@
-# <img src="/Meta/logo.png?raw=true" height="42" alt="Anymotion" />
+![Screenshot](logo_looped.gif)
 
 Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and your library of choice.
 
