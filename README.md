@@ -1,14 +1,24 @@
 ![Screenshot](logo_looped.gif)
 
-Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and your library of choice.
+Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and your library of choice
+
+- **powerful oneliners**
+- **grouping and chaining animations**
+- **cancellable animations with callbacks for clean up**
 
 ### Installation
 
+##### Pods
 ```
 pod 'Anymotion'
 ```
 
-##### Import in swift
+##### Carthage
+```
+github "agensdev/anymotion"
+```
+
+#####Import in swift
 
 ```
 import Anymotion
@@ -22,28 +32,84 @@ import Anymotion
 
 ### Basics
 
-Powerful oneliners using a chainable builder pattern
+#### Powerful oneliners
+
+Using a chainable builder pattern we can pack a good deal of configuration in one line
 ```objc
-POPBasicAnimation *alpha0 = [[[[POPBasicFactory propertyNamed:kPOPViewAlpha] duration:3] toValue:@0] build];
-POPBasicAnimation *alpha1 = [[[[POPBasicFactory propertyNamed:kPOPViewAlpha] duration:3] toValue:@1] build];
-POPBasicAnimation *frame0 = [[[[POPBasicFactory propertyNamed:kPOPViewFrame] duration:5] toValue:[NSValue valueWithCGRect:CGRectMake(100.0, 300.0, 50.0, 50.0)]] build];
-POPBasicAnimation *frame1 = [[[[POPBasicFactory propertyNamed:kPOPViewFrame] duration:5] toValue:[NSValue valueWithCGRect:CGRectMake(100.0, 0.0, 50.0, 50.0)]] build];
+ANYAnimation *goRight = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:right] animationFor:view];
+ANYAnimation *fadeOut = [[[[ANYCABasic new] toValue:@0] duration:1] animationFor:view.layer keyPath:@"opacity"];
 ```
-
-Group animations together
+Note: These animations won't start unless you say `start` like this
 ```objc
-AGAnimation *group = [AGAnimation group:@[
-                                          [alpha0 animation:view0],
-                                          [frame0 animation:view0],
-                                          [alpha1 animation:view1],
-                                          [frame1 animation:view1],
-                                          ]];
+[goRight start];
+[fadeOut start];
+```
+Making you able to define your animations once and then start and cancel them at your leisure.
 
+#### Grouping
+
+Start these animations simultaneously
+
+```objc
+ANYAnimation *goRight = ...;
+ANYAnimation *fadeOut = ...;
+ANYAnimation *group = [ANYAnimation group:@[goRight, fadeOut]];
 [group start];
 ```
 
+#### Chaining
+
+When one animation completes then start another
+```objc
+ANYAnimation *goRight = ...;
+ANYAnimation *goLeft = ...;
+ANYAnimation *group = [goRight then:goLeft];
+[group start];
+```
+
+Chain and repeat indefinitely
+```objc
+ANYAnimation *goRight = ...;
+ANYAnimation *goLeft = ...;
+ANYAnimation *group = [[goRight then:goLeft] repeat];
+[group start];
+```
+
+#### Start... and cancel
+
+```objc
+ANYAnimation *anim = ...;
+ANYActivity *runningAnimation = [anim start];
+...
+[runningAnimation cancel];
+```
+
+#### Set up and clean up
+
+```objc
+ANYAnimation *pulsatingDot = ...;
+[[pulsatingDot before:^{
+  view.hidden = NO;
+}] after:^{
+  view.hidden = YES;
+}];
+[pulsatingDot start];
+```
+
+#### Callbacks
+
+```objc
+ANYAnimation *anim = ...;
+[[anim onCompletion:^{
+  NSLog(@"Animation completed");
+} onError:^{
+  NSLog(@"Animation was cancelled");
+}] start];
+```
+
+
 ## Who's behind this?
 
-Made with love by Agens.no, a company situated in Oslo, Norway.
+Made with love by [Agens.no](http://agens.no/), a company situated in Oslo, Norway.
 
 [<img src="http://static.agens.no/images/agens_logo_w_slogan_avenir_medium.png" width="340" />](http://agens.no/)
