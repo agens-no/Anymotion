@@ -18,7 +18,7 @@ pod 'Anymotion'
 github "agensdev/anymotion"
 ```
 
-#####Import in swift
+##### Import in swift
 
 ```
 import Anymotion
@@ -45,6 +45,37 @@ Note: These animations won't start unless you say `start` like this
 [fadeOut start];
 ```
 Making you able to define your animations once and then start and cancel them at your leisure.
+
+#### POP, UIKit, CoreAnimation
+
+POP spring
+```objc
+ANYAnimation *anim = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValue:@0] animationFor:view];
+```
+
+POP basic
+```objc
+ANYAnimation *anim = [[[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0] duration:0.5] animationFor:view];
+```
+
+POP decay
+```objc
+ANYAnimation *anim = [[[ANYPOPDecay propertyNamed:kPOPViewAlpha] velocity:@(-10)] animationFor:view];
+```
+
+CABasicAnimation
+```objc
+ANYAnimation *anim = [[[[ANYCABasic new] toValue:@0] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
+```
+
+UIKit
+```objc
+ANYAnimation *anim = [ANYUIView animationWithDuration:0.5 block:^{
+    view.alpha = 0.0;
+}];
+```
+
+Ande more integrations to come...
 
 #### Grouping
 
