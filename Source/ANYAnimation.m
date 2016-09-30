@@ -222,7 +222,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
                 }
             }]; 
             [activity add:d];
-            [name appendString:activity.name];
+            [name appendString:activity.name ?: @""];
         }
         
         [name appendString:@")"];
