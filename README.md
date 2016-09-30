@@ -19,13 +19,11 @@ github "agensdev/anymotion"
 ```
 
 ##### Import in swift
-
 ```
 import Anymotion
 ```
 
 ##### Import in Objective-C
-
 ```
 #import <Anymotion/Anymotion.h>
 ```
@@ -79,7 +77,7 @@ Ande more integrations to come...
 
 #### Grouping
 
-Start these animations simultaneously
+Start animations simultaneously
 
 ```objc
 ANYAnimation *goRight = ...;
