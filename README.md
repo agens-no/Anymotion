@@ -48,27 +48,27 @@ Making you able to define your animations once and then start and cancel them at
 
 #### POP, UIKit, CoreAnimation
 
-POP spring
+##### POP spring
 ```objc
 ANYAnimation *anim = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValue:@0] animationFor:view];
 ```
 
-POP basic
+##### POP basic
 ```objc
 ANYAnimation *anim = [[[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0] duration:0.5] animationFor:view];
 ```
 
-POP decay
+##### POP decay
 ```objc
 ANYAnimation *anim = [[[ANYPOPDecay propertyNamed:kPOPViewAlpha] velocity:@(-10)] animationFor:view];
 ```
 
-CABasicAnimation
+##### CABasicAnimation
 ```objc
 ANYAnimation *anim = [[[[ANYCABasic new] toValue:@0] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
 ```
 
-UIKit
+##### UIKit
 ```objc
 ANYAnimation *anim = [ANYUIView animationWithDuration:0.5 block:^{
     view.alpha = 0.0;
