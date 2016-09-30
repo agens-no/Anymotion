@@ -42,7 +42,7 @@ Note: These animations won't start unless you say `start` like this
 [goRight start];
 [fadeOut start];
 ```
-Making you able to define your animations once and then start and cancel them at your leisure.
+Thus making you able to define your animations once and then start and cancel them at your leisure.
 
 #### POP, UIKit, CoreAnimation
 
