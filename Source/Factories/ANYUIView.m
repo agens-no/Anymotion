@@ -19,6 +19,26 @@
 
 @implementation ANYUIView
 
++ (instancetype)duration:(NSTimeInterval)duration
+{
+    return [[self new] duration:duration];
+}
+
++ (instancetype)delay:(NSTimeInterval)delay
+{
+    return [[self new] delay:delay];
+}
+
++ (instancetype)options:(UIViewAnimationOptions)options
+{
+    return [[self new] options:options];
+}
+
++ (instancetype)block:(void (^)(void))block
+{
+    return [[self new] block:block];
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
     ANYUIView *copy = [ANYUIView new];

@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ANYUIView : NSObject
 
++ (instancetype)duration:(NSTimeInterval)duration;
++ (instancetype)delay:(NSTimeInterval)delay;
++ (instancetype)options:(UIViewAnimationOptions)options;
++ (instancetype)block:(void (^)(void))block;
+
 - (instancetype)duration:(NSTimeInterval)duration;
 - (instancetype)delay:(NSTimeInterval)delay;
 - (instancetype)options:(UIViewAnimationOptions)options;
