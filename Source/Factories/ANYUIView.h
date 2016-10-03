@@ -25,7 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /*
- If the animation is cancelled it will leave the view in its current presented state.
+ If the animation is cancelled we will
+ - remove the underlying core animation
+ - leave the view in its current presented state.
+ 
  We're acheiving this by looking at
  - which animations have been added to the view/layer
  - what's the current value on the layer.presentationLayer for those animations
@@ -44,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /*
- If you prefer to simply remove the animation
+ Use this if you don't want to remove the underlying Core Animations on cancellation.
  */
 
 @interface ANYUIView (NoClean)
