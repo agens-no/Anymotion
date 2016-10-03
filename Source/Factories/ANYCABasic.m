@@ -149,7 +149,13 @@
         {
             [CATransaction begin];
             [CATransaction setDisableActions:YES];
+            
+            /*
+             If you encounter a crash on this line double check that your toValue type is correct for that key path.
+             E.g. "transform.scale" takes NSNumber – not [NSValue valueWithSize:].
+             */
             [layer setValue:basic.toValue forKeyPath:basic.keyPath];
+            
             [CATransaction commit];
         }
         
