@@ -26,7 +26,7 @@
 #import "ANYEXTScope.h"
 #import "ANYPOPMemoryTable.h"
 
-@interface ANYPOPBasic () <NSCopying>
+@interface ANYPOPBasic ()
 @property (nonatomic, copy) void (^configure)(POPBasicAnimation *anim);
 @end
 
@@ -58,11 +58,6 @@
         }
     };
     return instance;
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    return [self configure:nil];
 }
 
 - (POPBasicAnimation *)build

@@ -26,7 +26,7 @@
 #import "ANYEXTScope.h"
 #import "ANYPOPMemoryTable.h"
 
-@interface ANYPOPSpring () <NSCopying>
+@interface ANYPOPSpring ()
 @property (nonatomic, copy) void (^configure)(POPSpringAnimation *anim);
 @end
 
@@ -42,11 +42,6 @@
     return [[self new] configure:^(POPSpringAnimation *anim) {
         anim.property = property;
     }];
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    return [self configure:nil];
 }
 
 - (POPSpringAnimation *)build

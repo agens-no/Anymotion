@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ANYCABasic : NSObject
 
-- (instancetype)configure:(nullable void (^)(CABasicAnimation *anim))configure;
++ (instancetype)keyPath:(NSString *)keyPath;
 
 - (instancetype)toValue:(nullable id)toValue;
 - (instancetype)byValue:(nullable id)byValue;
@@ -40,8 +40,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)duration:(NSTimeInterval)duration;
 - (instancetype)removedOnCompletion:(BOOL)removedOnCompletion;
 - (instancetype)timingFunction:(nullable CAMediaTimingFunction *)timingFunction;
+- (instancetype)configure:(nullable void (^)(CABasicAnimation *anim))configure;
 
-- (ANYAnimation *)animationFor:(CALayer *)layer keyPath:(NSString *)keyPath;
+- (ANYAnimation *)animationFor:(CALayer *)layer;
+
+@end
+
+@interface ANYCABasic (Convenience)
+
+- (instancetype)updateModel;
 
 @end
 
