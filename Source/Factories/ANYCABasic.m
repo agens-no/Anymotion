@@ -27,11 +27,20 @@
 #import "ANYCALayerAnimationBlockDelegate.h"
 
 
-@interface ANYCABasic () <NSCopying>
+@interface ANYCABasic ()
 @property (nonatomic, copy) void (^configure)(CABasicAnimation *anim);
+@property (nonatomic, assign) BOOL shouldUpdateModel;
+
 @end
 
 @implementation ANYCABasic
+
++ (instancetype)keyPath:(NSString *)keyPath
+{
+    return [[self new] configure:^(CABasicAnimation *anim) {
+        anim.keyPath = keyPath;
+    }];
+}
 
 - (instancetype)configure:(void (^)(CABasicAnimation *anim))configure
 {
@@ -46,12 +55,8 @@
             configure(basic);
         }
     };
+    instance.shouldUpdateModel = self.shouldUpdateModel;
     return instance;
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    return [self configure:nil];
 }
 
 - (CABasicAnimation *)build
@@ -117,15 +122,16 @@
     }];
 }
 
-- (ANYAnimation *)animationFor:(CALayer *)layer keyPath:(NSString *)keyPath
+- (ANYAnimation *)animationFor:(CALayer *)layer
 {
-    NSString *key = [NSString stringWithFormat:@"any.%@", keyPath];
     
     @weakify(layer);
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         @strongify(layer);
         
         CABasicAnimation *basic = [self build];
+        NSAssert(basic.keyPath.length > 0, @"Missing keypath. Did you construct using +[%@ %@]?", NSStringFromClass([self class]), NSStringFromSelector(@selector(keyPath:)));
+        
         basic.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStop:^(BOOL completed){
             if(completed)
             {
@@ -137,6 +143,23 @@
             }
         }];
         
+        basic.fromValue = basic.fromValue ?: [layer.presentationLayer valueForKeyPath:basic.keyPath];
+        
+        if(self.shouldUpdateModel)
+        {
+            [CATransaction begin];
+            [CATransaction setDisableActions:YES];
+            
+            /*
+             If you encounter a crash on this line double check that your toValue type is correct for that key path.
+             E.g. "transform.scale" takes NSNumber – not [NSValue valueWithSize:].
+             */
+            [layer setValue:basic.toValue forKeyPath:basic.keyPath];
+            
+            [CATransaction commit];
+        }
+        
+        NSString *key = [NSString stringWithFormat:@"any.%@", basic.keyPath];
         [layer removeAnimationForKey:key];
         [layer addAnimation:basic forKey:key];
         
@@ -145,9 +168,21 @@
             @strongify(layer);
             [layer removeAnimationForKey:key];
             
-        }] nameFormat:@"(CA.basic key: '%@', layer '<%@ %p>')", keyPath, layer.class, layer];
+        }] nameFormat:@"(CA.basic key: '%@', layer '<%@ %p>')", basic.keyPath, layer.class, layer];
         
     }];
+}
+
+@end
+
+
+@implementation ANYCABasic (Convenience)
+
+- (instancetype)updateModel
+{
+    ANYCABasic *copy = [self configure:nil];
+    copy.shouldUpdateModel = YES;
+    return copy;
 }
 
 @end

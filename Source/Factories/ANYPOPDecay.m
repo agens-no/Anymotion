@@ -26,7 +26,7 @@
 #import "ANYEXTScope.h"
 #import "ANYPOPMemoryTable.h"
 
-@interface ANYPOPDecay () <NSCopying>
+@interface ANYPOPDecay ()
 @property (nonatomic, copy) void (^configure)(POPDecayAnimation *anim);
 @end
 
@@ -58,11 +58,6 @@
         }
     };
     return instance;
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    return [self configure:nil];
 }
 
 - (POPDecayAnimation *)build
