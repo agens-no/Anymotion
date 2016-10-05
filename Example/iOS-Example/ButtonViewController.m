@@ -96,6 +96,12 @@
     [self.view addGestureRecognizer:gesture];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.unSelectedAnimationGroup start];
+    [super viewWillDisappear:animated];
+}
+
 
 
 #pragma mark - Create
