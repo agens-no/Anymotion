@@ -62,6 +62,7 @@
 - (instancetype)then:(ANYAnimation *)animation;
 
 - (instancetype)repeat;
+- (instancetype)repeat:(NSUInteger)count;
 
 @end
 

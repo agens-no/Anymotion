@@ -293,7 +293,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
     }];
 }
 
-- (instancetype)repeat
+- (instancetype)repeatWhile:(BOOL(^)(void))whileBlock
 {
     return [ANYAnimation createAnimation:^ANYActivity * (ANYSubscriber *subscriber) {
         
@@ -301,7 +301,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
         
         __block BOOL cancelled = NO;
         __block ANYActivity *current = nil;
-
+        
         current = [self subscribeError:^{
             [master nameFormat:@"(repeat %@)", current.name];
             [subscriber failed];
@@ -309,7 +309,14 @@ static NSString *ANYAnimationDefaultName = @"anim";
             [master nameFormat:@"(repeat %@)", current.name];
             if(!cancelled)
             {
-                current = [[self repeat] subscribe:subscriber];
+                if (whileBlock())
+                {
+                    current = [[self repeat] subscribe:subscriber];
+                }
+                else
+                {
+                    [subscriber completed];
+                }
             }
         }];
         
@@ -319,7 +326,23 @@ static NSString *ANYAnimationDefaultName = @"anim";
             [current cancel];
         }];
         return master;
+        
+    }];
+}
 
+- (instancetype)repeat
+{
+    return [self repeatWhile:^BOOL{
+        return YES;
+    }];
+}
+
+- (instancetype)repeat:(NSUInteger)count
+{
+    __block NSUInteger i = 0;
+    return [self repeatWhile:^BOOL{
+        i++;
+        return i <= count;
     }];
 }
 
