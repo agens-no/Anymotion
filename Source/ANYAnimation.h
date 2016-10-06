@@ -57,6 +57,8 @@
 
 - (instancetype)delay:(NSTimeInterval)delay;
 
+- (instancetype)chain:(NSArray <ANYAnimation *> *)animations;
+
 - (instancetype)then:(ANYAnimation *)animation;
 
 - (instancetype)repeat;

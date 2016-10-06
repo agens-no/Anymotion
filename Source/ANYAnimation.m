@@ -251,6 +251,19 @@ static NSString *ANYAnimationDefaultName = @"anim";
     }];
 }
 
+- (instancetype)chain:(NSArray <ANYAnimation *> *)animations
+{
+    ANYAnimation *animation = animations.firstObject;
+    
+    for (NSUInteger index = 1; index < animations.count; index++)
+    {
+        ANYAnimation *next = animations[index];
+        animation = [animation then:next];
+    }
+    
+    return animation;
+}
+
 - (instancetype)then:(ANYAnimation *)animation
 {
     return [ANYAnimation createAnimation:^ANYActivity * (ANYSubscriber *subscriber) {
