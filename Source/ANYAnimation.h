@@ -26,6 +26,8 @@
 #import "ANYSubscriber.h"
 #import "ANYActivity.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ANYAnimation : NSObject
 
 + (instancetype)createAnimation:(ANYActivity * (^)(ANYSubscriber *subscriber))create;
@@ -73,3 +75,5 @@
 - (instancetype)nameFormat:(NSString *)format, ...;
 
 @end
+
+NS_ASSUME_NONNULL_END
