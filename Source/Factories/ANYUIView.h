@@ -43,10 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (ANYAnimation *)animation;
 
-+ (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block;
-+ (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options block:(void(^)(void))block;
-+ (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay block:(void(^)(void))block;
-+ (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block;
++ (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block NS_SWIFT_UNAVAILABLE("");
++ (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options block:(void(^)(void))block NS_SWIFT_NAME(animation(duration:options:block:));
++ (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay block:(void(^)(void))block NS_SWIFT_UNAVAILABLE("");
++ (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block NS_SWIFT_NAME(animation(duration:delay:options:block:));
 
 @end
 
@@ -59,10 +59,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (ANYAnimation *)noCleanAnimation;
 
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block;
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options block:(void(^)(void))block;
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay block:(void(^)(void))block;
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block;
++ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block NS_SWIFT_UNAVAILABLE("");
++ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options block:(void(^)(void))block NS_SWIFT_NAME(noCleanAnimation(duration:options:block:));;
++ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay block:(void(^)(void))block NS_SWIFT_UNAVAILABLE("");
++ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block NS_SWIFT_NAME(noCleanAnimation(duration:delay:options:block:));;
 
 @end
 
