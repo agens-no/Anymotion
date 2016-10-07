@@ -15,6 +15,7 @@
 		EFE55A3A1D9675470006178E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE55A331D9675470006178E /* ViewController.m */; };
 		EFE55A431D9675B90006178E /* Anymotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE55A421D9675B00006178E /* Anymotion.framework */; };
 		EFE55A461D9676110006178E /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE55A451D9676110006178E /* pop.framework */; };
+		FC108B631DA7AD950011A000 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC108B621DA7AD950011A000 /* ListViewController.m */; };
 		FC67EE571D9BF62A001E3314 /* ButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC67EE531D9BF62A001E3314 /* ButtonViewController.m */; };
 		FC67EE581D9BF62A001E3314 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC67EE541D9BF62A001E3314 /* image.jpg */; };
 		FC67EE591D9BF62A001E3314 /* ImageAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC67EE561D9BF62A001E3314 /* ImageAnimationViewController.m */; };
@@ -51,6 +52,8 @@
 		EFE55A3C1D9675B00006178E /* Anymotion.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Anymotion.xcodeproj; path = ../Anymotion.xcodeproj; sourceTree = "<group>"; };
 		EFE55A451D9676110006178E /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = "../Carthage/Checkouts/pop/build/Debug-iphoneos/pop.framework"; sourceTree = "<group>"; };
 		EFE55A5E1D96778A0006178E /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Playground.playground; path = ../Playgrounds/Playground.playground; sourceTree = "<group>"; };
+		FC108B611DA7AD950011A000 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		FC108B621DA7AD950011A000 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		FC67EE521D9BF62A001E3314 /* ButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonViewController.h; sourceTree = "<group>"; };
 		FC67EE531D9BF62A001E3314 /* ButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonViewController.m; sourceTree = "<group>"; };
 		FC67EE541D9BF62A001E3314 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
@@ -95,18 +98,14 @@
 			children = (
 				EFE55A291D9675470006178E /* AppDelegate.h */,
 				EFE55A2A1D9675470006178E /* AppDelegate.m */,
+				EFE55A321D9675470006178E /* ViewController.h */,
+				EFE55A331D9675470006178E /* ViewController.m */,
 				EFE55A2B1D9675470006178E /* Assets.xcassets */,
 				EFE55A2C1D9675470006178E /* LaunchScreen.storyboard */,
 				EFE55A2E1D9675470006178E /* Main.storyboard */,
 				EFE55A301D9675470006178E /* Info.plist */,
 				EFE55A311D9675470006178E /* main.m */,
-				EFE55A321D9675470006178E /* ViewController.h */,
-				EFE55A331D9675470006178E /* ViewController.m */,
-				FC67EE521D9BF62A001E3314 /* ButtonViewController.h */,
-				FC67EE531D9BF62A001E3314 /* ButtonViewController.m */,
-				FC67EE541D9BF62A001E3314 /* image.jpg */,
-				FC67EE551D9BF62A001E3314 /* ImageAnimationViewController.h */,
-				FC67EE561D9BF62A001E3314 /* ImageAnimationViewController.m */,
+				FC108B581DA7A6050011A000 /* Examples */,
 			);
 			path = "iOS-Example";
 			sourceTree = "<group>";
@@ -125,6 +124,44 @@
 				EFE55A451D9676110006178E /* pop.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC108B581DA7A6050011A000 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				FC108B591DA7A6170011A000 /* 1 */,
+				FC108B5A1DA7A6230011A000 /* 2 */,
+				FC108B5B1DA7A6430011A000 /* 3 */,
+			);
+			name = Examples;
+			sourceTree = "<group>";
+		};
+		FC108B591DA7A6170011A000 /* 1 */ = {
+			isa = PBXGroup;
+			children = (
+				FC67EE521D9BF62A001E3314 /* ButtonViewController.h */,
+				FC67EE531D9BF62A001E3314 /* ButtonViewController.m */,
+			);
+			name = 1;
+			sourceTree = "<group>";
+		};
+		FC108B5A1DA7A6230011A000 /* 2 */ = {
+			isa = PBXGroup;
+			children = (
+				FC67EE541D9BF62A001E3314 /* image.jpg */,
+				FC67EE551D9BF62A001E3314 /* ImageAnimationViewController.h */,
+				FC67EE561D9BF62A001E3314 /* ImageAnimationViewController.m */,
+			);
+			name = 2;
+			sourceTree = "<group>";
+		};
+		FC108B5B1DA7A6430011A000 /* 3 */ = {
+			isa = PBXGroup;
+			children = (
+				FC108B611DA7AD950011A000 /* ListViewController.h */,
+				FC108B621DA7AD950011A000 /* ListViewController.m */,
+			);
+			name = 3;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +196,7 @@
 				TargetAttributes = {
 					EFE55A0D1D9674CC0006178E = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -218,6 +256,7 @@
 			files = (
 				FC67EE571D9BF62A001E3314 /* ButtonViewController.m in Sources */,
 				EFE55A3A1D9675470006178E /* ViewController.m in Sources */,
+				FC108B631DA7AD950011A000 /* ListViewController.m in Sources */,
 				FC67EE591D9BF62A001E3314 /* ImageAnimationViewController.m in Sources */,
 				EFE55A391D9675470006178E /* main.m in Sources */,
 				EFE55A341D9675470006178E /* AppDelegate.m in Sources */,
@@ -348,10 +387,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.agens.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS-Example/iOS-Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -359,10 +402,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.agens.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS-Example/iOS-Example-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

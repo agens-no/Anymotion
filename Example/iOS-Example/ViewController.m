@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ButtonViewController.h"
 #import "ImageAnimationViewController.h"
+#import "ListViewController.h"
 
 #import <Anymotion/Anymotion.h>
 
@@ -27,7 +28,8 @@
     
     NSArray *items = @[
                        [ButtonViewController class],
-                       [ImageAnimationViewController class]
+                       [ImageAnimationViewController class],
+                       [ListViewController class]
                        ];
     self.items = items;
     
