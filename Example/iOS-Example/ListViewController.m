@@ -36,7 +36,7 @@
     [self.view addSubview:containerView];
     self.containerView = containerView;
     
-    [self showListAfterDelay:2.0];
+    [self showListAfterDelay:0.5];
 }
 
 - (void)showListAfterDelay:(NSTimeInterval)delay
@@ -52,13 +52,13 @@
         NSMutableArray *views = [NSMutableArray array];
         CATransform3D transform = CATransform3DMakeScale(0.0, 1.0, 1.0);
         NSTimeInterval delay = 0.0;
+        CGFloat hue = [self randomNumberBetween:0.0 maxNumber:255.0];
+        CGFloat saturation = 255.0;
         
         for (NSUInteger index = 0; index < numberOfItems; index++)
         {
-            CGFloat red = [self randomNumberBetween:0.0 maxNumber:255.0];
-            CGFloat green = [self randomNumberBetween:0.0 maxNumber:255.0];
-            CGFloat blue = [self randomNumberBetween:0.0 maxNumber:255.0];
-            UIColor *color = [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:1.0];
+            CGFloat brighness = (((double)index / (double)numberOfItems) * 100.0) + 155;
+            UIColor *color = [UIColor colorWithHue:hue/255.0 saturation:saturation/255.0 brightness:brighness/255.0 alpha:1.0];
             
             UIView *view = [self viewWithFrame:frame color:color];
             view.layer.transform = transform;
