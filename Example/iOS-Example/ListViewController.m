@@ -11,7 +11,7 @@
 #import <Anymotion/Anymotion.h>
 
 @interface ListViewController ()
-@property (nonatomic, strong) NSMutableArray *views;
+@property (nonatomic, strong) NSArray *views;
 @property (nonatomic, strong) UIView *containerView;
 @end
 
@@ -36,87 +36,70 @@
     [self.view addSubview:containerView];
     self.containerView = containerView;
     
-    [self showListAfterDelay:0.5];
+    NSArray *views = [self listOfViews];
+    for (UIView *view in views)
+    {
+        [self.containerView addSubview:view];
+    }
+    self.views = views;
+    
+    ANYAnimation *animations = [self showListAnimationWithViews:views];
+    [[animations delay:1.0] start];
 }
 
-- (void)showListAfterDelay:(NSTimeInterval)delay
+- (NSArray *)listOfViews
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    NSUInteger numberOfItems = 3;
+    CGFloat padding = 100.0;
+    CGFloat width = self.containerView.frame.size.width - padding;
+    CGFloat height = (self.containerView.frame.size.height - self.navigationController.navigationBar.frame.size.height - padding) / numberOfItems;
+    CGRect frame = CGRectMake((padding / 2.0) - (width / 2.0), self.navigationController.navigationBar.frame.size.height + padding / 2.0, width, height);
+    
+    NSMutableArray *views = [NSMutableArray array];
+    CATransform3D transform = CATransform3DMakeScale(0.0, 1.0, 1.0);
+    CGFloat hue = [self randomNumberBetween:0.0 maxNumber:255.0];
+    CGFloat saturation = 255.0;
+    
+    for (NSUInteger index = 0; index < numberOfItems; index++)
+    {
+        CGFloat brighness = (((double)index / (double)numberOfItems) * 100.0) + 155;
+        UIColor *color = [UIColor colorWithHue:hue/255.0 saturation:saturation/255.0 brightness:brighness/255.0 alpha:1.0];
         
-        NSUInteger numberOfItems = 3;
-        CGFloat padding = 100.0;
-        CGFloat width = self.containerView.frame.size.width - padding;
-        CGFloat height = (self.containerView.frame.size.height - self.navigationController.navigationBar.frame.size.height - padding) / numberOfItems;
-        CGRect frame = CGRectMake((padding / 2.0) - (width / 2.0), self.navigationController.navigationBar.frame.size.height + padding / 2.0, width, height);
+        UIView *view = [self viewWithFrame:frame color:color];
+        view.layer.transform = transform;
+        [views addObject:view];
         
-        NSMutableArray *views = [NSMutableArray array];
-        CATransform3D transform = CATransform3DMakeScale(0.0, 1.0, 1.0);
-        NSTimeInterval delay = 0.0;
-        CGFloat hue = [self randomNumberBetween:0.0 maxNumber:255.0];
-        CGFloat saturation = 255.0;
-        
-        for (NSUInteger index = 0; index < numberOfItems; index++)
-        {
-            CGFloat brighness = (((double)index / (double)numberOfItems) * 100.0) + 155;
-            UIColor *color = [UIColor colorWithHue:hue/255.0 saturation:saturation/255.0 brightness:brighness/255.0 alpha:1.0];
-            
-            UIView *view = [self viewWithFrame:frame color:color];
-            view.layer.transform = transform;
-            [self.containerView addSubview:view];
-            [views addObject:view];
-            
-            NSValue *toValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-            CAMediaTimingFunction *timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.19 : 1.0 : 0.22 : 1.0];
-            [[[[[[[[[ANYCABasic keyPath:@"transform"] toValue:toValue] timingFunction:timingFunction] updateModel] animationFor:view.layer] before:^{
-                view.layer.anchorPoint = CGPointMake(0.0, 0.5);
-            }] after:^{
-                CGPoint center = view.center;
-                center.x = self.containerView.center.x;
-                view.layer.anchorPoint = CGPointMake(0.5, 0.5);
-                view.center = center;
-            }] delay:delay] start];
-            
-            frame.origin.y += frame.size.height;
-            delay += 0.1;
-        }
-        
-        self.views = views;
-        
-    });
+        frame.origin.y += frame.size.height;
+    }
+    
+    return views;
 }
 
-- (void)hideListAfterDelay:(NSTimeInterval)delay
+- (ANYAnimation *)showListAnimationWithViews:(NSArray *)views
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    NSMutableArray *animations = [NSMutableArray array];
+    NSTimeInterval delay = 0.0;
+    
+    for (UIView *view in views)
+    {
+        NSValue *toValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+        CAMediaTimingFunction *timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.19 : 1.0 : 0.22 : 1.0];
+     
+        ANYAnimation *animation = [[[[[[[[ANYCABasic keyPath:@"transform"] toValue:toValue] timingFunction:timingFunction] updateModel] animationFor:view.layer] before:^{
+            view.layer.anchorPoint = CGPointMake(0.0, 0.5);
+        }] after:^{
+            CGPoint center = view.center;
+            center.x = self.containerView.center.x;
+            view.layer.anchorPoint = CGPointMake(0.5, 0.5);
+            view.center = center;
+        }] delay:delay];
         
-        NSMutableArray *animations = [NSMutableArray array];
-        NSTimeInterval delay = 0.0;
+        [animations addObject:animation];
         
-        for (UIView *view in self.views)
-        {
-            CATransform3D transform = CATransform3DMakeScale(0.0, 1.0, 1.0);
-            NSValue *toValue = [NSValue valueWithCATransform3D:transform];
-            CAMediaTimingFunction *timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.95 : 0.05 : 0.795 : 0.035];
-            
-            ANYAnimation *animation = [[[[[[[[ANYCABasic keyPath:@"transform"] toValue:toValue] timingFunction:timingFunction] updateModel] animationFor:view.layer] before:^{
-                CGPoint center = view.center;
-                center.x = self.containerView.center.x + (view.frame.size.width / 2.0);
-                view.layer.anchorPoint = CGPointMake(1.0, 0.5);
-                view.center = center;
-            }] onCompletion:^{
-                [view removeFromSuperview];
-            }] delay:delay];
-            
-            [animations addObject:animation];
-            
-            delay += 0.1;
-        }
-        
-        [[[ANYAnimation group:animations] onCompletion:^{
-            [self showListAfterDelay:1.0];
-        }] start];
-        
-    });
+        delay += 0.1;
+    }
+    
+    return [ANYAnimation group:animations];
 }
 
 - (UIView *)viewWithFrame:(CGRect)frame color:(UIColor *)color
@@ -154,7 +137,15 @@
         self.containerView.backgroundColor = backgroundColor;
         [view removeFromSuperview];
         
-        [self showListAfterDelay:2.0];
+        NSArray *views = [self listOfViews];
+        for (UIView *view in views)
+        {
+            [self.containerView addSubview:view];
+        }
+        self.views = views;
+        
+        ANYAnimation *animations = [self showListAnimationWithViews:self.views];
+        [[animations delay:2.0] start];
         
     }] start];
 }
