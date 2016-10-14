@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import "ImageAnimationViewController.h"
-
+#import "UndelayedPanRecognizer.h"
 #import <Anymotion/Anymotion.h>
 
 @interface ImageAnimationViewController () <UIGestureRecognizerDelegate>
@@ -30,6 +30,8 @@
 @property (nonatomic, strong) ANYActivity *animation;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, assign) CGPoint touchPoint;
+@property (nonatomic, assign) UITouch *touch;
+@property (nonatomic, assign) CGPoint translation;
 
 @end
 
@@ -51,63 +53,95 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
     
-    CGRect frame = CGRectMake(100.0, 100.0, 250.0, 250.0 / (16.0 / 9.0));
+    CGRect frame = CGRectMake(300, -500, 250, 172);
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    imageView.image = [UIImage imageNamed:@"image.jpg"];
+    imageView.image = [UIImage imageNamed:@"example-image.jpg"];
+    imageView.layer.cornerRadius = 3;
+    imageView.layer.masksToBounds = YES;
     [self.view addSubview:imageView];
     self.imageView = imageView;
     
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    panGesture.delegate = self;
-    [self.view addGestureRecognizer:panGesture];
+    [[self moveToCenter] start];
+    
+    UndelayedPanRecognizer *pan = [[UndelayedPanRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    pan.delegate = self;
+    [self.view addGestureRecognizer:pan];
 }
-
 
 
 #pragma mark - Gesture
 
-- (void)handleGesture:(UIPanGestureRecognizer *)gesture
+- (void)handlePanGesture:(UndelayedPanRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan)
     {
-        CGPoint touchPoint = [gesture locationInView:self.view];
-        touchPoint.x = touchPoint.x - self.imageView.frame.origin.x;
-        touchPoint.y = touchPoint.y - self.imageView.frame.origin.y;
-        self.touchPoint = touchPoint;
-        
-        CGSize toValue = CGSizeMake(200.0, 200.0 / (16.0 / 9.0));
-        [[[[ANYPOPSpring propertyNamed:kPOPLayerSize] toValueWithSize:toValue] animationFor:self.imageView] start];
-        
         [self.animation cancel];
+        
+        CGPoint touchPoint = [gesture locationInView:self.imageView];
+        [[self scaleDownWithTouchPoint:touchPoint] start];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged)
     {
-        CGPoint point = [gesture locationInView:self.view];
-        point.x = point.x - self.touchPoint.x;
-        point.y = point.y - self.touchPoint.y;
-        
-        CGRect frame = self.imageView.frame;
-        frame.origin = point;
-        self.imageView.frame = frame;
+        CGPoint center = [gesture locationInView:self.view];
+        self.imageView.center = center;
     }
-    else if (gesture.state == UIGestureRecognizerStateEnded)
+    else if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled)
     {
-        CGSize toValue1 = CGSizeMake(250.0, 250.0 / (16.0 / 9.0));
-        ANYAnimation *anim1 = [[[ANYPOPSpring propertyNamed:kPOPLayerSize] toValueWithSize:toValue1] animationFor:self.imageView];
+        [[self scaleUp] start];
         
         CGPoint velocity = [gesture velocityInView:self.view];
-        NSValue *velocityValue = [NSValue valueWithCGPoint:velocity];
-        ANYAnimation *anim2 = [[[ANYPOPDecay propertyNamed:kPOPViewCenter] velocity:velocityValue] animationFor:self.imageView];
-        
-        self.animation = [[[ANYAnimation group:@[anim1, anim2]] onCompletion:^{
-            
-            if (!CGRectContainsPoint(self.view.bounds, self.imageView.center))
-            {
-                [[[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:self.view.center] animationFor:self.imageView] start];
-            }
-            
-        }] start];
+        self.animation = [[self throwWithVelocity:velocity] start];
     }
+}
+
+- (ANYAnimation *)throwWithVelocity:(CGPoint)velocity
+{
+    NSValue *velocityValue = [NSValue valueWithCGPoint:velocity];
+    ANYAnimation *throw = [[[[ANYPOPDecay propertyNamed:kPOPViewCenter] velocity:velocityValue] deceleration:0.992] animationFor:self.imageView];
+    
+    return [throw then:[ANYAnimation defer:^ANYAnimation * _Nonnull{
+        
+        [self updateAnchorPointOf:self.imageView to:CGPointMake(0.5, 0.5)];
+        
+        if (!CGRectIntersectsRect(self.view.bounds, self.imageView.frame))
+        {
+            return [self moveToCenter];
+        }
+        
+        return [ANYAnimation empty];
+    }]];
+}
+
+- (ANYAnimation *)moveToCenter
+{
+    return [ANYAnimation defer:^ANYAnimation *{
+        CGPoint center = CGPointMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0);
+        return [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:center] animationFor:self.imageView];
+    }];
+}
+
+- (ANYAnimation *)scaleDownWithTouchPoint:(CGPoint)touchPoint
+{
+    return [ANYAnimation defer:^ANYAnimation *{
+        CGPoint anchorPoint = CGPointMake(touchPoint.x / self.imageView.bounds.size.width,
+                                          touchPoint.y / self.imageView.bounds.size.height);
+        
+        [self updateAnchorPointOf:self.imageView to:anchorPoint];
+        
+        return [[[[[[ANYPOPSpring propertyNamed:kPOPViewScaleXY] toValueWithPoint:CGPointMake(0.95, 0.95)] dynamicsMass:0.1] dynamicsTension:1500] dynamicsFriction:35] animationFor:self.imageView];
+    }];
+}
+
+- (ANYAnimation *)scaleUp
+{
+    return [[[[[[ANYPOPSpring propertyNamed:kPOPViewScaleXY] toValueWithPoint:CGPointMake(1, 1)] dynamicsMass:0.1] dynamicsTension:50] dynamicsFriction:2] animationFor:self.imageView];
+}
+
+- (void)updateAnchorPointOf:(UIView *)view to:(CGPoint)anchorPoint
+{
+    CGRect frame = self.imageView.frame;
+    self.imageView.layer.anchorPoint = anchorPoint;
+    self.imageView.frame = frame;
 }
 
 
@@ -115,7 +149,13 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    return CGRectContainsPoint(self.imageView.frame, [touch locationInView:self.view]);
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 
 @end
+
