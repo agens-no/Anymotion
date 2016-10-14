@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C0392271D9F99FE00959AB2 /* ScrubbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0392261D9F99FE00959AB2 /* ScrubbarViewController.m */; };
+		4CE0592D1D9E393900252089 /* RepeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0592C1D9E393900252089 /* RepeatController.m */; };
+		4CE059301D9E431800252089 /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0592F1D9E431800252089 /* GroupController.m */; };
 		EFE55A341D9675470006178E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE55A2A1D9675470006178E /* AppDelegate.m */; };
 		EFE55A351D9675470006178E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFE55A2B1D9675470006178E /* Assets.xcassets */; };
 		EFE55A361D9675470006178E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFE55A2C1D9675470006178E /* LaunchScreen.storyboard */; };
@@ -38,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C0392251D9F99FE00959AB2 /* ScrubbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrubbarViewController.h; sourceTree = "<group>"; };
+		4C0392261D9F99FE00959AB2 /* ScrubbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrubbarViewController.m; sourceTree = "<group>"; };
+		4CE0592B1D9E393800252089 /* RepeatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatController.h; sourceTree = "<group>"; };
+		4CE0592C1D9E393900252089 /* RepeatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatController.m; sourceTree = "<group>"; };
+		4CE0592E1D9E431800252089 /* GroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupController.h; sourceTree = "<group>"; };
+		4CE0592F1D9E431800252089 /* GroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupController.m; sourceTree = "<group>"; };
 		EFE55A0E1D9674CC0006178E /* iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE55A291D9675470006178E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EFE55A2A1D9675470006178E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -100,13 +109,19 @@
 				EFE55A2E1D9675470006178E /* Main.storyboard */,
 				EFE55A301D9675470006178E /* Info.plist */,
 				EFE55A311D9675470006178E /* main.m */,
+				FC67EE541D9BF62A001E3314 /* image.jpg */,
 				EFE55A321D9675470006178E /* ViewController.h */,
 				EFE55A331D9675470006178E /* ViewController.m */,
 				FC67EE521D9BF62A001E3314 /* ButtonViewController.h */,
 				FC67EE531D9BF62A001E3314 /* ButtonViewController.m */,
-				FC67EE541D9BF62A001E3314 /* image.jpg */,
 				FC67EE551D9BF62A001E3314 /* ImageAnimationViewController.h */,
 				FC67EE561D9BF62A001E3314 /* ImageAnimationViewController.m */,
+				4CE0592B1D9E393800252089 /* RepeatController.h */,
+				4CE0592C1D9E393900252089 /* RepeatController.m */,
+				4CE0592E1D9E431800252089 /* GroupController.h */,
+				4CE0592F1D9E431800252089 /* GroupController.m */,
+				4C0392251D9F99FE00959AB2 /* ScrubbarViewController.h */,
+				4C0392261D9F99FE00959AB2 /* ScrubbarViewController.m */,
 			);
 			path = "iOS-Example";
 			sourceTree = "<group>";
@@ -220,6 +235,9 @@
 				EFE55A3A1D9675470006178E /* ViewController.m in Sources */,
 				FC67EE591D9BF62A001E3314 /* ImageAnimationViewController.m in Sources */,
 				EFE55A391D9675470006178E /* main.m in Sources */,
+				4CE0592D1D9E393900252089 /* RepeatController.m in Sources */,
+				4CE059301D9E431800252089 /* GroupController.m in Sources */,
+				4C0392271D9F99FE00959AB2 /* ScrubbarViewController.m in Sources */,
 				EFE55A341D9675470006178E /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

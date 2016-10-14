@@ -7,10 +7,12 @@
 //
 
 #import "ViewController.h"
+#import <Anymotion/Anymotion.h>
 #import "ButtonViewController.h"
 #import "ImageAnimationViewController.h"
-
-#import <Anymotion/Anymotion.h>
+#import "RepeatController.h"
+#import "GroupController.h"
+#import "ScrubbarViewController.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -27,11 +29,15 @@
     
     NSArray *items = @[
                        [ButtonViewController class],
-                       [ImageAnimationViewController class]
+                       [ImageAnimationViewController class],
+                       [RepeatController class],
+                       [GroupController class],
+                       [ScrubbarViewController class],
                        ];
     self.items = items;
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     tableView.delegate = self;
     tableView.dataSource = self;
     
@@ -44,7 +50,6 @@
     [self addChildViewController:navigationController];
     [self.view addSubview:navigationController.view];
     self.navigationController = navigationController;
-    
 }
 
 
