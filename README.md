@@ -8,25 +8,52 @@ Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and y
 
 ### Installation
 
-##### Pods
-```
-pod 'Anymotion'
+
+<details>
+<summary>Via CocoaPods</summary>
+
+If you're using CocoaPods, you can simply add to your `Podfile`:
+
+```ruby
+pod "Anymotion"
 ```
 
-##### Carthage
-```
-github "agensdev/anymotion"
-```
+This will download the `Anymotion` and dependencies in `Pods/` during your next `pod install` exection. You may have to say `pod repo update` first.
 
 ##### Import in swift
-```
+```swift
 import Anymotion
 ```
 
 ##### Import in Objective-C
-```
+```objc
 #import <Anymotion/Anymotion.h>
 ```
+
+</details>
+
+<details>
+<summary>Via Carthage</summary>
+
+To install SwiftGen via [Carthage](https://github.com/Carthage/Carthage) add to your Cartfile:
+
+```ruby
+github "agensdev/anymotion"
+```
+
+##### Import in swift
+```swift
+import Anymotion
+```
+
+##### Import in Objective-C
+```objc
+#import <Anymotion/Anymotion.h>
+```
+
+</details>
+
+
 
 ### Basics
 
@@ -44,36 +71,25 @@ Note: These animations won't start unless you say `start` like this
 ```
 Thus making you able to define your animations once and then start and cancel them at your leisure.
 
-#### POP, UIKit, CoreAnimation
-
-##### POP spring
+#### POP 
 ```objc
-ANYAnimation *anim = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValue:@0] animationFor:view];
+ANYAnimation *decay = [[[ANYPOPDecay propertyNamed:kPOPViewAlpha] velocity:@(-10)] animationFor:view];
+ANYAnimation *basic = [[[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0] duration:0.5] animationFor:view];
+ANYAnimation *spring = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValue:@0] animationFor:view];
 ```
 
-##### POP basic
+#### Core Animation
 ```objc
-ANYAnimation *anim = [[[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0] duration:0.5] animationFor:view];
+ANYAnimation *basic = [[[[ANYCABasic new] toValue:@0] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
+ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[@0, @1]] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
 ```
 
-##### POP decay
-```objc
-ANYAnimation *anim = [[[ANYPOPDecay propertyNamed:kPOPViewAlpha] velocity:@(-10)] animationFor:view];
-```
-
-##### CABasicAnimation
-```objc
-ANYAnimation *anim = [[[[ANYCABasic new] toValue:@0] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
-```
-
-##### UIKit
+#### UIKit
 ```objc
 ANYAnimation *anim = [ANYUIView animationWithDuration:0.5 block:^{
     view.alpha = 0.0;
 }];
 ```
-
-And more integrations to come...
 
 #### Grouping
 
@@ -111,7 +127,7 @@ ANYAnimation *group = [goRight then:goLeft];
   </tr>
 </table>
 
-Chain and repeat indefinitely
+#### Repeat
 
 <table>
   <tr>
@@ -148,13 +164,13 @@ ANYActivity *runningAnimation = [anim start];
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-    ANYAnimation *pulsatingDot = ...;
-    [[pulsatingDot before:^{
-      view.hidden = NO;
-    }] after:^{
-      view.hidden = YES;
-    }];
-    [pulsatingDot start];
+ANYAnimation *pulsatingDot = ...;
+[[pulsatingDot before:^{
+   view.hidden = NO;
+}] after:^{
+   view.hidden = YES;
+}];
+[pulsatingDot start];
     </pre></div></td>
     <td>
       <img src="/Meta/Readme/setup_and_clean_up.gif?raw=true" alt="GIF" />
