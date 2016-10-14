@@ -22,18 +22,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ANYCAKeyframeAnimation.h"
+#import "ANYCAKeyframe.h"
 #import "ANYEXTScope.h"
 #import "ANYCALayerAnimationBlockDelegate.h"
 
 
-@interface ANYCAKeyframeAnimation ()
+@interface ANYCAKeyframe ()
 @property (nonatomic, copy) void (^configure)(CAKeyframeAnimation *anim);
 @property (nonatomic, assign) BOOL shouldUpdateModel;
 
 @end
 
-@implementation ANYCAKeyframeAnimation
+@implementation ANYCAKeyframe
 
 + (instancetype)keyPath:(NSString *)keyPath
 {
@@ -44,7 +44,7 @@
 
 - (instancetype)configure:(void (^)(CAKeyframeAnimation *anim))configure
 {
-    ANYCAKeyframeAnimation *instance = [ANYCAKeyframeAnimation new];
+    ANYCAKeyframe *instance = [ANYCAKeyframe new];
     instance.configure = ^(CAKeyframeAnimation *basic){
         if(self.configure)
         {
@@ -73,10 +73,10 @@
     }];
 }
 
-- (instancetype)path:(CGPathRef)path
+- (instancetype)path:(UIBezierPath *)path
 {
     return [self configure:^(CAKeyframeAnimation *anim) {
-        anim.path = path;
+        anim.path = path.CGPath;
     }];
 }
 
@@ -151,16 +151,15 @@
 }
 
 - (ANYAnimation *)animationFor:(CALayer *)layer
-{
-    
+{    
     @weakify(layer);
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         @strongify(layer);
         
-        CAKeyframeAnimation *basic = [self build];
-        NSAssert(basic.keyPath.length > 0, @"Missing keypath. Did you construct using +[%@ %@]?", NSStringFromClass([self class]), NSStringFromSelector(@selector(keyPath:)));
+        CAKeyframeAnimation *anim = [self build];
+        NSAssert(anim.keyPath.length > 0, @"Missing keypath. Did you construct using +[%@ %@]?", NSStringFromClass([self class]), NSStringFromSelector(@selector(keyPath:)));
         
-        basic.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStop:^(BOOL completed){
+        anim.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStop:^(BOOL completed){
             if(completed)
             {
                 [subscriber completed];
@@ -171,18 +170,45 @@
             }
         }];
         
-        NSString *key = [NSString stringWithFormat:@"any.%@", basic.keyPath];
+        if(self.shouldUpdateModel)
+        {
+            [CATransaction begin];
+            [CATransaction setDisableActions:YES];
+            
+            /*
+             If you encounter a crash on this line double check that your toValue type is correct for that key path.
+             E.g. "transform.scale" takes NSNumber – not [NSValue valueWithSize:].
+             */
+            
+            id value = anim.values.lastObject;
+            [layer setValue:value forKeyPath:anim.keyPath];
+            
+            [CATransaction commit];
+        }
+        
+        NSString *key = [NSString stringWithFormat:@"any.%@", anim.keyPath];
         [layer removeAnimationForKey:key];
-        [layer addAnimation:basic forKey:key];
+        [layer addAnimation:anim forKey:key];
         
         return [[ANYActivity activityWithTearDownBlock:^{
             
             @strongify(layer);
             [layer removeAnimationForKey:key];
             
-        }] nameFormat:@"(CA.keyframe key: '%@', layer '<%@ %p>')", basic.keyPath, layer.class, layer];
+        }] nameFormat:@"(CA.keyframe key: '%@', layer '<%@ %p>')", anim.keyPath, layer.class, layer];
         
     }];
+}
+
+@end
+
+@implementation ANYCAKeyframe (Convenience)
+
+- (instancetype)updateModel
+{
+    ANYCAKeyframe *copy = [self configure:nil];
+    copy.shouldUpdateModel = YES;
+    return copy;
 }
 
 @end

@@ -36,8 +36,8 @@
 		EF5EDE601D965F6500116AFF /* ANYUIView.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE441D965F6500116AFF /* ANYUIView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE611D965F6500116AFF /* ANYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE451D965F6500116AFF /* ANYUIView.m */; };
 		EF5EDE7A1D965F8600116AFF /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5EDE6F1D965F7F00116AFF /* pop.framework */; };
-		FCA62DED1DB0C17F00B77457 /* ANYCAKeyframeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA62DEB1DB0C17F00B77457 /* ANYCAKeyframeAnimation.h */; };
-		FCA62DEE1DB0C17F00B77457 /* ANYCAKeyframeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA62DEC1DB0C17F00B77457 /* ANYCAKeyframeAnimation.m */; };
+		FCA62DED1DB0C17F00B77457 /* ANYCAKeyframe.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA62DEB1DB0C17F00B77457 /* ANYCAKeyframe.h */; };
+		FCA62DEE1DB0C17F00B77457 /* ANYCAKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA62DEC1DB0C17F00B77457 /* ANYCAKeyframe.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,8 +124,8 @@
 		EF5EDE621D965F7F00116AFF /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = Carthage/Checkouts/pop/pop.xcodeproj; sourceTree = "<group>"; };
 		EFF050B51D965ED900C2BB91 /* Anymotion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Anymotion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFF050B91D965ED900C2BB91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCA62DEB1DB0C17F00B77457 /* ANYCAKeyframeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYCAKeyframeAnimation.h; sourceTree = "<group>"; };
-		FCA62DEC1DB0C17F00B77457 /* ANYCAKeyframeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYCAKeyframeAnimation.m; sourceTree = "<group>"; };
+		FCA62DEB1DB0C17F00B77457 /* ANYCAKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYCAKeyframe.h; sourceTree = "<group>"; };
+		FCA62DEC1DB0C17F00B77457 /* ANYCAKeyframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYCAKeyframe.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,8 +169,8 @@
 			children = (
 				EF5EDE3A1D965F6500116AFF /* ANYCABasic.h */,
 				EF5EDE3B1D965F6500116AFF /* ANYCABasic.m */,
-				FCA62DEB1DB0C17F00B77457 /* ANYCAKeyframeAnimation.h */,
-				FCA62DEC1DB0C17F00B77457 /* ANYCAKeyframeAnimation.m */,
+				FCA62DEB1DB0C17F00B77457 /* ANYCAKeyframe.h */,
+				FCA62DEC1DB0C17F00B77457 /* ANYCAKeyframe.m */,
 				EF5EDE3C1D965F6500116AFF /* ANYPOPBasic.h */,
 				EF5EDE3D1D965F6500116AFF /* ANYPOPBasic.m */,
 				EF5EDE3E1D965F6500116AFF /* ANYPOPDecay.h */,
@@ -242,7 +242,7 @@
 				EF5EDE531D965F6500116AFF /* Anymotion.h in Headers */,
 				EF5EDE511D965F6500116AFF /* ANYEXTMetamacros.h in Headers */,
 				EF5EDE521D965F6500116AFF /* ANYEXTScope.h in Headers */,
-				FCA62DED1DB0C17F00B77457 /* ANYCAKeyframeAnimation.h in Headers */,
+				FCA62DED1DB0C17F00B77457 /* ANYCAKeyframe.h in Headers */,
 				EF5EDE601D965F6500116AFF /* ANYUIView.h in Headers */,
 				EF5EDE5A1D965F6500116AFF /* ANYPOPDecay.h in Headers */,
 				EF5EDE501D965F6500116AFF /* ANYDefines.h in Headers */,
@@ -384,7 +384,7 @@
 				EF5EDE611D965F6500116AFF /* ANYUIView.m in Sources */,
 				EF5EDE591D965F6500116AFF /* ANYPOPBasic.m in Sources */,
 				EF5EDE571D965F6500116AFF /* ANYCABasic.m in Sources */,
-				FCA62DEE1DB0C17F00B77457 /* ANYCAKeyframeAnimation.m in Sources */,
+				FCA62DEE1DB0C17F00B77457 /* ANYCAKeyframe.m in Sources */,
 				EF5EDE5B1D965F6500116AFF /* ANYPOPDecay.m in Sources */,
 				EF5EDE4B1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m in Sources */,
 				EF5EDE4F1D965F6500116AFF /* ANYCoreAnimationObserver.m in Sources */,

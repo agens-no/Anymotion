@@ -28,12 +28,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ANYCAKeyframeAnimation : NSObject
+@interface ANYCAKeyframe : NSObject
 
 + (instancetype)keyPath:(NSString *)keyPath;
 
 - (instancetype)values:(nullable NSArray *)values;
-- (instancetype)path:(nullable CGPathRef)path;
+- (instancetype)path:(nullable UIBezierPath *)path;
 - (instancetype)keyTimes:(nullable NSArray <NSNumber *> *)keyTimes;
 - (instancetype)timingFunctions:(nullable NSArray <CAMediaTimingFunction *> *)timingFunctions;
 - (instancetype)calculationMode:(NSString *)calculationMode;
@@ -45,6 +45,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)additive:(BOOL)additive;
 
 - (ANYAnimation *)animationFor:(CALayer *)layer;
+
+@end
+
+@interface ANYCAKeyframe (Convenience)
+
+- (instancetype)updateModel;
 
 @end
 

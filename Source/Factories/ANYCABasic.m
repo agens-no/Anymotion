@@ -129,10 +129,10 @@
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         @strongify(layer);
         
-        CABasicAnimation *basic = [self build];
-        NSAssert(basic.keyPath.length > 0, @"Missing keypath. Did you construct using +[%@ %@]?", NSStringFromClass([self class]), NSStringFromSelector(@selector(keyPath:)));
+        CABasicAnimation *anim = [self build];
+        NSAssert(anim.keyPath.length > 0, @"Missing keypath. Did you construct using +[%@ %@]?", NSStringFromClass([self class]), NSStringFromSelector(@selector(keyPath:)));
         
-        basic.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStop:^(BOOL completed){
+        anim.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStop:^(BOOL completed){
             if(completed)
             {
                 [subscriber completed];
@@ -143,7 +143,7 @@
             }
         }];
         
-        basic.fromValue = basic.fromValue ?: [layer.presentationLayer valueForKeyPath:basic.keyPath];
+        anim.fromValue = anim.fromValue ?: [layer.presentationLayer valueForKeyPath:anim.keyPath];
         
         if(self.shouldUpdateModel)
         {
@@ -154,21 +154,21 @@
              If you encounter a crash on this line double check that your toValue type is correct for that key path.
              E.g. "transform.scale" takes NSNumber – not [NSValue valueWithSize:].
              */
-            [layer setValue:basic.toValue forKeyPath:basic.keyPath];
+            [layer setValue:anim.toValue forKeyPath:anim.keyPath];
             
             [CATransaction commit];
         }
         
-        NSString *key = [NSString stringWithFormat:@"any.%@", basic.keyPath];
+        NSString *key = [NSString stringWithFormat:@"any.%@", anim.keyPath];
         [layer removeAnimationForKey:key];
-        [layer addAnimation:basic forKey:key];
+        [layer addAnimation:anim forKey:key];
         
         return [[ANYActivity activityWithTearDownBlock:^{
             
             @strongify(layer);
             [layer removeAnimationForKey:key];
             
-        }] nameFormat:@"(CA.basic key: '%@', layer '<%@ %p>')", basic.keyPath, layer.class, layer];
+        }] nameFormat:@"(CA.basic key: '%@', layer '<%@ %p>')", anim.keyPath, layer.class, layer];
         
     }];
 }
