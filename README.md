@@ -147,7 +147,7 @@ ANYAnimation *pulsatingDot = ...;
 }] after:^{
    view.hidden = YES;
 }];
-[[pulsatingDot repeat] start];
+[pulsatingDot start];
     </pre></div></td>
     <td>
       <img src="/Meta/Readme/setup_and_clean_up.gif?raw=true" alt="GIF" />
