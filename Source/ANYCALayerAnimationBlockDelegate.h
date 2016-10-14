@@ -31,7 +31,7 @@
 
 @interface ANYCALayerAnimationBlockDelegate : NSObject <CAAnimationDelegate>
 
-+ (instancetype)newWithAnimationDidStart:(void(^)(void))onStart didStop:(void(^)(BOOL completed))onStop;
-+ (instancetype)newWithAnimationDidStop:(void(^)(BOOL completed))onStop;
++ (instancetype)newWithAnimationDidStart:(void(^)(void))onStart didStop:(void(^)(BOOL finished))onStop;
++ (instancetype)newWithAnimationDidStop:(void(^)(BOOL finished))onStop;
 
 @end

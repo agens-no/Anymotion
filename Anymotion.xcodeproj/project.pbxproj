@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A311504E1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = A311504C1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h */; };
+		A311504F1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A311504D1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m */; };
 		EF5EDE461D965F6500116AFF /* ANYActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE291D965F6500116AFF /* ANYActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE471D965F6500116AFF /* ANYActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE2A1D965F6500116AFF /* ANYActivity.m */; };
 		EF5EDE481D965F6500116AFF /* ANYAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE2B1D965F6500116AFF /* ANYAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE491D965F6500116AFF /* ANYAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE2C1D965F6500116AFF /* ANYAnimation.m */; };
 		EF5EDE4A1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE2D1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.h */; };
 		EF5EDE4B1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE2E1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m */; };
-		EF5EDE4C1D965F6500116AFF /* ANYCoreAnimationChanges.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE2F1D965F6500116AFF /* ANYCoreAnimationChanges.h */; };
-		EF5EDE4D1D965F6500116AFF /* ANYCoreAnimationChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE301D965F6500116AFF /* ANYCoreAnimationChanges.m */; };
 		EF5EDE4E1D965F6500116AFF /* ANYCoreAnimationObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE311D965F6500116AFF /* ANYCoreAnimationObserver.h */; };
 		EF5EDE4F1D965F6500116AFF /* ANYCoreAnimationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE321D965F6500116AFF /* ANYCoreAnimationObserver.m */; };
 		EF5EDE501D965F6500116AFF /* ANYDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE331D965F6500116AFF /* ANYDefines.h */; };
@@ -93,14 +93,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A311504C1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYAnimationDragHelper.h; sourceTree = "<group>"; };
+		A311504D1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYAnimationDragHelper.m; sourceTree = "<group>"; };
 		EF5EDE291D965F6500116AFF /* ANYActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYActivity.h; sourceTree = "<group>"; };
 		EF5EDE2A1D965F6500116AFF /* ANYActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYActivity.m; sourceTree = "<group>"; };
 		EF5EDE2B1D965F6500116AFF /* ANYAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYAnimation.h; sourceTree = "<group>"; };
 		EF5EDE2C1D965F6500116AFF /* ANYAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYAnimation.m; sourceTree = "<group>"; };
 		EF5EDE2D1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYCALayerAnimationBlockDelegate.h; sourceTree = "<group>"; };
 		EF5EDE2E1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYCALayerAnimationBlockDelegate.m; sourceTree = "<group>"; };
-		EF5EDE2F1D965F6500116AFF /* ANYCoreAnimationChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYCoreAnimationChanges.h; sourceTree = "<group>"; };
-		EF5EDE301D965F6500116AFF /* ANYCoreAnimationChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYCoreAnimationChanges.m; sourceTree = "<group>"; };
 		EF5EDE311D965F6500116AFF /* ANYCoreAnimationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYCoreAnimationObserver.h; sourceTree = "<group>"; };
 		EF5EDE321D965F6500116AFF /* ANYCoreAnimationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYCoreAnimationObserver.m; sourceTree = "<group>"; };
 		EF5EDE331D965F6500116AFF /* ANYDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYDefines.h; sourceTree = "<group>"; };
@@ -149,8 +149,6 @@
 				EF5EDE2C1D965F6500116AFF /* ANYAnimation.m */,
 				EF5EDE2D1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.h */,
 				EF5EDE2E1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m */,
-				EF5EDE2F1D965F6500116AFF /* ANYCoreAnimationChanges.h */,
-				EF5EDE301D965F6500116AFF /* ANYCoreAnimationChanges.m */,
 				EF5EDE311D965F6500116AFF /* ANYCoreAnimationObserver.h */,
 				EF5EDE321D965F6500116AFF /* ANYCoreAnimationObserver.m */,
 				EF5EDE331D965F6500116AFF /* ANYDefines.h */,
@@ -159,6 +157,8 @@
 				EF5EDE361D965F6500116AFF /* Anymotion.h */,
 				EF5EDE371D965F6500116AFF /* ANYSubscriber.h */,
 				EF5EDE381D965F6500116AFF /* ANYSubscriber.m */,
+				A311504C1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h */,
+				A311504D1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m */,
 				EF5EDE391D965F6500116AFF /* Factories */,
 			);
 			path = Source;
@@ -236,12 +236,12 @@
 				EF5EDE561D965F6500116AFF /* ANYCABasic.h in Headers */,
 				EF5EDE461D965F6500116AFF /* ANYActivity.h in Headers */,
 				EF5EDE4E1D965F6500116AFF /* ANYCoreAnimationObserver.h in Headers */,
-				EF5EDE4C1D965F6500116AFF /* ANYCoreAnimationChanges.h in Headers */,
 				EF5EDE541D965F6500116AFF /* ANYSubscriber.h in Headers */,
 				EF5EDE481D965F6500116AFF /* ANYAnimation.h in Headers */,
 				EF5EDE531D965F6500116AFF /* Anymotion.h in Headers */,
 				EF5EDE511D965F6500116AFF /* ANYEXTMetamacros.h in Headers */,
 				EF5EDE521D965F6500116AFF /* ANYEXTScope.h in Headers */,
+				A311504E1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h in Headers */,
 				FCA62DED1DB0C17F00B77457 /* ANYCAKeyframe.h in Headers */,
 				EF5EDE601D965F6500116AFF /* ANYUIView.h in Headers */,
 				EF5EDE5A1D965F6500116AFF /* ANYPOPDecay.h in Headers */,
@@ -388,9 +388,9 @@
 				EF5EDE5B1D965F6500116AFF /* ANYPOPDecay.m in Sources */,
 				EF5EDE4B1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m in Sources */,
 				EF5EDE4F1D965F6500116AFF /* ANYCoreAnimationObserver.m in Sources */,
-				EF5EDE4D1D965F6500116AFF /* ANYCoreAnimationChanges.m in Sources */,
 				EF5EDE551D965F6500116AFF /* ANYSubscriber.m in Sources */,
 				EF5EDE491D965F6500116AFF /* ANYAnimation.m in Sources */,
+				A311504F1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

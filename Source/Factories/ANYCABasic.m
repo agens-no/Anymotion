@@ -124,13 +124,14 @@
 
 - (ANYAnimation *)animationFor:(CALayer *)layer
 {
-    
     @weakify(layer);
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         @strongify(layer);
         
         CABasicAnimation *anim = [self build];
         NSAssert(anim.keyPath.length > 0, @"Missing keypath. Did you construct using +[%@ %@]?", NSStringFromClass([self class]), NSStringFromSelector(@selector(keyPath:)));
+        
+        __block BOOL failed = NO;
         
         anim.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStop:^(BOOL completed){
             if(completed)
@@ -139,24 +140,17 @@
             }
             else
             {
+                failed = YES;
                 [subscriber failed];
             }
         }];
         
-        anim.fromValue = anim.fromValue ?: [layer.presentationLayer valueForKeyPath:anim.keyPath];
+        CALayer *presentationLayer = layer.presentationLayer ?: layer;
+        anim.fromValue = anim.fromValue ?: [presentationLayer valueForKeyPath:anim.keyPath];
         
         if(self.shouldUpdateModel)
         {
-            [CATransaction begin];
-            [CATransaction setDisableActions:YES];
-            
-            /*
-             If you encounter a crash on this line double check that your `toValue` type is correct for that key path.
-             E.g. "transform.scale" for a UIView takes NSNumber – not [NSValue valueWithSize:].
-             */
-            [layer setValue:anim.toValue forKeyPath:anim.keyPath];
-            
-            [CATransaction commit];
+            [self.class applyValue:anim.toValue toLayer:layer animation:anim];
         }
         
         NSString *key = [NSString stringWithFormat:@"any.%@", anim.keyPath];
@@ -166,11 +160,34 @@
         return [[ANYActivity activityWithTearDownBlock:^{
             
             @strongify(layer);
-            [layer removeAnimationForKey:key];
+            if(!failed)
+            {
+                [layer removeAnimationForKey:key];
+                
+                if(self.shouldUpdateModel)
+                {
+                    CALayer *presentationLayer = layer.presentationLayer ?: layer;
+                    [self.class applyValue:[presentationLayer valueForKeyPath:anim.keyPath] toLayer:layer animation:anim];
+                }
+            }
             
         }] nameFormat:@"(CA.basic key: '%@', layer '<%@ %p>')", anim.keyPath, layer.class, layer];
         
     }];
+}
+
++ (void)applyValue:(id)value toLayer:(CALayer *)layer animation:(CABasicAnimation *)animation
+{
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    
+    /*
+     If you encounter a crash on this line double check that your `toValue` type is correct for that key path.
+     E.g. "transform.scale" for a UIView takes NSNumber – not [NSValue valueWithSize:].
+     */
+    [layer setValue:value forKeyPath:animation.keyPath];
+    
+    [CATransaction commit];
 }
 
 @end
