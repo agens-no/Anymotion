@@ -73,7 +73,7 @@ ANYAnimation *anim = [ANYUIView animationWithDuration:0.5 block:^{
 }];
 ```
 
-Ande more integrations to come...
+And more integrations to come...
 
 #### Grouping
 
@@ -127,14 +127,22 @@ ANYAnimation *pulsatingDot = ...;
 
 #### Callbacks
 
-```objc
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 ANYAnimation *anim = ...;
 [[anim onCompletion:^{
-  NSLog(@"Animation completed");
+    NSLog(@"Animation completed");
 } onError:^{
-  NSLog(@"Animation was cancelled");
+    NSLog(@"Animation was cancelled");
 }] start];
-```
+    </pre></div></td>
+    <td>
+      ![Screenshot](GIFs/callbacks.gif)
+    </td>
+  </tr>
+</table>
+
 
 
 ## Who's behind this?
