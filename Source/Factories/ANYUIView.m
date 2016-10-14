@@ -26,98 +26,10 @@
 #import <UIKit/UIKit.h>
 #import "ANYCoreAnimationObserver.h"
 
-@interface ANYUIView () <NSCopying>
-@property (nonatomic, copy) void (^block)(void);
-@property (nonatomic, assign) NSTimeInterval duration;
-@property (nonatomic, assign) NSTimeInterval delay;
-@property (nonatomic, assign) UIViewAnimationOptions options;
+@interface ANYUIView ()
 @end
 
 @implementation ANYUIView
-
-+ (instancetype)duration:(NSTimeInterval)duration
-{
-    return [[self new] duration:duration];
-}
-
-+ (instancetype)delay:(NSTimeInterval)delay
-{
-    return [[self new] delay:delay];
-}
-
-+ (instancetype)options:(UIViewAnimationOptions)options
-{
-    return [[self new] options:options];
-}
-
-+ (instancetype)block:(void (^)(void))block
-{
-    return [[self new] block:block];
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    ANYUIView *copy = [ANYUIView new];
-    copy.block = self.block;
-    copy.duration = self.duration;
-    copy.delay = self.delay;
-    copy.options = self.options;
-    return copy;
-}
-
-- (instancetype)duration:(NSTimeInterval)duration
-{
-    ANYUIView *copy = [self copy];
-    copy.duration = duration;
-    return copy;
-}
-
-- (instancetype)delay:(NSTimeInterval)delay
-{
-    ANYUIView *copy = [self copy];
-    copy.delay = delay;
-    return copy;
-}
-
-- (instancetype)options:(UIViewAnimationOptions)options
-{
-    ANYUIView *copy = [self copy];
-    copy.options = options;
-    return copy;
-}
-
-- (instancetype)addOptions:(UIViewAnimationOptions)options
-{
-    ANYUIView *copy = [self copy];
-    copy.options = self.options | options;
-    return copy;
-}
-
-- (instancetype)block:(void (^)(void))block
-{
-    ANYUIView *instance = [self copy];
-    instance.block = ^{
-        if(self.block)
-        {
-            self.block();
-        }
-        if(block)
-        {
-            block();
-        }
-    };
-    return instance;
-}
-
-@end
-
-
-@implementation ANYUIView (Clean)
-
-- (ANYAnimation *)animation
-{
-    return [self.class animationWithDuration:self.duration delay:self.delay options:self.options block:self.block];
-}
 
 + (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block
 {
@@ -150,7 +62,7 @@
             
             [self removeAddedAnimation:added];
             
-        }] nameFormat:@"(UIView, clean, duration: %.2f, delay: %.2f)", duration, delay];
+        }] nameFormat:@"(UIView, duration: %.2f, delay: %.2f)", duration, delay];
         
     }];
 }
@@ -184,45 +96,6 @@
             [self applyValueOfPresentationLayer:layer animation:animation];
         }
     }
-}
-
-@end
-
-@implementation ANYUIView (NoClean)
-
-- (ANYAnimation *)noCleanAnimation
-{
-    return [self.class animationWithDuration:self.duration delay:self.delay options:self.options block:self.block];
-}
-
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block
-{
-    return [self noCleanAnimationWithDuration:duration delay:0 options:0 block:block];
-}
-
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options block:(void(^)(void))block
-{
-    return [self noCleanAnimationWithDuration:duration delay:0 options:options block:block];
-}
-
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay block:(void(^)(void))block
-{
-    return [self noCleanAnimationWithDuration:duration delay:delay options:0 block:block];
-}
-
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block
-{
-    return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-        
-        [UIView animateWithDuration:duration delay:delay options:options animations:^{
-            block();
-        } completion:^(BOOL finished) {
-            [subscriber completed:finished];
-        }];
-        
-        return [[ANYActivity new] nameFormat:@"(UIView, no clean, duration: %.2f, delay: %.2f)", duration, delay];
-        
-    }];
 }
 
 @end

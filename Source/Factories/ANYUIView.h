@@ -31,54 +31,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ANYUIView : NSObject
 
-+ (instancetype)duration:(NSTimeInterval)duration;
-+ (instancetype)delay:(NSTimeInterval)delay;
-+ (instancetype)options:(UIViewAnimationOptions)options;
-+ (instancetype)block:(void (^)(void))block;
-
-- (instancetype)duration:(NSTimeInterval)duration;
-- (instancetype)delay:(NSTimeInterval)delay;
-- (instancetype)options:(UIViewAnimationOptions)options;
-- (instancetype)addOptions:(UIViewAnimationOptions)options;
-- (instancetype)block:(void (^)(void))block;
-
-@end
-
-
 /*
  If the animation is cancelled we will
  - remove the underlying core animation
- - leave the view in its current presented state.
+ - leave the view in its current presented state
  
  We're acheiving this by looking at
- - which animations have been added to the view/layer
+ - which animations have been added to the view/layer when triggering the block
  - what's the current value on the layer.presentationLayer for those animations
  */
-
-@interface ANYUIView (Clean)
-
-- (ANYAnimation *)animation;
 
 + (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block NS_SWIFT_UNAVAILABLE("");
 + (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options block:(void(^)(void))block NS_SWIFT_NAME(animation(duration:options:block:));
 + (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay block:(void(^)(void))block NS_SWIFT_UNAVAILABLE("");
 + (ANYAnimation *)animationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block NS_SWIFT_NAME(animation(duration:delay:options:block:));
-
-@end
-
-
-/*
- Use this if you don't want to remove the underlying Core Animations on cancellation.
- */
-
-@interface ANYUIView (NoClean)
-
-- (ANYAnimation *)noCleanAnimation;
-
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration block:(void(^)(void))block NS_SWIFT_UNAVAILABLE("");
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options block:(void(^)(void))block NS_SWIFT_NAME(noCleanAnimation(duration:options:block:));;
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay block:(void(^)(void))block NS_SWIFT_UNAVAILABLE("");
-+ (ANYAnimation *)noCleanAnimationWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options block:(void(^)(void))block NS_SWIFT_NAME(noCleanAnimation(duration:delay:options:block:));;
 
 @end
 
