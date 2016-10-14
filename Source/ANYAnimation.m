@@ -299,7 +299,10 @@ static NSString *ANYAnimationDefaultName = @"anim";
             }];
             
             [master add:second];
-            [master name:[master.name stringByReplacingCharactersInRange:NSMakeRange(master.name.length - 2, 1) withString:second.name]];
+            if(second.name.length > 0)
+            {
+                [master name:[master.name stringByReplacingCharactersInRange:NSMakeRange(master.name.length - 2, 1) withString:second.name]];
+            }
         }];
 
         [master add:first];
