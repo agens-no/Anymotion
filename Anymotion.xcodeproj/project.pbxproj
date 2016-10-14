@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A311504E1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = A311504C1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h */; };
+		A311504F1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A311504D1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m */; };
 		EF5EDE461D965F6500116AFF /* ANYActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE291D965F6500116AFF /* ANYActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE471D965F6500116AFF /* ANYActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE2A1D965F6500116AFF /* ANYActivity.m */; };
 		EF5EDE481D965F6500116AFF /* ANYAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE2B1D965F6500116AFF /* ANYAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -93,6 +95,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A311504C1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYAnimationDragHelper.h; sourceTree = "<group>"; };
+		A311504D1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYAnimationDragHelper.m; sourceTree = "<group>"; };
 		EF5EDE291D965F6500116AFF /* ANYActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYActivity.h; sourceTree = "<group>"; };
 		EF5EDE2A1D965F6500116AFF /* ANYActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYActivity.m; sourceTree = "<group>"; };
 		EF5EDE2B1D965F6500116AFF /* ANYAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYAnimation.h; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				EF5EDE361D965F6500116AFF /* Anymotion.h */,
 				EF5EDE371D965F6500116AFF /* ANYSubscriber.h */,
 				EF5EDE381D965F6500116AFF /* ANYSubscriber.m */,
+				A311504C1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h */,
+				A311504D1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m */,
 				EF5EDE391D965F6500116AFF /* Factories */,
 			);
 			path = Source;
@@ -242,6 +248,7 @@
 				EF5EDE531D965F6500116AFF /* Anymotion.h in Headers */,
 				EF5EDE511D965F6500116AFF /* ANYEXTMetamacros.h in Headers */,
 				EF5EDE521D965F6500116AFF /* ANYEXTScope.h in Headers */,
+				A311504E1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h in Headers */,
 				FCA62DED1DB0C17F00B77457 /* ANYCAKeyframe.h in Headers */,
 				EF5EDE601D965F6500116AFF /* ANYUIView.h in Headers */,
 				EF5EDE5A1D965F6500116AFF /* ANYPOPDecay.h in Headers */,
@@ -391,6 +398,7 @@
 				EF5EDE4D1D965F6500116AFF /* ANYCoreAnimationChanges.m in Sources */,
 				EF5EDE551D965F6500116AFF /* ANYSubscriber.m in Sources */,
 				EF5EDE491D965F6500116AFF /* ANYAnimation.m in Sources */,
+				A311504F1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
