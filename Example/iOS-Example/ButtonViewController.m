@@ -81,31 +81,21 @@
     line2.layer.transform = CATransform3DTranslate(line2.layer.transform, -3.5, 0.0, 0.0);
     [self.view addSubview:line2];
     
-    ANYAnimation *selectedAnimationGroup = [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-        
-        ANYAnimation *anim1 = [[[ANYPOPSpring propertyNamed:kPOPLayerScaleXY] toValueWithSize:CGSizeMake(8.0, 8.0)] animationFor:circleView1.layer];
-        ANYAnimation *anim2 = [[[ANYPOPSpring propertyNamed:kPOPLayerScaleXY] toValueWithSize:CGSizeMake(2.0, 2.0)] animationFor:circleView2.layer];
-        ANYAnimation *anim3 = [[[ANYPOPBasic propertyNamed:kPOPViewBackgroundColor] toValue:selectedColor] animationFor:line1];
-        ANYAnimation *anim4 = [[[ANYPOPBasic propertyNamed:kPOPViewBackgroundColor] toValue:selectedColor] animationFor:line2];
-        ANYAnimation *anim5 = [[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@1.0] animationFor:circleView2];
-        
-        return [[ANYAnimation group:@[anim1, anim2, anim3, anim4, anim5]] start];
-        
-    }];
-    self.selectedAnimationGroup = selectedAnimationGroup;
+    self.selectedAnimationGroup = [ANYAnimation group:@[
+          [[[ANYPOPSpring propertyNamed:kPOPLayerScaleXY] toValueWithSize:CGSizeMake(8.0, 8.0)] animationFor:circleView1.layer],
+          [[[ANYPOPSpring propertyNamed:kPOPLayerScaleXY] toValueWithSize:CGSizeMake(2.0, 2.0)] animationFor:circleView2.layer],
+          [[[ANYPOPBasic propertyNamed:kPOPViewBackgroundColor] toValue:selectedColor] animationFor:line1],
+          [[[ANYPOPBasic propertyNamed:kPOPViewBackgroundColor] toValue:selectedColor] animationFor:line2],
+          [[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@1.0] animationFor:circleView2]
+    ]];
     
-    ANYAnimation *unSelectedAnimationGroup = [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
-        
-        ANYAnimation *anim1 = [[[ANYPOPSpring propertyNamed:kPOPLayerScaleXY] toValueWithSize:CGSizeMake(1.0, 1.0)] animationFor:circleView1.layer];
-        ANYAnimation *anim2 = [[[ANYPOPSpring propertyNamed:kPOPLayerScaleXY] toValueWithSize:CGSizeMake(0.001, 0.001)] animationFor:circleView2.layer];
-        ANYAnimation *anim3 = [[[ANYPOPBasic propertyNamed:kPOPViewBackgroundColor] toValue:unSelectedColor] animationFor:line1];
-        ANYAnimation *anim4 = [[[ANYPOPBasic propertyNamed:kPOPViewBackgroundColor] toValue:unSelectedColor] animationFor:line2];
-        ANYAnimation *anim5 = [[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0.0] animationFor:circleView2];
-        
-        return [[ANYAnimation group:@[anim1, anim2, anim3, anim4, anim5]] start];
-        
-    }];
-    self.unSelectedAnimationGroup = unSelectedAnimationGroup;
+    self.unSelectedAnimationGroup = [ANYAnimation group:@[
+          [[[ANYPOPSpring propertyNamed:kPOPLayerScaleXY] toValueWithSize:CGSizeMake(1.0, 1.0)] animationFor:circleView1.layer],
+          [[[ANYPOPSpring propertyNamed:kPOPLayerScaleXY] toValueWithSize:CGSizeMake(0.001, 0.001)] animationFor:circleView2.layer],
+          [[[ANYPOPBasic propertyNamed:kPOPViewBackgroundColor] toValue:unSelectedColor] animationFor:line1],
+          [[[ANYPOPBasic propertyNamed:kPOPViewBackgroundColor] toValue:unSelectedColor] animationFor:line2],
+          [[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0.0] animationFor:circleView2]
+    ]];
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     [self.view addGestureRecognizer:gesture];
@@ -151,7 +141,7 @@
         [self.selectedAnimationGroup start];
     }
     
-    self.isSelected =! self.isSelected;
+    self.isSelected = !self.isSelected;
 }
 
 
