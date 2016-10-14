@@ -36,9 +36,18 @@ static NSString *ANYAnimationDefaultName = @"anim";
 
 @implementation ANYAnimation
 
+- (instancetype)init
+{
+    self = [self initWithBlock:^ANYActivity *(ANYSubscriber *subscriber) {
+        [subscriber completed];
+        return [ANYActivity new];
+    }];
+    return self;
+}
+
 - (instancetype)initWithBlock:(ANYActivity * (^)(ANYSubscriber *subscriber))create
 {
-    self = [self init];
+    self = [super init];
     if(self)
     {
         self.create = create;
@@ -182,6 +191,14 @@ static NSString *ANYAnimationDefaultName = @"anim";
         {
             after();
         }
+    }];
+}
+
++ (instancetype)empty
+{
+    return [ANYAnimation createAnimation:^ANYActivity * _Nonnull(ANYSubscriber * _Nonnull subscriber) {
+        [subscriber completed];
+        return [ANYActivity new];
     }];
 }
 

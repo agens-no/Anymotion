@@ -52,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)before:(dispatch_block_t)before;
 - (instancetype)after:(dispatch_block_t)after;
 
++ (instancetype)empty;
 + (instancetype)defer:(ANYAnimation *(^)(void))defer;
 
 - (instancetype)groupWith:(ANYAnimation *)animation;
