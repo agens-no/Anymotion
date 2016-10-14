@@ -138,7 +138,7 @@ ANYAnimation *anim = ...;
 }] start];
     </pre></div></td>
     <td>
-      ![Screenshot](GIFs/callbacks.gif)
+      ![Callbacks](gifs/callbacks.gif)
     </td>
   </tr>
 </table>
