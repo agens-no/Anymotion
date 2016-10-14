@@ -42,7 +42,7 @@
     self = [super init];
     if (self)
     {
-        self.title = @"Image Animation";
+        self.title = @"Pan gesture";
     }
     return self;
 }
@@ -61,7 +61,7 @@
     [self.view addSubview:imageView];
     self.imageView = imageView;
     
-    [[self moveToCenter] start];
+    [[[self moveToCenter] delay:0.3] start];
     
     UndelayedPanRecognizer *pan = [[UndelayedPanRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     pan.delegate = self;

@@ -44,7 +44,7 @@
     self = [super init];
     if (self)
     {
-        self.title = @"Button Animation";
+        self.title = @"Toggle button";
     }
     return self;
 }
