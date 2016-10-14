@@ -79,30 +79,53 @@ And more integrations to come...
 
 Start animations simultaneously
 
-```objc
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 ANYAnimation *goRight = ...;
 ANYAnimation *fadeOut = ...;
 ANYAnimation *group = [ANYAnimation group:@[goRight, fadeOut]];
 [group start];
-```
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/group.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### Chaining
 
 When one animation completes then start another
-```objc
+
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
 ANYAnimation *group = [goRight then:goLeft];
 [group start];
-```
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/chain.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 Chain and repeat indefinitely
-```objc
+
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
 ANYAnimation *group = [[goRight then:goLeft] repeat];
 [group start];
-```
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/chain_and_repeat.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### Start... and cancel
 
@@ -110,9 +133,9 @@ ANYAnimation *group = [[goRight then:goLeft] repeat];
   <tr>
     <td width="400px"><div class="highlight"><pre>
 ANYAnimation *anim = ...;
-    ANYActivity *runningAnimation = [anim start];
-    ...
-    [runningAnimation cancel];
+ANYActivity *runningAnimation = [anim start];
+...
+[runningAnimation cancel];
     </pre></div></td>
     <td>
       <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
@@ -131,7 +154,7 @@ ANYAnimation *anim = ...;
     }] after:^{
       view.hidden = YES;
     }];
-    [[pulsatingDot repeat] start];
+    [pulsatingDot start];
     </pre></div></td>
     <td>
       <img src="/Meta/Readme/setup_and_clean_up.gif?raw=true" alt="GIF" />
