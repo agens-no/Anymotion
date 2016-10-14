@@ -44,36 +44,25 @@ Note: These animations won't start unless you say `start` like this
 ```
 Thus making you able to define your animations once and then start and cancel them at your leisure.
 
-#### POP, UIKit, CoreAnimation
-
-##### POP spring
+#### POP 
 ```objc
-ANYAnimation *anim = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValue:@0] animationFor:view];
+ANYAnimation *decay = [[[ANYPOPDecay propertyNamed:kPOPViewAlpha] velocity:@(-10)] animationFor:view];
+ANYAnimation *basic = [[[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0] duration:0.5] animationFor:view];
+ANYAnimation *spring = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValue:@0] animationFor:view];
 ```
 
-##### POP basic
+#### Core Animation
 ```objc
-ANYAnimation *anim = [[[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0] duration:0.5] animationFor:view];
+ANYAnimation *basic = [[[[ANYCABasic new] toValue:@0] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
+ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[@0, @1]] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
 ```
 
-##### POP decay
-```objc
-ANYAnimation *anim = [[[ANYPOPDecay propertyNamed:kPOPViewAlpha] velocity:@(-10)] animationFor:view];
-```
-
-##### CABasicAnimation
-```objc
-ANYAnimation *anim = [[[[ANYCABasic new] toValue:@0] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
-```
-
-##### UIKit
+#### UIKit
 ```objc
 ANYAnimation *anim = [ANYUIView animationWithDuration:0.5 block:^{
     view.alpha = 0.0;
 }];
 ```
-
-And more integrations to come...
 
 #### Grouping
 
@@ -96,7 +85,7 @@ ANYAnimation *group = [goRight then:goLeft];
 [group start];
 ```
 
-Chain and repeat indefinitely
+#### Repeat
 ```objc
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
@@ -110,9 +99,9 @@ ANYAnimation *group = [[goRight then:goLeft] repeat];
   <tr>
     <td width="400px"><div class="highlight"><pre>
 ANYAnimation *anim = ...;
-    ANYActivity *runningAnimation = [anim start];
-    ...
-    [runningAnimation cancel];
+ANYActivity *runningAnimation = [anim start];
+...
+[runningAnimation cancel];
     </pre></div></td>
     <td>
       <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
@@ -125,13 +114,13 @@ ANYAnimation *anim = ...;
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-    ANYAnimation *pulsatingDot = ...;
-    [[pulsatingDot before:^{
-      view.hidden = NO;
-    }] after:^{
-      view.hidden = YES;
-    }];
-    [[pulsatingDot repeat] start];
+ANYAnimation *pulsatingDot = ...;
+[[pulsatingDot before:^{
+   view.hidden = NO;
+}] after:^{
+   view.hidden = YES;
+}];
+[[pulsatingDot repeat] start];
     </pre></div></td>
     <td>
       <img src="/Meta/Readme/setup_and_clean_up.gif?raw=true" alt="GIF" />
