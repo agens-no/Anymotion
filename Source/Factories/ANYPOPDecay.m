@@ -126,7 +126,10 @@
         return [[ANYActivity activityWithTearDownBlock:^{
             
             @strongify(object);
-            [object pop_removeAnimationForKey:key];
+            if([object pop_animationForKey:key] == anim)
+            {
+                [object pop_removeAnimationForKey:key];
+            }
             
         }] nameFormat:@"(pop.decay key: '%@', toValue: %@, object: <%@ %p>)", key, anim.toValue, object.class, object];
         

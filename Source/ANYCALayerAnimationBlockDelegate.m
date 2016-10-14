@@ -26,13 +26,13 @@
 @interface ANYCALayerAnimationBlockDelegate ()
 
 @property (nonatomic, copy) void (^onStart)();
-@property (nonatomic, copy) void (^onStop)(BOOL completed);
+@property (nonatomic, copy) void (^onStop)(BOOL finished);
 
 @end
 
 @implementation ANYCALayerAnimationBlockDelegate
 
-+ (instancetype)newWithAnimationDidStart:(void(^)(void))onStart didStop:(void(^)(BOOL completed))onStop
++ (instancetype)newWithAnimationDidStart:(void(^)(void))onStart didStop:(void(^)(BOOL finished))onStop
 {
     ANYCALayerAnimationBlockDelegate *instance = [[self alloc] init];
     instance.onStart = onStart;
@@ -40,7 +40,7 @@
     return instance;
 }
 
-+ (instancetype)newWithAnimationDidStop:(void(^)(BOOL completed))onStop
++ (instancetype)newWithAnimationDidStop:(void(^)(BOOL finished))onStop
 {
     ANYCALayerAnimationBlockDelegate *instance = [[self alloc] init];
     instance.onStop = onStop;

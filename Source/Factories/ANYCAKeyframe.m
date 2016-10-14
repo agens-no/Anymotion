@@ -159,6 +159,8 @@
         CAKeyframeAnimation *anim = [self build];
         NSAssert(anim.keyPath.length > 0, @"Missing keypath. Did you construct using +[%@ %@]?", NSStringFromClass([self class]), NSStringFromSelector(@selector(keyPath:)));
         
+        __block BOOL failed = NO;
+        
         anim.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStop:^(BOOL completed){
             if(completed)
             {
@@ -166,25 +168,11 @@
             }
             else
             {
+                failed = YES;
                 [subscriber failed];
             }
         }];
         
-        if(self.shouldUpdateModel)
-        {
-            [CATransaction begin];
-            [CATransaction setDisableActions:YES];
-            
-            /*
-             If you encounter a crash on this line double check that your `toValue` type is correct for that key path.
-             E.g. "transform.scale" for a UIView takes NSNumber – not [NSValue valueWithSize:].
-             */
-            
-            id value = anim.values.lastObject;
-            [layer setValue:value forKeyPath:anim.keyPath];
-            
-            [CATransaction commit];
-        }
         
         NSString *key = [NSString stringWithFormat:@"any.%@", anim.keyPath];
         [layer removeAnimationForKey:key];
@@ -193,22 +181,14 @@
         return [[ANYActivity activityWithTearDownBlock:^{
             
             @strongify(layer);
-            [layer removeAnimationForKey:key];
+            if(!failed)
+            {
+                [layer removeAnimationForKey:key];
+            }
             
         }] nameFormat:@"(CA.keyframe key: '%@', layer '<%@ %p>')", anim.keyPath, layer.class, layer];
         
     }];
-}
-
-@end
-
-@implementation ANYCAKeyframe (Convenience)
-
-- (instancetype)updateModel
-{
-    ANYCAKeyframe *copy = [self configure:nil];
-    copy.shouldUpdateModel = YES;
-    return copy;
 }
 
 @end

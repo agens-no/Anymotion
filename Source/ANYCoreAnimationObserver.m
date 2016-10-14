@@ -7,14 +7,31 @@
 //
 
 #import "ANYCoreAnimationObserver.h"
+#import "ANYCALayerAnimationBlockDelegate.h"
 #import <objc/runtime.h>
+
+@implementation ANYCoreAnimationChange
+
+- (instancetype)initWithLayer:(CALayer *)layer animation:(CAAnimation *)animation key:(NSString *)key
+{
+    self = [super init];
+    if (self)
+    {
+        _layer = layer;
+        _animation = animation;
+        _key = key;
+    }
+    return self;
+}
+
+@end
 
 @interface CALayer (Anymotion)
 + (void)_anymotion_swizzleAddAndRemoveAnimation;
 @end
 
 @interface ANYCoreAnimtionBlockCallback : NSObject
-@property (nonatomic, copy) void (^block)(CALayer *layer, NSString *key, CAAnimation *animation);
+@property (nonatomic, copy) void (^block)(CALayer *layer, NSString *key, CAAnimation **animation);
 @end
 @implementation ANYCoreAnimtionBlockCallback
 @end
@@ -67,43 +84,60 @@
     return model;
 }
 
-- (void)addedAnimation:(CAAnimation *)animation forKey:(NSString *)key onLayer:(CALayer *)layer
+- (void)addingAnimation:(inout CAAnimation **)animation forKey:(NSString *)key onLayer:(CALayer *)layer
 {
-    CoreAnimationObserverModel *model = [self modelForCurrentThread];
-    for(ANYCoreAnimtionBlockCallback *block in [model.subscribers objectEnumerator])
+    NSDictionary <NSNumber *, ANYCoreAnimtionBlockCallback *> *subscribers = [[self modelForCurrentThread].subscribers copy];
+    
+    if(subscribers.count > 0)
     {
-        block.block(layer, key, animation);
+        for(ANYCoreAnimtionBlockCallback *block in [subscribers objectEnumerator])
+        {
+            block.block(layer, key, animation);
+        }
     }
 }
 
-- (NSMapTable <CALayer *, ANYCoreAnimationChanges *> *)addedAnimations:(dispatch_block_t)block
+- (CAAnimation *)animationCallbacksByCopyingAnimation:(CAAnimation *)original
+                                              onStart:(void(^)(CAAnimation *anim))onStart
+                                            onDidStop:(void(^)(CAAnimation *anim, BOOL finished))onStop
+{
+    CAAnimation *copy = [original copy];
+    copy.delegate = [ANYCALayerAnimationBlockDelegate newWithAnimationDidStart:^{
+        onStart(copy);
+        if([original.delegate respondsToSelector:@selector(animationDidStart:)])
+        {
+            [original.delegate animationDidStart:original];
+        }
+    } didStop:^(BOOL finished) {
+        onStop(copy, finished);
+        if([original.delegate respondsToSelector:@selector(animationDidStop:finished:)])
+        {
+            [original.delegate animationDidStop:original finished:finished];
+        }
+    }];
+    return copy;
+}
+
+- (NSArray <ANYCoreAnimationChange *> *)addedAnimations:(dispatch_block_t)block
+                                                onStart:(void(^)(CAAnimation *anim))onStart
+                                              onDidStop:(void(^)(CAAnimation *anim, BOOL finished))onStop
 {
     CoreAnimationObserverModel *model = [self modelForCurrentThread];
     NSInteger subscriptionId = model.subscriberId++;
     NSNumber *boxed = @(subscriptionId);
     
-    NSMapTable <CALayer *, ANYCoreAnimationChanges *> *added = [NSMapTable weakToStrongObjectsMapTable];
+    NSMutableArray <ANYCoreAnimationChange *> *added = [NSMutableArray new];
     
     ANYCoreAnimtionBlockCallback *callback = [ANYCoreAnimtionBlockCallback new];
-    callback.block = ^(CALayer *layer, NSString *key, CAAnimation *animation) {
+    callback.block = ^(CALayer *layer, NSString *key, CAAnimation **animation) {
         
-        ANYCoreAnimationChanges *changesForLayer = [added objectForKey:layer];
-        if(changesForLayer == nil)
-        {
-            changesForLayer = [ANYCoreAnimationChanges new];
-            changesForLayer.animationsWithKeys = [NSMutableDictionary new];
-            changesForLayer.animationsWithoutKeys = [NSMutableArray new];
-            [added setObject:changesForLayer forKey:layer];
-        }
+        CAAnimation *original = *animation;
+        CAAnimation *copy = [self animationCallbacksByCopyingAnimation:original onStart:onStart onDidStop:onStop];
         
-        if(key)
-        {
-            changesForLayer.animationsWithKeys[key] = animation;
-        }
-        else
-        {
-            [changesForLayer.animationsWithoutKeys addObject:animation];
-        }
+        ANYCoreAnimationChange *change = [[ANYCoreAnimationChange alloc] initWithLayer:layer animation:copy key:key];
+        [added addObject:change];
+        
+        *animation = copy;
     };
     
     model.subscribers[boxed] = callback;
@@ -136,8 +170,9 @@ static void AnymotionSwizzleMethods(Class c, SEL orig, SEL new)
 
 - (void)_anymotion_addAnimation:(CAAnimation *)anim forKey:(nullable NSString *)key
 {
-    [[ANYCoreAnimationObserver shared] addedAnimation:anim forKey:key onLayer:self];
-    [self _anymotion_addAnimation:anim forKey:key];
+    CAAnimation *mutated = anim;
+    [[ANYCoreAnimationObserver shared] addingAnimation:&mutated forKey:key onLayer:self];
+    [self _anymotion_addAnimation:mutated forKey:key];
 }
 
 @end

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A31150591DB0FFA0005B4CD9 /* UndelayedPanRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A31150581DB0FFA0005B4CD9 /* UndelayedPanRecognizer.m */; };
 		A311505B1DB105DF005B4CD9 /* example-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A311505A1DB105DF005B4CD9 /* example-image.jpg */; };
+		A31150601DB140D4005B4CD9 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A311505F1DB140D4005B4CD9 /* DummyViewController.swift */; };
 		EFE55A341D9675470006178E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE55A2A1D9675470006178E /* AppDelegate.m */; };
 		EFE55A351D9675470006178E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFE55A2B1D9675470006178E /* Assets.xcassets */; };
 		EFE55A361D9675470006178E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFE55A2C1D9675470006178E /* LaunchScreen.storyboard */; };
@@ -43,6 +44,8 @@
 		A31150571DB0FFA0005B4CD9 /* UndelayedPanRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UndelayedPanRecognizer.h; sourceTree = "<group>"; };
 		A31150581DB0FFA0005B4CD9 /* UndelayedPanRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UndelayedPanRecognizer.m; sourceTree = "<group>"; };
 		A311505A1DB105DF005B4CD9 /* example-image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "example-image.jpg"; sourceTree = "<group>"; };
+		A311505F1DB140D4005B4CD9 /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
+		A31150611DB141FE005B4CD9 /* iOS-Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS-Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		EFE55A0E1D9674CC0006178E /* iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE55A291D9675470006178E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EFE55A2A1D9675470006178E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -103,11 +106,13 @@
 				EFE55A2A1D9675470006178E /* AppDelegate.m */,
 				EFE55A321D9675470006178E /* ViewController.h */,
 				EFE55A331D9675470006178E /* ViewController.m */,
+				A311505F1DB140D4005B4CD9 /* DummyViewController.swift */,
 				EFE55A2B1D9675470006178E /* Assets.xcassets */,
 				EFE55A2C1D9675470006178E /* LaunchScreen.storyboard */,
 				EFE55A2E1D9675470006178E /* Main.storyboard */,
 				EFE55A301D9675470006178E /* Info.plist */,
 				EFE55A311D9675470006178E /* main.m */,
+				A31150611DB141FE005B4CD9 /* iOS-Example-Bridging-Header.h */,
 				FC108B581DA7A6050011A000 /* Examples */,
 			);
 			path = "iOS-Example";
@@ -261,6 +266,7 @@
 			files = (
 				FC67EE571D9BF62A001E3314 /* ButtonViewController.m in Sources */,
 				A31150591DB0FFA0005B4CD9 /* UndelayedPanRecognizer.m in Sources */,
+				A31150601DB140D4005B4CD9 /* DummyViewController.swift in Sources */,
 				EFE55A3A1D9675470006178E /* ViewController.m in Sources */,
 				FC108B631DA7AD950011A000 /* ListViewController.m in Sources */,
 				FC67EE591D9BF62A001E3314 /* ImageAnimationViewController.m in Sources */,
@@ -323,6 +329,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -371,6 +378,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

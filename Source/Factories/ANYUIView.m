@@ -25,6 +25,7 @@
 #import "ANYUIView.h"
 #import <UIKit/UIKit.h>
 #import "ANYCoreAnimationObserver.h"
+#import "ANYCALayerAnimationBlockDelegate.h"
 
 @interface ANYUIView ()
 @end
@@ -50,17 +51,41 @@
 {
     return [ANYAnimation createAnimation:^ANYActivity *(ANYSubscriber *subscriber) {
         
-        NSMapTable <CALayer *, ANYCoreAnimationChanges *> *added = [[ANYCoreAnimationObserver shared] addedAnimations:^{
+        NSMutableArray <CAAnimation *> *completed = [NSMutableArray new];
+        NSMutableArray <CAAnimation *> *failed = [NSMutableArray new];
+        NSArray <ANYCoreAnimationChange *> *added = [[ANYCoreAnimationObserver shared] addedAnimations:^{
             [UIView animateWithDuration:duration delay:delay options:options animations:^{
                 block();
             } completion:^(BOOL finished) {
                 [subscriber completed:finished];
             }];
+        } onStart:^(CAAnimation *anim) {} onDidStop:^(CAAnimation *anim, BOOL finished) {
+            if(finished)
+            {
+                [completed addObject:anim];
+            }
+            else
+            {
+                [failed addObject:anim];
+            }
         }];
         
         return [[ANYActivity activityWithTearDownBlock:^{
             
-            [self removeAddedAnimation:added];
+            for(ANYCoreAnimationChange *change in added)
+            {
+                BOOL cancelledViaActivity = ![failed containsObject:change.animation] && ![completed containsObject:change.animation];
+                
+                if(cancelledViaActivity)
+                {
+                    [self applyValueOfPresentationLayer:change.layer animation:change.animation];
+                    
+                    if(change.key)
+                    {
+                        [change.layer removeAnimationForKey:change.key];
+                    }
+                }
+            }
             
         }] nameFormat:@"(UIView, duration: %.2f, delay: %.2f)", duration, delay];
         
@@ -74,27 +99,6 @@
         CAPropertyAnimation *propertyAnim = (id)animation;
         id value = [layer.presentationLayer valueForKeyPath:propertyAnim.keyPath];
         [layer setValue:value forKey:propertyAnim.keyPath];
-    }
-}
-
-+ (void)removeAddedAnimation:(NSMapTable <CALayer *, ANYCoreAnimationChanges *> *)added
-{
-    for(CALayer *layer in added)
-    {
-        ANYCoreAnimationChanges *addedToLayer = [added objectForKey:layer];
-        
-        for(NSString *key in addedToLayer.animationsWithKeys)
-        {
-            [layer removeAnimationForKey:key];
-            
-            CAAnimation *animation = addedToLayer.animationsWithKeys[key];
-            [self applyValueOfPresentationLayer:layer animation:animation];
-        }
-        
-        for(CAAnimation *animation in addedToLayer.animationsWithoutKeys)
-        {
-            [self applyValueOfPresentationLayer:layer animation:animation];
-        }
     }
 }
 

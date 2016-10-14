@@ -26,7 +26,7 @@
 #import "ButtonViewController.h"
 #import "ImageAnimationViewController.h"
 #import "ListViewController.h"
-
+#import "iOS_Example-Swift.h"
 #import <Anymotion/Anymotion.h>
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>

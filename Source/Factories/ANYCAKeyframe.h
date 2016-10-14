@@ -48,10 +48,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface ANYCAKeyframe (Convenience)
-
-- (instancetype)updateModel;
-
-@end
-
 NS_ASSUME_NONNULL_END
