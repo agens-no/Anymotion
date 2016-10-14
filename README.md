@@ -106,24 +106,38 @@ ANYAnimation *group = [[goRight then:goLeft] repeat];
 
 #### Start... and cancel
 
-```objc
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 ANYAnimation *anim = ...;
-ANYActivity *runningAnimation = [anim start];
-...
-[runningAnimation cancel];
-```
+    ANYActivity *runningAnimation = [anim start];
+    ...
+    [runningAnimation cancel];
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### Set up and clean up
 
-```objc
-ANYAnimation *pulsatingDot = ...;
-[[pulsatingDot before:^{
-  view.hidden = NO;
-}] after:^{
-  view.hidden = YES;
-}];
-[pulsatingDot start];
-```
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
+    ANYAnimation *pulsatingDot = ...;
+    [[pulsatingDot before:^{
+      view.hidden = NO;
+    }] after:^{
+      view.hidden = YES;
+    }];
+    [[pulsatingDot repeat] start];
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/setup_and_clean_up.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### Callbacks
 
@@ -138,7 +152,7 @@ ANYAnimation *anim = ...;
 }] start];
     </pre></div></td>
     <td>
-      ![Callbacks](Meta/Readme/callbacks.gif)
+      <img src="/Meta/Readme/callbacks.gif?raw=true" alt="GIF" />
     </td>
   </tr>
 </table>
