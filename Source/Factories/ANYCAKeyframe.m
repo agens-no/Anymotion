@@ -176,8 +176,8 @@
             [CATransaction setDisableActions:YES];
             
             /*
-             If you encounter a crash on this line double check that your toValue type is correct for that key path.
-             E.g. "transform.scale" takes NSNumber – not [NSValue valueWithSize:].
+             If you encounter a crash on this line double check that your `toValue` type is correct for that key path.
+             E.g. "transform.scale" for a UIView takes NSNumber – not [NSValue valueWithSize:].
              */
             
             id value = anim.values.lastObject;
