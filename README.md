@@ -113,7 +113,7 @@ ANYActivity *activity = [[goRight groupWith:fadeOut] start];
 let spring = ANYPOPSpring(kPOPLayerPositionX)
                .toValue(100)
                .springSpeed(5)
-               .animation(for: view)
+               .animation(for: view)</pre></div>
     <td>
       <img src="/Meta/Readme/spring.gif?raw=true" alt="GIF" />
     </td>
@@ -126,7 +126,7 @@ let spring = ANYPOPSpring(kPOPLayerPositionX)
 let basic = ANYPOPBasic(kPOPLayerPositionX)
                .toValue(100)
                .duration(2)
-               .animation(for: view)
+               .animation(for: view)</pre></div>
     <td>
       <img src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
     </td>
@@ -138,7 +138,7 @@ let basic = ANYPOPBasic(kPOPLayerPositionX)
     <td width="400px"><div class="highlight"><pre>
 let decay = ANYPOPDecay(kPOPLayerPositionX)
                .velocity(10)
-               .animation(for: view)
+               .animation(for: view)</pre></div>
     <td>
       <img src="/Meta/Readme/decay.gif?raw=true" alt="GIF" />
     </td>
@@ -146,15 +146,20 @@ let decay = ANYPOPDecay(kPOPLayerPositionX)
 </table>
 
 #### Core Animation
+
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-let basic = ANYCABasic(#keyPath(CALayer.position)).duration(2).toValue(CGPoint(x: 100, y: 0)).animation(for: view.layer)</pre></div></td>
+let basic = ANYCABasic(#keyPath(CALayer.position))
+               .toValue(CGPoint(x: 100, y: 0))
+               .duration(2)
+               .animation(for: view.layer)</pre></div>
     <td>
-      <img src="/Meta/Readme/core_animation.gif?raw=true" alt="GIF" />
+      <img src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
     </td>
   </tr>
 </table>
+
 
 #### UIKit
 
@@ -165,10 +170,11 @@ let uikit = ANYUIView.animation(duration: 2) {
     view.center.x = 100
 }</pre></div></td>
     <td>
-      <img src="/Meta/Readme/uikit.gif?raw=true" alt="GIF" />
+      <img src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
     </td>
   </tr>
 </table>
+
 
 #### Grouping
 
