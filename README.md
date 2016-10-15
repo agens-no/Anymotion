@@ -133,9 +133,9 @@ let basic = ANYCABasic(#keyPath(CALayer.position)).duration(2).toValue(CGPoint(x
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-ANYAnimation *anim = [ANYUIView animationWithDuration:0.5 block:^{
-  view.alpha = 0.0;
-}];</pre></div></td>
+let uikit = ANYUIView.animation(duration: 2) { 
+    view.center.x = 100
+}</pre></div></td>
     <td>
       <img src="/Meta/Readme/uikit.gif?raw=true" alt="GIF" />
     </td>
