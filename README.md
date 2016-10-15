@@ -74,12 +74,45 @@ ANYAnimation *fadeOut = [[[[ANYCABasic new] toValue:@0] duration:1] animationFor
 </table>
 
 Note: These animations won't start unless you say `start` like this
-```objc
+
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 [goRight start];
 [fadeOut start];
-```
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
-Thus making you able to define your animations once and then start and cancel them at your leisure.
+Instead of starting each one individually you can group them 
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
+[[goRight groupWith:fadeOut] start];
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
+
+Calling `start` actually returns an `ANYActivity` empowering you with the option of stopping the animation at any time.
+
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
+ANYActivity *activity = [[goRight groupWith:fadeOut] start];
+...
+[activity cancel];
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### POP
 <table>
