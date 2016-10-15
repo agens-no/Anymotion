@@ -79,7 +79,7 @@ Note: These animations won't start unless you say `start` like this
   </tr>
 </table>
 
-Instead of starting each one individually you can group them 
+Instead of starting each one individually you can group them
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
@@ -106,16 +106,35 @@ ANYActivity *activity = [[goRight groupWith:fadeOut] start];
 
 
 #### POP
-```swift
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 let spring = ANYPOPSpring(kPOPLayerPositionX).toValue(100).springSpeed(5).animation(for: view)
-```
-```swift
-let basic = ANYPOPBasic(kPOPLayerPositionX).toValue(100).duration(2).animation(for: view)
-```
-```swift
-let decay = ANYPOPDecay(kPOPLayerPositionX).velocity(10).animation(for: view)
-```
+    <td>
+      <img src="/Meta/Readme/spring.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
+let basic = ANYPOPBasic(kPOPLayerPositionX).toValue(100).duration(2).animation(for: view)
+    <td>
+      <img src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
+let decay = ANYPOPDecay(kPOPLayerPositionX).velocity(10).animation(for: view)
+    <td>
+      <img src="/Meta/Readme/decay.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### Core Animation
 <table>
@@ -133,7 +152,7 @@ let basic = ANYCABasic(#keyPath(CALayer.position)).duration(2).toValue(CGPoint(x
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-let uikit = ANYUIView.animation(duration: 2) { 
+let uikit = ANYUIView.animation(duration: 2) {
     view.center.x = 100
 }</pre></div></td>
     <td>
