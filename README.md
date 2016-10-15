@@ -72,8 +72,7 @@ Note: These animations won't start unless you say `start` like this
   <tr>
     <td width="400px"><div class="highlight"><pre>
 [goRight start];
-[fadeOut start];
-    </pre></div></td>
+[fadeOut start];</pre></div></td>
     <td>
       <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
     </td>
@@ -84,8 +83,7 @@ Instead of starting each one individually you can group them
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-[[goRight groupWith:fadeOut] start];
-    </pre></div></td>
+[[goRight groupWith:fadeOut] start];</pre></div></td>
     <td>
       <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
     </td>
@@ -99,8 +97,7 @@ Calling `start` actually returns an `ANYActivity` empowering you to stop the ani
     <td width="400px"><div class="highlight"><pre>
 ANYActivity *activity = [[goRight groupWith:fadeOut] start];
 ...
-[activity cancel];
-    </pre></div></td>
+[activity cancel];</pre></div></td>
     <td>
       <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
     </td>
@@ -127,8 +124,7 @@ let decay = ANYPOPDecay(kPOPLayerPositionX).fromValue(0).velocity(10).animation(
 NSValue *left = [NSValue valueWithCGPoint:CGPointMake(100.0, 100.0)];
 NSValue *right = [NSValue valueWithCGPoint:CGPointMake(200.0, 100.0)];
 ANYAnimation *basic = [[[[ANYCABasic new] toValue:@0] duration:2.0] animationFor:view.layer keyPath:@"opacity"];
-ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[right, left, right]] duration:1.0] animationFor:view.layer keyPath:@"position"];
-    </pre></div></td>
+ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[right, left, right]] duration:1.0] animationFor:view.layer keyPath:@"position"];</pre></div></td>
     <td>
       <img src="/Meta/Readme/core_animation.gif?raw=true" alt="GIF" />
     </td>
@@ -142,8 +138,7 @@ ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[right, left, right]] du
     <td width="400px"><div class="highlight"><pre>
 ANYAnimation *anim = [ANYUIView animationWithDuration:0.5 block:^{
   view.alpha = 0.0;
-}];
-    </pre></div></td>
+}];</pre></div></td>
     <td>
       <img src="/Meta/Readme/uikit.gif?raw=true" alt="GIF" />
     </td>
@@ -160,8 +155,7 @@ Start animations simultaneously
 ANYAnimation *goRight = ...;
 ANYAnimation *fadeOut = ...;
 ANYAnimation *group = [ANYAnimation group:@[goRight, fadeOut]];
-[group start];
-    </pre></div></td>
+[group start];</pre></div></td>
     <td>
       <img src="/Meta/Readme/group.gif?raw=true" alt="GIF" />
     </td>
@@ -178,8 +172,7 @@ When one animation completes then start another
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
 ANYAnimation *group = [goRight then:goLeft];
-[group start];
-    </pre></div></td>
+[group start];</pre></div></td>
     <td>
       <img src="/Meta/Readme/chain.gif?raw=true" alt="GIF" />
     </td>
@@ -194,8 +187,7 @@ ANYAnimation *group = [goRight then:goLeft];
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
 ANYAnimation *group = [[goRight then:goLeft] repeat];
-[group start];
-    </pre></div></td>
+[group start];</pre></div></td>
     <td>
       <img src="/Meta/Readme/chain_and_repeat.gif?raw=true" alt="GIF" />
     </td>
@@ -210,8 +202,7 @@ ANYAnimation *group = [[goRight then:goLeft] repeat];
 ANYAnimation *anim = ...;
 ANYActivity *runningAnimation = [anim start];
 ...
-[runningAnimation cancel];
-    </pre></div></td>
+[runningAnimation cancel];</pre></div></td>
     <td>
       <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
     </td>
@@ -229,8 +220,7 @@ ANYAnimation *pulsatingDot = ...;
 }] after:^{
    view.hidden = YES;
 }];
-[pulsatingDot start];
-    </pre></div></td>
+[pulsatingDot start];</pre></div></td>
     <td>
       <img src="/Meta/Readme/setup_and_clean_up.gif?raw=true" alt="GIF" />
     </td>
@@ -247,8 +237,7 @@ ANYAnimation *anim = ...;
     NSLog(@"Animation completed");
 } onError:^{
     NSLog(@"Animation was cancelled");
-}] start];
-    </pre></div></td>
+}] start];</pre></div></td>
     <td>
       <img src="/Meta/Readme/callbacks.gif?raw=true" alt="GIF" />
     </td>
