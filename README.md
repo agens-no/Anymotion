@@ -109,19 +109,16 @@ ANYActivity *activity = [[goRight groupWith:fadeOut] start];
 
 
 #### POP
-<table>
-  <tr>
-    <td width="400px"><div class="highlight"><pre>
-NSValue *toValue = [NSValue valueWithCGPoint:CGPointMake(view.center.x + 200.0, view.center.y)];
-NSValue *velocity = [NSValue valueWithCGPoint:CGPointMake(-50.0, 0.0)];
-ANYAnimation *decay = [[[[ANYPOPDecay propertyNamed:kPOPViewCenter] toValue:toValue] velocity:velocity] animationFor:view];
-ANYAnimation *basic = [[[[ANYPOPBasic propertyNamed:kPOPViewCenter] toValue:toValue] duration:0.5] animationFor:view];
-ANYAnimation *spring = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValue:toValue] animationFor:view];    </pre></div></td>
-    <td>
-      <img src="/Meta/Readme/pop.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+```swift
+let spring = ANYPOPSpring(kPOPLayerPositionX).fromValue(0).toValue(100).springSpeed(5).animation(for: foo)
+```
+```swift
+let basic = ANYPOPBasic(kPOPLayerPositionX).fromValue(0).toValue(100).duration(2).animation(for: foo)
+```
+```swift
+let decay = ANYPOPDecay(kPOPLayerPositionX).fromValue(0).velocity(10).animation(for: foo)
+```
+
 
 #### Core Animation
 <table>
