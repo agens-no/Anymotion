@@ -60,40 +60,56 @@ import Anymotion
 #### Powerful oneliners
 
 Using a chainable builder pattern we can pack a good deal of configuration in one line
-```objc
+
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 ANYAnimation *goRight = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:right] animationFor:view];
 ANYAnimation *fadeOut = [[[[ANYCABasic new] toValue:@0] duration:1] animationFor:view.layer keyPath:@"opacity"];
-```
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
+
 Note: These animations won't start unless you say `start` like this
 ```objc
 [goRight start];
 [fadeOut start];
 ```
 
-<img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
-
 Thus making you able to define your animations once and then start and cancel them at your leisure.
 
 #### POP
-```objc
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 NSValue *toValue = [NSValue valueWithCGPoint:CGPointMake(view.center.x + 200.0, view.center.y)];
 NSValue *velocity = [NSValue valueWithCGPoint:CGPointMake(-50.0, 0.0)];
 ANYAnimation *decay = [[[[ANYPOPDecay propertyNamed:kPOPViewCenter] toValue:toValue] velocity:velocity] animationFor:view];
 ANYAnimation *basic = [[[[ANYPOPBasic propertyNamed:kPOPViewCenter] toValue:toValue] duration:0.5] animationFor:view];
-ANYAnimation *spring = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValue:toValue] animationFor:view];
-```
-
-<img src="/Meta/Readme/pop.gif?raw=true" alt="GIF" />
+ANYAnimation *spring = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValue:toValue] animationFor:view];    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/pop.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### Core Animation
-```objc
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 NSValue *left = [NSValue valueWithCGPoint:CGPointMake(100.0, 100.0)];
 NSValue *right = [NSValue valueWithCGPoint:CGPointMake(200.0, 100.0)];
 ANYAnimation *basic = [[[[ANYCABasic new] toValue:@0] duration:2.0] animationFor:view.layer keyPath:@"opacity"];
 ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[left, right, left, right]] duration:1.0] animationFor:view.layer keyPath:@"position"];
-```
-
-<img src="/Meta/Readme/core_animation.gif?raw=true" alt="GIF" />
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/core_animation.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### UIKit
 
