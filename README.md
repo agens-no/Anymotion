@@ -5,6 +5,7 @@ Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and y
 - **powerful oneliners**
 - **grouping and chaining animations**
 - **cancellable animations with callbacks for clean up**
+- **swift api**
 
 ## Installation
 
