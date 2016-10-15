@@ -106,10 +106,14 @@ ANYActivity *activity = [[goRight groupWith:fadeOut] start];
 
 
 #### POP
+
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-let spring = ANYPOPSpring(kPOPLayerPositionX).toValue(100).springSpeed(5).animation(for: view)
+let spring = ANYPOPSpring(kPOPLayerPositionX)
+               .toValue(100)
+               .springSpeed(5)
+               .animation(for: view)
     <td>
       <img src="/Meta/Readme/spring.gif?raw=true" alt="GIF" />
     </td>
@@ -119,7 +123,10 @@ let spring = ANYPOPSpring(kPOPLayerPositionX).toValue(100).springSpeed(5).animat
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-let basic = ANYPOPBasic(kPOPLayerPositionX).toValue(100).duration(2).animation(for: view)
+let basic = ANYPOPBasic(kPOPLayerPositionX)
+               .toValue(100)
+               .duration(2)
+               .animation(for: view)
     <td>
       <img src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
     </td>
@@ -129,7 +136,9 @@ let basic = ANYPOPBasic(kPOPLayerPositionX).toValue(100).duration(2).animation(f
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-let decay = ANYPOPDecay(kPOPLayerPositionX).velocity(10).animation(for: view)
+let decay = ANYPOPDecay(kPOPLayerPositionX)
+               .velocity(10)
+               .animation(for: view)
     <td>
       <img src="/Meta/Readme/decay.gif?raw=true" alt="GIF" />
     </td>
