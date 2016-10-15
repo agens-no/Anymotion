@@ -107,13 +107,13 @@ ANYActivity *activity = [[goRight groupWith:fadeOut] start];
 
 #### POP
 ```swift
-let spring = ANYPOPSpring(kPOPLayerPositionX).fromValue(0).toValue(100).springSpeed(5).animation(for: foo)
+let spring = ANYPOPSpring(kPOPLayerPositionX).toValue(100).springSpeed(5).animation(for: view)
 ```
 ```swift
-let basic = ANYPOPBasic(kPOPLayerPositionX).fromValue(0).toValue(100).duration(2).animation(for: foo)
+let basic = ANYPOPBasic(kPOPLayerPositionX).toValue(100).duration(2).animation(for: view)
 ```
 ```swift
-let decay = ANYPOPDecay(kPOPLayerPositionX).fromValue(0).velocity(10).animation(for: foo)
+let decay = ANYPOPDecay(kPOPLayerPositionX).velocity(10).animation(for: view)
 ```
 
 
@@ -121,10 +121,7 @@ let decay = ANYPOPDecay(kPOPLayerPositionX).fromValue(0).velocity(10).animation(
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-NSValue *left = [NSValue valueWithCGPoint:CGPointMake(100.0, 100.0)];
-NSValue *right = [NSValue valueWithCGPoint:CGPointMake(200.0, 100.0)];
-ANYAnimation *basic = [[[[ANYCABasic new] toValue:@0] duration:2.0] animationFor:view.layer keyPath:@"opacity"];
-ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[right, left, right]] duration:1.0] animationFor:view.layer keyPath:@"position"];</pre></div></td>
+let basic = ANYCABasic(#keyPath(CALayer.position)).duration(2).toValue(CGPoint(x: 100, y: 0)).animation(for: view.layer)</pre></div></td>
     <td>
       <img src="/Meta/Readme/core_animation.gif?raw=true" alt="GIF" />
     </td>
