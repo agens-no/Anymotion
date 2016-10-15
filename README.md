@@ -57,8 +57,6 @@ import Anymotion
 
 ## Basics
 
-#### Powerful oneliners
-
 Using a chainable builder pattern we can pack a good deal of configuration in one line
 
 ```objc
@@ -229,20 +227,6 @@ ANYAnimation *group = [[goRight then:goLeft] repeat];
   </tr>
 </table>
 
-#### Start... and cancel
-
-<table>
-  <tr>
-    <td width="400px"><div class="highlight"><pre>
-ANYAnimation *anim = ...;
-ANYActivity *runningAnimation = [anim start];
-...
-[runningAnimation cancel];</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
 
 #### Set up and clean up
 
