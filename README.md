@@ -6,7 +6,7 @@ Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and y
 - **grouping and chaining animations**
 - **cancellable animations with callbacks for clean up**
 
-### Installation
+#"" Installation
 
 
 <details>
@@ -55,7 +55,7 @@ import Anymotion
 
 
 
-### Basics
+## Basics
 
 #### Powerful oneliners
 
@@ -69,27 +69,46 @@ Note: These animations won't start unless you say `start` like this
 [goRight start];
 [fadeOut start];
 ```
+
+<img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
+
 Thus making you able to define your animations once and then start and cancel them at your leisure.
 
-#### POP 
+#### POP
 ```objc
-ANYAnimation *decay = [[[ANYPOPDecay propertyNamed:kPOPViewAlpha] velocity:@(-10)] animationFor:view];
-ANYAnimation *basic = [[[[ANYPOPBasic propertyNamed:kPOPViewAlpha] toValue:@0] duration:0.5] animationFor:view];
-ANYAnimation *spring = [[[ANYPOPSpring propertyNamed:kPOPViewAlpha] toValue:@0] animationFor:view];
+NSValue *toValue = [NSValue valueWithCGPoint:CGPointMake(view.center.x + 200.0, view.center.y)];
+NSValue *velocity = [NSValue valueWithCGPoint:CGPointMake(-50.0, 0.0)];
+ANYAnimation *decay = [[[[ANYPOPDecay propertyNamed:kPOPViewCenter] toValue:toValue] velocity:velocity] animationFor:view];
+ANYAnimation *basic = [[[[ANYPOPBasic propertyNamed:kPOPViewCenter] toValue:toValue] duration:0.5] animationFor:view];
+ANYAnimation *spring = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValue:toValue] animationFor:view];
 ```
+
+<img src="/Meta/Readme/pop.gif?raw=true" alt="GIF" />
 
 #### Core Animation
 ```objc
-ANYAnimation *basic = [[[[ANYCABasic new] toValue:@0] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
-ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[@0, @1]] duration:0.5] animationFor:view.layer keyPath:@"opacity"];
+NSValue *left = [NSValue valueWithCGPoint:CGPointMake(100.0, 100.0)];
+NSValue *right = [NSValue valueWithCGPoint:CGPointMake(200.0, 100.0)];
+ANYAnimation *basic = [[[[ANYCABasic new] toValue:@0] duration:2.0] animationFor:view.layer keyPath:@"opacity"];
+ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[left, right, left, right]] duration:1.0] animationFor:view.layer keyPath:@"position"];
 ```
 
+<img src="/Meta/Readme/core_animation.gif?raw=true" alt="GIF" />
+
 #### UIKit
-```objc
+
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
 ANYAnimation *anim = [ANYUIView animationWithDuration:0.5 block:^{
-    view.alpha = 0.0;
+  view.alpha = 0.0;
 }];
-```
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/uikit.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
 #### Grouping
 
