@@ -61,11 +61,18 @@ import Anymotion
 
 Using a chainable builder pattern we can pack a good deal of configuration in one line
 
+```objc
+ANYAnimation *goRight = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:right] animationFor:view];
+ANYAnimation *fadeOut = [[[[ANYCABasic new] toValue:@0] duration:1] animationFor:view.layer keyPath:@"opacity"];
+```
+
+Note: These animations won't start unless you say `start` like this
+
 <table>
   <tr>
     <td width="400px"><div class="highlight"><pre>
-ANYAnimation *goRight = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:right] animationFor:view];
-ANYAnimation *fadeOut = [[[[ANYCABasic new] toValue:@0] duration:1] animationFor:view.layer keyPath:@"opacity"];
+[goRight start];
+[fadeOut start];
     </pre></div></td>
     <td>
       <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
@@ -73,13 +80,33 @@ ANYAnimation *fadeOut = [[[[ANYCABasic new] toValue:@0] duration:1] animationFor
   </tr>
 </table>
 
-Note: These animations won't start unless you say `start` like this
-```objc
-[goRight start];
-[fadeOut start];
-```
+Instead of starting each one individually you can group them 
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
+[[goRight groupWith:fadeOut] start];
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
 
-Thus making you able to define your animations once and then start and cancel them at your leisure.
+Calling `start` actually returns an `ANYActivity` empowering you to stop the animation at any time.
+
+<table>
+  <tr>
+    <td width="400px"><div class="highlight"><pre>
+ANYActivity *activity = [[goRight groupWith:fadeOut] start];
+...
+[activity cancel];
+    </pre></div></td>
+    <td>
+      <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
+    </td>
+  </tr>
+</table>
+
 
 #### POP
 <table>
