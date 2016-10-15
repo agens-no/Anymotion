@@ -268,6 +268,6 @@ ANYAnimation *anim = ...;
 
 ## Who's behind this?
 
-Made with love by [Agens.no](http://agens.no/), a company situated in Oslo, Norway.
+Made with ❤️ by [Agens.no](http://agens.no/), a company situated in Oslo, Norway.
 
 [<img src="http://static.agens.no/images/agens_logo_w_slogan_avenir_medium.png" width="340" />](http://agens.no/)
