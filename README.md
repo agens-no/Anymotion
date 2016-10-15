@@ -61,17 +61,10 @@ import Anymotion
 
 Using a chainable builder pattern we can pack a good deal of configuration in one line
 
-<table>
-  <tr>
-    <td width="400px"><div class="highlight"><pre>
+```objc
 ANYAnimation *goRight = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValueWithPoint:right] animationFor:view];
 ANYAnimation *fadeOut = [[[[ANYCABasic new] toValue:@0] duration:1] animationFor:view.layer keyPath:@"opacity"];
-    </pre></div></td>
-    <td>
-      <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+```
 
 Note: These animations won't start unless you say `start` like this
 
