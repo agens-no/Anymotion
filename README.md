@@ -92,7 +92,7 @@ Instead of starting each one individually you can group them
   </tr>
 </table>
 
-Calling `start` actually returns an `ANYActivity` empowering you with the option of stopping the animation at any time.
+Calling `start` actually returns an `ANYActivity` empowering you to stop the animation at any time.
 
 <table>
   <tr>
@@ -106,6 +106,7 @@ ANYActivity *activity = [[goRight groupWith:fadeOut] start];
     </td>
   </tr>
 </table>
+
 
 #### POP
 <table>
