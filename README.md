@@ -1,4 +1,4 @@
-![Screenshot](logo_looped.gif)
+![Screenshot](/Meta/Readme/logo.gif)
 
 Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and your library of choice
 
@@ -103,7 +103,7 @@ ANYAnimation *spring = [[[ANYPOPSpring propertyNamed:kPOPViewCenter] toValue:toV
 NSValue *left = [NSValue valueWithCGPoint:CGPointMake(100.0, 100.0)];
 NSValue *right = [NSValue valueWithCGPoint:CGPointMake(200.0, 100.0)];
 ANYAnimation *basic = [[[[ANYCABasic new] toValue:@0] duration:2.0] animationFor:view.layer keyPath:@"opacity"];
-ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[left, right, left, right]] duration:1.0] animationFor:view.layer keyPath:@"position"];
+ANYAnimation *keyframe = [[[[ANYCAKeyFrame new] values:@[right, left, right]] duration:1.0] animationFor:view.layer keyPath:@"position"];
     </pre></div></td>
     <td>
       <img src="/Meta/Readme/core_animation.gif?raw=true" alt="GIF" />
