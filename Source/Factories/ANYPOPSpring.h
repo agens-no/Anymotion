@@ -26,17 +26,21 @@
 #import <pop/pop.h>
 #import "ANYAnimation.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ANYPOPSpring : NSObject
 
-+ (instancetype)propertyNamed:(NSString *)name;
-+ (instancetype)property:(POPAnimatableProperty *)property;
+- (instancetype)initWithPropertyNamed:(NSString *)name NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(_:));
+- (instancetype)initWithProperty:(POPAnimatableProperty *)property NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(property:));
 
-- (instancetype)fromValue:(nullable id)fromValue;
-- (instancetype)toValue:(nullable id)toValue;
++ (instancetype)propertyNamed:(NSString *)name NS_SWIFT_UNAVAILABLE("");
++ (instancetype)property:(POPAnimatableProperty *)property NS_SWIFT_UNAVAILABLE("");
+
+- (instancetype)fromValue:(nullable NSObject *)fromValue;
+- (instancetype)toValue:(nullable NSObject *)toValue;
 - (instancetype)beginTime:(CFTimeInterval)beginTime;
-- (instancetype)velocity:(nullable id)velocity;
+- (instancetype)velocity:(nullable NSObject *)velocity;
 - (instancetype)springSpeed:(CGFloat)springSpeed;
 - (instancetype)dynamicsMass:(CGFloat)dynamicsMass;
 - (instancetype)dynamicsTension:(CGFloat)dynamicsTension;
@@ -53,13 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable POPSpringAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
 + (nullable POPSpringAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
 
-- (instancetype)fromValueWithPoint:(CGPoint)point;
-- (instancetype)fromValueWithSize:(CGSize)size;
-- (instancetype)fromValueWithRect:(CGRect)rect;
-
-- (instancetype)toValueWithPoint:(CGPoint)point;
-- (instancetype)toValueWithSize:(CGSize)size;
-- (instancetype)toValueWithRect:(CGRect)rect;
+- (instancetype)continueWithVelocityInObject:(NSObject *)object;
 
 @end
 

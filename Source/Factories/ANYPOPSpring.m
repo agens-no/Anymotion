@@ -32,16 +32,45 @@
 
 @implementation ANYPOPSpring
 
+- (instancetype)init
+{
+    [NSException raise:NSGenericException format:@"Use designated initializer"];
+    self = [self initWithPropertyNamed:@""];
+    return self;
+}
+
+- (instancetype)initWithPropertyNamed:(NSString *)name
+{
+    self = [super init];
+    if(self)
+    {
+        self.configure = ^(POPSpringAnimation *anim) {
+            anim.property = [POPAnimatableProperty propertyWithName:name];
+        };
+    }
+    return self;
+}
+
+- (instancetype)initWithProperty:(POPAnimatableProperty *)property
+{
+    self = [super init];
+    if(self)
+    {
+        self.configure = ^(POPSpringAnimation *anim) {
+            anim.property = property;
+        };
+    }
+    return self;
+}
+
 + (instancetype)propertyNamed:(NSString *)name
 {
-    return [self property:[POPAnimatableProperty propertyWithName:name]];
+    return [[self alloc] initWithPropertyNamed:name];
 }
 
 + (instancetype)property:(POPAnimatableProperty *)property
 {
-    return [[self new] configure:^(POPSpringAnimation *anim) {
-        anim.property = property;
-    }];
+    return [[self alloc] initWithProperty:property];
 }
 
 - (POPSpringAnimation *)build
@@ -186,34 +215,11 @@
     return [[self sharedTable] animationForProperty:property object:object];
 }
 
-- (instancetype)fromValueWithPoint:(CGPoint)point
+- (instancetype)continueWithVelocityInObject:(NSObject *)object
 {
-    return [self fromValue:[NSValue valueWithCGPoint:point]];
-}
-
-- (instancetype)fromValueWithSize:(CGSize)size
-{
-    return [self fromValue:[NSValue valueWithCGSize:size]];
-}
-
-- (instancetype)fromValueWithRect:(CGRect)rect
-{
-    return [self fromValue:[NSValue valueWithCGRect:rect]];
-}
-
-- (instancetype)toValueWithPoint:(CGPoint)point
-{
-    return [self toValue:[NSValue valueWithCGPoint:point]];
-}
-
-- (instancetype)toValueWithSize:(CGSize)size
-{
-    return [self toValue:[NSValue valueWithCGSize:size]];
-}
-
-- (instancetype)toValueWithRect:(CGRect)rect
-{
-    return [self toValue:[NSValue valueWithCGRect:rect]];
+    return [self configure:^(POPSpringAnimation * _Nonnull anim) {
+        anim.velocity = [self.class lastActiveAnimationForProperty:anim.property object:object].velocity;
+    }];
 }
 
 @end

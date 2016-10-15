@@ -30,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ANYPOPBasic : NSObject
 
+- (instancetype)initWithPropertyNamed:(NSString *)name NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(_:));
+- (instancetype)initWithProperty:(POPAnimatableProperty *)property NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(property:));
+
 + (instancetype)propertyNamed:(NSString *)name;
 + (instancetype)property:(POPAnimatableProperty *)property;
 
@@ -47,14 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable POPBasicAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
 + (nullable POPBasicAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
-
-- (nullable instancetype)fromValueWithPoint:(CGPoint)point;
-- (nullable instancetype)fromValueWithSize:(CGSize)size;
-- (nullable instancetype)fromValueWithRect:(CGRect)rect;
-
-- (instancetype)toValueWithPoint:(CGPoint)point;
-- (instancetype)toValueWithSize:(CGSize)size;
-- (instancetype)toValueWithRect:(CGRect)rect;
 
 @end
 

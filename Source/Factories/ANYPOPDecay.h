@@ -30,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ANYPOPDecay : NSObject
 
+- (instancetype)initWithPropertyNamed:(NSString *)name NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(_:));
+- (instancetype)initWithProperty:(POPAnimatableProperty *)property NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(property:));
+
 + (instancetype)propertyNamed:(NSString *)name;
 + (instancetype)property:(POPAnimatableProperty *)property;
 
@@ -47,10 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable POPDecayAnimation *)lastActiveAnimationForPropertyNamed:(NSString *)name object:(NSObject *)object;
 + (nullable POPDecayAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object;
-
-- (instancetype)fromValueWithPoint:(CGPoint)point;
-- (instancetype)fromValueWithSize:(CGSize)size;
-- (instancetype)fromValueWithRect:(CGRect)rect;
 
 @end
 

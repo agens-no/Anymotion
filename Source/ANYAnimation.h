@@ -35,22 +35,21 @@ NS_ASSUME_NONNULL_BEGIN
 - (ANYActivity *)start;
 
 - (ANYActivity *)subscribe:(ANYSubscriber *)subscriber;
-- (ANYActivity *)subscribeError:(dispatch_block_t)error completed:(dispatch_block_t)completed;
 
 @end
 
 @interface ANYAnimation (Operators)
 
-- (instancetype)onError:(dispatch_block_t)onError;
-- (instancetype)onError:(dispatch_block_t)onError onCompletion:(dispatch_block_t)onCompletion;
+- (instancetype)onError:(nullable dispatch_block_t)onError;
+- (instancetype)onError:(nullable dispatch_block_t)onError onCompletion:(nullable dispatch_block_t)onCompletion;
 
-- (instancetype)onCompletion:(dispatch_block_t)onCompletion;
-- (instancetype)onCompletion:(dispatch_block_t)onCompletion onError:(dispatch_block_t)onError;
+- (instancetype)onCompletion:(nullable dispatch_block_t)onCompletion;
+- (instancetype)onCompletion:(nullable dispatch_block_t)onCompletion onError:(nullable dispatch_block_t)onError;
 
 - (instancetype)onCompletionOrError:(void(^)(BOOL success))onCompletionOrError;
 
-- (instancetype)before:(dispatch_block_t)before;
-- (instancetype)after:(dispatch_block_t)after;
+- (instancetype)before:(nullable dispatch_block_t)before;
+- (instancetype)after:(nullable dispatch_block_t)after;
 
 + (instancetype)empty;
 + (instancetype)defer:(ANYAnimation *(^)(void))defer;

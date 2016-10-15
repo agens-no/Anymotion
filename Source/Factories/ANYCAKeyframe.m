@@ -35,6 +35,25 @@
 
 @implementation ANYCAKeyframe
 
+- (instancetype)init
+{
+    [NSException raise:NSGenericException format:@"Use designated initializer"];
+    self = [self initWithKeyPath:@""];
+    return self;
+}
+
+- (instancetype)initWithKeyPath:(NSString *)keyPath
+{
+    self = [super init];
+    if(self)
+    {
+        self.configure = ^(CAKeyframeAnimation *anim) {
+            anim.keyPath = keyPath;
+        };
+    }
+    return self;
+}
+
 + (instancetype)keyPath:(NSString *)keyPath
 {
     return [[self new] configure:^(CAKeyframeAnimation *anim) {

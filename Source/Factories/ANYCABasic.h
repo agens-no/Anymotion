@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ANYCABasic : NSObject
 
+- (instancetype)initWithKeyPath:(NSString *)keyPath NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(_:));
+
 + (instancetype)keyPath:(NSString *)keyPath;
 
 - (instancetype)toValue:(nullable id)toValue;

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A311504E1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = A311504C1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h */; };
 		A311504F1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A311504D1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m */; };
+		A3178E3A1DB23C0900C360FC /* ANYPOPSugar.h in Headers */ = {isa = PBXBuildFile; fileRef = A3178E381DB23C0900C360FC /* ANYPOPSugar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3178E3B1DB23C0900C360FC /* ANYPOPSugar.m in Sources */ = {isa = PBXBuildFile; fileRef = A3178E391DB23C0900C360FC /* ANYPOPSugar.m */; };
 		EF5EDE461D965F6500116AFF /* ANYActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE291D965F6500116AFF /* ANYActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE471D965F6500116AFF /* ANYActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE2A1D965F6500116AFF /* ANYActivity.m */; };
 		EF5EDE481D965F6500116AFF /* ANYAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE2B1D965F6500116AFF /* ANYAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,7 +38,7 @@
 		EF5EDE601D965F6500116AFF /* ANYUIView.h in Headers */ = {isa = PBXBuildFile; fileRef = EF5EDE441D965F6500116AFF /* ANYUIView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF5EDE611D965F6500116AFF /* ANYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EDE451D965F6500116AFF /* ANYUIView.m */; };
 		EF5EDE7A1D965F8600116AFF /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5EDE6F1D965F7F00116AFF /* pop.framework */; };
-		FCA62DED1DB0C17F00B77457 /* ANYCAKeyframe.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA62DEB1DB0C17F00B77457 /* ANYCAKeyframe.h */; };
+		FCA62DED1DB0C17F00B77457 /* ANYCAKeyframe.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA62DEB1DB0C17F00B77457 /* ANYCAKeyframe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA62DEE1DB0C17F00B77457 /* ANYCAKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA62DEC1DB0C17F00B77457 /* ANYCAKeyframe.m */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 /* Begin PBXFileReference section */
 		A311504C1DB0EA58005B4CD9 /* ANYAnimationDragHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYAnimationDragHelper.h; sourceTree = "<group>"; };
 		A311504D1DB0EA58005B4CD9 /* ANYAnimationDragHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYAnimationDragHelper.m; sourceTree = "<group>"; };
+		A3178E381DB23C0900C360FC /* ANYPOPSugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYPOPSugar.h; sourceTree = "<group>"; };
+		A3178E391DB23C0900C360FC /* ANYPOPSugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYPOPSugar.m; sourceTree = "<group>"; };
 		EF5EDE291D965F6500116AFF /* ANYActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYActivity.h; sourceTree = "<group>"; };
 		EF5EDE2A1D965F6500116AFF /* ANYActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANYActivity.m; sourceTree = "<group>"; };
 		EF5EDE2B1D965F6500116AFF /* ANYAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANYAnimation.h; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 				EF5EDE411D965F6500116AFF /* ANYPOPMemoryTable.m */,
 				EF5EDE421D965F6500116AFF /* ANYPOPSpring.h */,
 				EF5EDE431D965F6500116AFF /* ANYPOPSpring.m */,
+				A3178E381DB23C0900C360FC /* ANYPOPSugar.h */,
+				A3178E391DB23C0900C360FC /* ANYPOPSugar.m */,
 				EF5EDE441D965F6500116AFF /* ANYUIView.h */,
 				EF5EDE451D965F6500116AFF /* ANYUIView.m */,
 			);
@@ -238,6 +244,7 @@
 				EF5EDE4E1D965F6500116AFF /* ANYCoreAnimationObserver.h in Headers */,
 				EF5EDE541D965F6500116AFF /* ANYSubscriber.h in Headers */,
 				EF5EDE481D965F6500116AFF /* ANYAnimation.h in Headers */,
+				A3178E3A1DB23C0900C360FC /* ANYPOPSugar.h in Headers */,
 				EF5EDE531D965F6500116AFF /* Anymotion.h in Headers */,
 				EF5EDE511D965F6500116AFF /* ANYEXTMetamacros.h in Headers */,
 				EF5EDE521D965F6500116AFF /* ANYEXTScope.h in Headers */,
@@ -284,6 +291,7 @@
 				TargetAttributes = {
 					EFF050B41D965ED900C2BB91 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -385,6 +393,7 @@
 				EF5EDE591D965F6500116AFF /* ANYPOPBasic.m in Sources */,
 				EF5EDE571D965F6500116AFF /* ANYCABasic.m in Sources */,
 				FCA62DEE1DB0C17F00B77457 /* ANYCAKeyframe.m in Sources */,
+				A3178E3B1DB23C0900C360FC /* ANYPOPSugar.m in Sources */,
 				EF5EDE5B1D965F6500116AFF /* ANYPOPDecay.m in Sources */,
 				EF5EDE4B1D965F6500116AFF /* ANYCALayerAnimationBlockDelegate.m in Sources */,
 				EF5EDE4F1D965F6500116AFF /* ANYCoreAnimationObserver.m in Sources */,
@@ -496,6 +505,7 @@
 		EFF050BE1D965ED900C2BB91 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -507,12 +517,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = no.agens.Anymotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		EFF050BF1D965ED900C2BB91 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -524,6 +537,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = no.agens.Anymotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

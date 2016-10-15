@@ -27,6 +27,19 @@ class DummyViewController : UIViewController {
         foo.backgroundColor = .blue
         view.addSubview(foo)
         
+        let spring = ANYPOPSpring(kPOPLayerPositionX).fromValue(0).toValue(100).springSpeed(5).animation(for: view)
+        let basic = ANYPOPBasic(kPOPLayerPositionX).fromValue(0).toValue(100).duration(2).animation(for: view)
+        let decay = ANYPOPDecay(kPOPLayerPositionX).fromValue(0).velocity(10).animation(for: view)
+        
+        let caBasic = ANYCABasic(#keyPath(CALayer.position)).duration(2).fromValue(CGPoint.zero).toValue(CGPoint(x: 100, y: 0)).animation(for: view.layer)
+        let caKeyframe = ANYCAKeyframe(#keyPath(CALayer.opacity)).values([0, 0.5, 1]).animation(for: view.layer)
+        
+        let uikit = ANYUIView.animation(duration: 2) { 
+            foo.center.x = 100
+        }
+        
+        ANYAnimation.group([spring, basic, decay, caBasic, caKeyframe, uikit]).start()
+        
         
     }
     

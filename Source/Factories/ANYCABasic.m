@@ -35,11 +35,28 @@
 
 @implementation ANYCABasic
 
+- (instancetype)init
+{
+    [NSException raise:NSGenericException format:@"Use designated initializer"];
+    self = [self initWithKeyPath:@""];
+    return self;
+}
+
+- (instancetype)initWithKeyPath:(NSString *)keyPath
+{
+    self = [super init];
+    if(self)
+    {
+        self.configure = ^(CABasicAnimation *anim) {
+            anim.keyPath = keyPath;
+        };
+    }
+    return self;
+}
+
 + (instancetype)keyPath:(NSString *)keyPath
 {
-    return [[self new] configure:^(CABasicAnimation *anim) {
-        anim.keyPath = keyPath;
-    }];
+    return [[self alloc] initWithKeyPath:keyPath];
 }
 
 - (instancetype)configure:(void (^)(CABasicAnimation *anim))configure

@@ -32,16 +32,45 @@
 
 @implementation ANYPOPDecay
 
+- (instancetype)init
+{
+    [NSException raise:NSGenericException format:@"Use designated initializer"];
+    self = [self initWithPropertyNamed:@""];
+    return self;
+}
+
+- (instancetype)initWithPropertyNamed:(NSString *)name
+{
+    self = [super init];
+    if(self)
+    {
+        self.configure = ^(POPDecayAnimation *anim) {
+            anim.property = [POPAnimatableProperty propertyWithName:name];
+        };
+    }
+    return self;
+}
+
+- (instancetype)initWithProperty:(POPAnimatableProperty *)property
+{
+    self = [super init];
+    if(self)
+    {
+        self.configure = ^(POPDecayAnimation *anim) {
+            anim.property = property;
+        };
+    }
+    return self;
+}
+
 + (instancetype)propertyNamed:(NSString *)name
 {
-    return [self property:[POPAnimatableProperty propertyWithName:name]];
+    return [[self alloc] initWithPropertyNamed:name];
 }
 
 + (instancetype)property:(POPAnimatableProperty *)property
 {
-    return [[self new] configure:^(POPDecayAnimation *anim) {
-        anim.property = property;
-    }];
+    return [[self alloc] initWithProperty:property];
 }
 
 - (instancetype)configure:(void (^)(POPDecayAnimation *anim))configure
@@ -149,21 +178,6 @@
 + (POPDecayAnimation *)lastActiveAnimationForProperty:(POPAnimatableProperty *)property object:(NSObject *)object
 {
     return [[self sharedTable] animationForProperty:property object:object];
-}
-
-- (instancetype)fromValueWithPoint:(CGPoint)point
-{
-    return [self fromValue:[NSValue valueWithCGPoint:point]];
-}
-
-- (instancetype)fromValueWithSize:(CGSize)size
-{
-    return [self fromValue:[NSValue valueWithCGSize:size]];
-}
-
-- (instancetype)fromValueWithRect:(CGRect)rect
-{
-    return [self fromValue:[NSValue valueWithCGRect:rect]];
 }
 
 @end
