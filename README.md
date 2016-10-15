@@ -105,6 +105,8 @@ ANYActivity *activity = [[goRight groupWith:fadeOut] start];
 </table>
 
 
+## Frameworks integrations
+
 #### POP
 
 <table>
@@ -175,6 +177,8 @@ let uikit = ANYUIView.animation(duration: 2) {
   </tr>
 </table>
 
+
+## Operators
 
 #### Grouping
 
