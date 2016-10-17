@@ -16,9 +16,11 @@
 		EFE55A371D9675470006178E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFE55A2E1D9675470006178E /* Main.storyboard */; };
 		EFE55A391D9675470006178E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE55A311D9675470006178E /* main.m */; };
 		EFE55A3A1D9675470006178E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE55A331D9675470006178E /* ViewController.m */; };
-		EFE55A431D9675B90006178E /* Anymotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE55A421D9675B00006178E /* Anymotion.framework */; };
-		EFE55A461D9676110006178E /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE55A451D9676110006178E /* pop.framework */; };
 		FC108B631DA7AD950011A000 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC108B621DA7AD950011A000 /* ListViewController.m */; };
+		FC19846D1DB515ED0040352C /* Anymotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE55A421D9675B00006178E /* Anymotion.framework */; };
+		FC19846E1DB515ED0040352C /* Anymotion.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFE55A421D9675B00006178E /* Anymotion.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FC1984731DB515F00040352C /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1984721DB515F00040352C /* pop.framework */; };
+		FC1984741DB515F00040352C /* pop.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC1984721DB515F00040352C /* pop.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC67EE571D9BF62A001E3314 /* ButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC67EE531D9BF62A001E3314 /* ButtonViewController.m */; };
 		FC67EE591D9BF62A001E3314 /* ImageAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC67EE561D9BF62A001E3314 /* ImageAnimationViewController.m */; };
 /* End PBXBuildFile section */
@@ -38,7 +40,29 @@
 			remoteGlobalIDString = EFF050B41D965ED900C2BB91;
 			remoteInfo = Anymotion;
 		};
+		FC19846F1DB515ED0040352C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFE55A3C1D9675B00006178E /* Anymotion.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EFF050B41D965ED900C2BB91;
+			remoteInfo = Anymotion;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FC1984711DB515ED0040352C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FC1984741DB515F00040352C /* pop.framework in Embed Frameworks */,
+				FC19846E1DB515ED0040352C /* Anymotion.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A31150571DB0FFA0005B4CD9 /* UndelayedPanRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UndelayedPanRecognizer.h; sourceTree = "<group>"; };
@@ -61,6 +85,7 @@
 		EFE55A5E1D96778A0006178E /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Playground.playground; path = ../Playgrounds/Playground.playground; sourceTree = "<group>"; };
 		FC108B611DA7AD950011A000 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		FC108B621DA7AD950011A000 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		FC1984721DB515F00040352C /* pop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = pop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC67EE521D9BF62A001E3314 /* ButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonViewController.h; sourceTree = "<group>"; };
 		FC67EE531D9BF62A001E3314 /* ButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonViewController.m; sourceTree = "<group>"; };
 		FC67EE551D9BF62A001E3314 /* ImageAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimationViewController.h; sourceTree = "<group>"; };
@@ -72,8 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFE55A461D9676110006178E /* pop.framework in Frameworks */,
-				EFE55A431D9675B90006178E /* Anymotion.framework in Frameworks */,
+				FC1984731DB515F00040352C /* pop.framework in Frameworks */,
+				FC19846D1DB515ED0040352C /* Anymotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +108,7 @@
 		EFE55A051D9674CC0006178E = {
 			isa = PBXGroup;
 			children = (
+				FC1984721DB515F00040352C /* pop.framework */,
 				EFE55A5E1D96778A0006178E /* Playground.playground */,
 				EFE55A281D9675470006178E /* iOS-Example */,
 				EFE55A0F1D9674CC0006178E /* Products */,
@@ -184,11 +210,13 @@
 				EFE55A0A1D9674CC0006178E /* Sources */,
 				EFE55A0B1D9674CC0006178E /* Frameworks */,
 				EFE55A0C1D9674CC0006178E /* Resources */,
+				FC1984711DB515ED0040352C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				EFE55A481D9676320006178E /* PBXTargetDependency */,
+				FC1984701DB515ED0040352C /* PBXTargetDependency */,
 			);
 			name = "iOS-Example";
 			productName = "iOS-Example";
@@ -283,6 +311,11 @@
 			isa = PBXTargetDependency;
 			name = Anymotion;
 			targetProxy = EFE55A471D9676320006178E /* PBXContainerItemProxy */;
+		};
+		FC1984701DB515ED0040352C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Anymotion;
+			targetProxy = FC19846F1DB515ED0040352C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
