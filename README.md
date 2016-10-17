@@ -266,8 +266,10 @@ ANYAnimation *anim = ...;
 
 
 
-## Who's behind this?
+## Feedback
 
-Made with ❤️ by [Agens.no](http://agens.no/), a company situated in Oslo, Norway.
+If you use Anymotion and are happy with it consider sending out a tweet mentioning @agens :) This library is made by love by Mats, who's passionate about animations, and Håvard Fossli , who cares deeply about architecture. 
+
+We would love to hear why you don't like it, please let us know what you would like improved, so we can fix it!
 
 [<img src="http://static.agens.no/images/agens_logo_w_slogan_avenir_medium.png" width="340" />](http://agens.no/)
