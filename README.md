@@ -268,7 +268,7 @@ ANYAnimation *anim = ...;
 
 ## Feedback
 
-If you use Anymotion and are happy with it consider sending out a tweet mentioning @agens :) This library is made by love by Mats, who's passionate about animations, and Håvard Fossli , who cares deeply about architecture. 
+If you use Anymotion and are happy with it consider sending out a tweet mentioning [@agens](https://twitter.com/agens). This library is made by love by [Mats Hauge](https://github.com/matshau), who's passionate about animations, and [Håvard Fossli](https://twitter.com/hfossli), who cares deeply about architecture. 
 
 We would 😍 to hear your opinion about this library. Wether you [like it](https://github.com/agens-no/Anymotion/issues/20) or [don't](https://github.com/agens-no/Anymotion/issues/19). Please file an issue if there's something you would like like improved, so we can fix it!
 
