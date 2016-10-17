@@ -103,6 +103,13 @@ activity.cancel()</pre></div></td>
   </tr>
 </table>
 
+## Live Examples
+
+Compile and run the iOS-Example project to watch some beautiful examples!
+
+ <img width="32.9%" src="/Meta/Readme/button.gif?raw=true" alt="GIF" />
+ <img width="32.9%" src="/Meta/Readme/pan.gif?raw=true" alt="GIF" />
+ <img width="32.9%" src="/Meta/Readme/list.gif?raw=true" alt="GIF" />
 
 ## Frameworks integrations
 
@@ -263,15 +270,6 @@ ANYAnimation *anim = ...;
     </td>
   </tr>
 </table>
-
-## Live Examples
-
-Compile and run the iOS-Example project to watch some beautiful examples!
-
- <img width="30%" src="/Meta/Readme/button.gif?raw=true" alt="GIF" />
- <img width="30%" src="/Meta/Readme/pan.gif?raw=true" alt="GIF" />
- <img width="30%" src="/Meta/Readme/list.gif?raw=true" alt="GIF" />
-
 
 ## Feedback
 
