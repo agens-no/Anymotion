@@ -9,32 +9,17 @@ Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and y
 
 ## Installation
 
+### CocoaPods
 
-<details>
-<summary>Via CocoaPods</summary>
-
-If you're using CocoaPods, you can simply add to your `Podfile`:
+Add the following to your `Podfile`:
 
 ```ruby
 pod "Anymotion", :git => 'https://github.com/agens-no/Anymotion.git', :branch => 'master'
 ```
 
-This will download the `Anymotion` and dependencies in `Pods/` during your next `pod install` exection. You may have to say `pod repo update` first.
+This will download the `Anymotion` and dependencies in `Pods/` during your next `pod install` exection. You may have to run `pod repo update` first.
 
-##### Import in swift
-```swift
-import Anymotion
-```
-
-##### Import in Objective-C
-```objc
-#import <Anymotion/Anymotion.h>
-```
-
-</details>
-
-<details>
-<summary>Via Carthage</summary>
+### Carthage
 
 To install SwiftGen via [Carthage](https://github.com/Carthage/Carthage) add to your Cartfile:
 
@@ -42,19 +27,15 @@ To install SwiftGen via [Carthage](https://github.com/Carthage/Carthage) add to 
 github "agensdev/anymotion"
 ```
 
-##### Import in swift
+### Import in swift
 ```swift
 import Anymotion
 ```
 
-##### Import in Objective-C
+### Import in Objective-C
 ```objc
 #import <Anymotion/Anymotion.h>
 ```
-
-</details>
-
-
 
 ## Basics
 
