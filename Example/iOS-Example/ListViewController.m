@@ -110,26 +110,32 @@
     CGRect frame = self.view.bounds;
     frame.origin.y = frame.size.height / 2.0;
     
+    UIView *oldContainer = self.containerView;
+    UIView *wrapper = [UIView new];
+    wrapper.frame = self.view.bounds;
+    wrapper.backgroundColor = [UIColor whiteColor];
+    [self.view insertSubview:wrapper belowSubview:oldContainer];
+    
+    oldContainer.backgroundColor = [UIColor clearColor];
+    oldContainer.frame = wrapper.bounds;
+    [wrapper addSubview:oldContainer];
+    
     UIView *newContainer = [[UIView alloc] initWithFrame:frame];
-    newContainer.backgroundColor = [UIColor whiteColor];
     newContainer.layer.transform = CATransform3DMakeScale(1.0, 0.0, 1.0);
     newContainer.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    newContainer.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:newContainer];
     
-    UIView *oldContainer = self.containerView;
     self.containerView = newContainer;
     
     UIColor *darkerColor = [self colorWithColor:views.firstObject.backgroundColor brightnessChangedByFactor:0.7];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     return [[ANYUIView animationWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction block:^{
         newContainer.layer.transform = CATransform3DIdentity;
         oldContainer.transform = CGAffineTransformMakeScale(0.8, 0.8);
-        self.view.backgroundColor = darkerColor;
+        wrapper.backgroundColor = darkerColor;
     }] after:^{
-        oldContainer.backgroundColor = [UIColor clearColor];
-        [oldContainer removeFromSuperview];
+        [wrapper removeFromSuperview];
         newContainer.transform = CGAffineTransformIdentity;
     }];
 }
