@@ -264,12 +264,18 @@ ANYAnimation *anim = ...;
   </tr>
 </table>
 
+## Live Examples
 
+Compile and run the iOS-Example project to watch some beautiful examples!
+
+![Button Example](/Meta/Readme/button.gif)
+![Pan Example](/Meta/Readme/pan.gif)
+![List Example](/Meta/Readme/list.gif)
 
 ## Feedback
 
 We would 😍 to hear your opinion about this library. Wether you [like it](https://github.com/agens-no/Anymotion/issues/20) or [don't](https://github.com/agens-no/Anymotion/issues/19). Please file an issue if there's something you would like like improved, so we can fix it!
 
-If you use Anymotion and are happy with it consider sending out a tweet mentioning [@agens](https://twitter.com/agens). This library is made by love by [Mats Hauge](https://github.com/matshau), who's passionate about animations, and [Håvard Fossli](https://twitter.com/hfossli), who cares deeply about architecture. 
+If you use Anymotion and are happy with it consider sending out a tweet mentioning [@agens](https://twitter.com/agens). This library is made by love by [Mats Hauge](https://github.com/matshau), who's passionate about animations, and [Håvard Fossli](https://twitter.com/hfossli), who cares deeply about architecture.
 
 [<img src="http://static.agens.no/images/agens_logo_w_slogan_avenir_medium.png" width="340" />](http://agens.no/)
