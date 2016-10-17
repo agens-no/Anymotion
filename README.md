@@ -269,14 +269,9 @@ ANYAnimation *anim = ...;
 Compile and run the iOS-Example project to watch some beautiful examples!
 
  <img width="30%" src="/Meta/Readme/button.gif?raw=true" alt="GIF" />
- <img width="30%" src="/Meta/Readme/button.gif?raw=true" alt="GIF" />
- <img width="30%" src="/Meta/Readme/button.gif?raw=true" alt="GIF" />
+ <img width="30%" src="/Meta/Readme/pan.gif?raw=true" alt="GIF" />
+ <img width="30%" src="/Meta/Readme/list.gif?raw=true" alt="GIF" />
 
-# adfølkasd
-
-![Button Example](/Meta/Readme/button.gif)
-![Pan Example](/Meta/Readme/pan.gif)
-![List Example](/Meta/Readme/list.gif)
 
 ## Feedback
 
