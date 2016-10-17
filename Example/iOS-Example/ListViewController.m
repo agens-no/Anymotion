@@ -110,9 +110,8 @@
     CGRect frame = self.view.bounds;
     frame.origin.y = frame.size.height / 2.0;
     
-    UIColor *backgroundColor = views.firstObject.backgroundColor;
     UIView *newContainer = [[UIView alloc] initWithFrame:frame];
-    newContainer.backgroundColor = backgroundColor;
+    newContainer.backgroundColor = [UIColor whiteColor];
     newContainer.layer.transform = CATransform3DMakeScale(1.0, 0.0, 1.0);
     newContainer.layer.anchorPoint = CGPointMake(0.5, 1.0);
     [self.view addSubview:newContainer];
@@ -120,10 +119,16 @@
     UIView *oldContainer = self.containerView;
     self.containerView = newContainer;
     
+    UIColor *darkerColor = [self colorWithColor:views.firstObject.backgroundColor brightnessChangedByFactor:0.7];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     return [[ANYUIView animationWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction block:^{
         newContainer.layer.transform = CATransform3DIdentity;
         oldContainer.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        self.view.backgroundColor = darkerColor;
     }] after:^{
+        oldContainer.backgroundColor = [UIColor clearColor];
         [oldContainer removeFromSuperview];
         newContainer.transform = CGAffineTransformIdentity;
     }];
@@ -139,15 +144,14 @@
     
     NSMutableArray <UIView *> *views = [NSMutableArray array];
     CATransform3D transform = CATransform3DMakeScale(0.0, 1.0, 1.0);
-    CGFloat hue = [self randomNumberBetween:0.0 maxNumber:255.0];
-    CGFloat saturation = 255.0;
+    UIColor *color = [self nextMainColor];
     
     for (NSUInteger index = 0; index < numberOfItems; index++)
     {
-        CGFloat brighness = (((double)index / (double)numberOfItems) * 100.0) + 155;
-        UIColor *color = [UIColor colorWithHue:hue/255.0 saturation:saturation/255.0 brightness:brighness/255.0 alpha:1.0];
+        color = [self colorWithColor:color brightnessChangedByFactor:0.92];
         
-        UIView *view = [self viewWithFrame:frame color:color];
+        UIView *view = [[UIView alloc] initWithFrame:frame];
+        view.backgroundColor = color;
         view.layer.transform = transform;
         [views addObject:view];
         
@@ -157,16 +161,21 @@
     return views;
 }
 
-- (UIView *)viewWithFrame:(CGRect)frame color:(UIColor *)color
+- (UIColor *)colorWithColor:(UIColor *)color brightnessChangedByFactor:(CGFloat)factor
 {
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-    view.backgroundColor = color;
-    return view;
+    CGFloat hue, saturation, brightness, alpha;
+    [color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness * factor alpha:alpha];
 }
 
-- (NSInteger)randomNumberBetween:(NSInteger)min maxNumber:(NSInteger)max
+- (UIColor *)nextMainColor
 {
-    return min + arc4random() % (max - min);
+    static int index = 0;
+    NSArray <UIColor *> *colors = @[
+                                    [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0],
+                                    [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0]
+                                    ];
+    return colors[index++ % colors.count];
 }
 
 @end
