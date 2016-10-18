@@ -7,12 +7,11 @@ Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and y
 - **cancellable animations with callbacks for clean up**
 - **swift api**
 
-<p style="float:left; width:50%;">
-test
-</p>
-<p style="float:left; width:50%;">
-test
-</p>
+<img align="right" src="/Meta/Readme/basics.gif?raw=true">
+```
+goRight.start()
+fadeOut.start()
+```
 
 ## Installation
 
@@ -74,41 +73,26 @@ let fadeOut = ANYCABasic(#keyPath(CALayer.opacity)).toValue(0).duration(1).anima
 
 Note: These animations won't start unless you say `start` like this
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 goRight.start()
-fadeOut.start()</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+fadeOut.start()
+```
+<img align="right" src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
 
 Instead of starting each one individually you can group them
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
-goRight.groupWith(fadeOut).start()</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+```swift
+goRight.groupWith(fadeOut).start()
+```
+<img align="right" src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
 
 Calling `start` actually returns an `ANYActivity` empowering you to stop the animation at any time.
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 let activity = goRight.groupWith(fadeOut).start()
 ...
-activity.cancel()</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+activity.cancel()
+```
+<img align="right" src="/Meta/Readme/start_and_cancel.gif?raw=true" alt="GIF" />
 
 ## Live Examples
 
@@ -122,73 +106,52 @@ Compile and run the iOS-Example project to watch some beautiful examples!
 
 #### POP
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 let spring = ANYPOPSpring(kPOPLayerPositionX)
                .toValue(100)
                .springSpeed(5)
-               .animation(for: view.layer)</pre></div>
-    <td>
-      <img src="/Meta/Readme/spring.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+               .animation(for: view.layer)
+```
+<img align="right" src="/Meta/Readme/spring.gif?raw=true" alt="GIF" />
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+
+```swift
 let basic = ANYPOPBasic(kPOPLayerPositionX)
                .toValue(100)
                .duration(2)
-               .animation(for: view.layer)</pre></div>
-    <td>
-      <img src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+               .animation(for: view.layer)
+```
+<img align="right" src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+
+```swift
 let decay = ANYPOPDecay(kPOPLayerPositionX)
                .velocity(10)
-               .animation(for: view.layer)</pre></div>
-    <td>
-      <img src="/Meta/Readme/decay.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+               .animation(for: view.layer)
+```
+<img align="right" src="/Meta/Readme/decay.gif?raw=true" alt="GIF" />
+
 
 #### Core Animation
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 let basic = ANYCABasic(#keyPath(CALayer.position))
                .toValue(CGPoint(x: 100, y: 0))
                .duration(2)
-               .animation(for: view.layer)</pre></div>
-    <td>
-      <img src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+               .animation(for: view.layer)
+```
+<img align="right" src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
+
 
 
 #### UIKit
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 let uikit = ANYUIView.animation(duration: 2) {
     view.center.x = 100
-}</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+}
+```
+<img align="right" src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
 
 
 ## Operators
@@ -197,86 +160,61 @@ let uikit = ANYUIView.animation(duration: 2) {
 
 Start animations simultaneously
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 ANYAnimation *goRight = ...;
 ANYAnimation *fadeOut = ...;
 ANYAnimation *group = [ANYAnimation group:@[goRight, fadeOut]];
-[group start];</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/group.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+[group start];
+```
+<img align="right" src="/Meta/Readme/group.gif?raw=true" alt="GIF" />
 
 #### Chaining
 
 When one animation completes then start another
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
 ANYAnimation *group = [goRight then:goLeft];
-[group start];</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/chain.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+[group start];
+```
+<img align="right" src="/Meta/Readme/chain.gif?raw=true" alt="GIF" />
 
 #### Repeat
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
 ANYAnimation *group = [[goRight then:goLeft] repeat];
-[group start];</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/chain_and_repeat.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+[group start];
+```
+<img align="right" src="/Meta/Readme/chain_and_repeat.gif?raw=true" alt="GIF" />
 
 
 #### Set up and clean up
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 ANYAnimation *pulsatingDot = ...;
 [[pulsatingDot before:^{
    view.hidden = NO;
 }] after:^{
    view.hidden = YES;
 }];
-[pulsatingDot start];</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/setup_and_clean_up.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+[pulsatingDot start];
+```
+<img align="right" src="/Meta/Readme/setup_and_clean_up.gif?raw=true" alt="GIF" />
 
 #### Callbacks
 
-<table>
-  <tr>
-    <td width="50%"><div class="highlight"><pre>
+```swift
 ANYAnimation *anim = ...;
 [[anim onCompletion:^{
     NSLog(@"Animation completed");
 } onError:^{
     NSLog(@"Animation was cancelled");
-}] start];</pre></div></td>
-    <td>
-      <img src="/Meta/Readme/callbacks.gif?raw=true" alt="GIF" />
-    </td>
-  </tr>
-</table>
+}] start];
+```
+<img align="right" src="/Meta/Readme/callbacks.gif?raw=true" alt="GIF" />
 
 ## Feedback
 
