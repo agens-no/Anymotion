@@ -7,6 +7,13 @@ Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and y
 - **cancellable animations with callbacks for clean up**
 - **swift api**
 
+<p style="float:left; width:50%;">
+test
+</p>
+<p style="float:left; width:50%;">
+test
+</p>
+
 ## Installation
 
 
