@@ -69,7 +69,7 @@ Note: These animations won't start unless you say `start` like this
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 goRight.start()
 fadeOut.start()</pre></div></td>
     <td>
@@ -81,7 +81,7 @@ fadeOut.start()</pre></div></td>
 Instead of starting each one individually you can group them
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 goRight.groupWith(fadeOut).start()</pre></div></td>
     <td>
       <img src="/Meta/Readme/basics.gif?raw=true" alt="GIF" />
@@ -93,7 +93,7 @@ Calling `start` actually returns an `ANYActivity` empowering you to stop the ani
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 let activity = goRight.groupWith(fadeOut).start()
 ...
 activity.cancel()</pre></div></td>
@@ -117,7 +117,7 @@ Compile and run the iOS-Example project to watch some beautiful examples!
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 let spring = ANYPOPSpring(kPOPLayerPositionX)
                .toValue(100)
                .springSpeed(5)
@@ -130,7 +130,7 @@ let spring = ANYPOPSpring(kPOPLayerPositionX)
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 let basic = ANYPOPBasic(kPOPLayerPositionX)
                .toValue(100)
                .duration(2)
@@ -143,7 +143,7 @@ let basic = ANYPOPBasic(kPOPLayerPositionX)
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 let decay = ANYPOPDecay(kPOPLayerPositionX)
                .velocity(10)
                .animation(for: view.layer)</pre></div>
@@ -157,7 +157,7 @@ let decay = ANYPOPDecay(kPOPLayerPositionX)
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 let basic = ANYCABasic(#keyPath(CALayer.position))
                .toValue(CGPoint(x: 100, y: 0))
                .duration(2)
@@ -173,7 +173,7 @@ let basic = ANYCABasic(#keyPath(CALayer.position))
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 let uikit = ANYUIView.animation(duration: 2) {
     view.center.x = 100
 }</pre></div></td>
@@ -192,7 +192,7 @@ Start animations simultaneously
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 ANYAnimation *goRight = ...;
 ANYAnimation *fadeOut = ...;
 ANYAnimation *group = [ANYAnimation group:@[goRight, fadeOut]];
@@ -209,7 +209,7 @@ When one animation completes then start another
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
 ANYAnimation *group = [goRight then:goLeft];
@@ -224,7 +224,7 @@ ANYAnimation *group = [goRight then:goLeft];
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 ANYAnimation *goRight = ...;
 ANYAnimation *goLeft = ...;
 ANYAnimation *group = [[goRight then:goLeft] repeat];
@@ -240,7 +240,7 @@ ANYAnimation *group = [[goRight then:goLeft] repeat];
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 ANYAnimation *pulsatingDot = ...;
 [[pulsatingDot before:^{
    view.hidden = NO;
@@ -258,7 +258,7 @@ ANYAnimation *pulsatingDot = ...;
 
 <table>
   <tr>
-    <td width="400px"><div class="highlight"><pre>
+    <td width="50%"><div class="highlight"><pre>
 ANYAnimation *anim = ...;
 [[anim onCompletion:^{
     NSLog(@"Animation completed");
