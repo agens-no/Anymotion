@@ -1,12 +1,12 @@
+
 <img width="30%" align="right" src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
-<div width="70%">
-```swift
+<div width="70%"><pre>
 let basic = ANYPOPBasic(kPOPLayerPositionX)
                .toValue(100)
                .duration(2)
                .animation(for: view.layer)
 ```
-</div>
+</pre></div>
 
 ![Screenshot](/Meta/Readme/logo.gif)
 
