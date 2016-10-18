@@ -1,9 +1,9 @@
-<div float="left" width="460"><pre>
+<pre float="left" width="460px">
 let basic = ANYPOPBasic(kPOPLayerPositionX)
                .toValue(100)
                .duration(2)
                .animation(for: view.layer
-</pre></div>
+</pre>
 <img float="left" width="400px" src="/Meta/Readme/basic.gif?raw=true" alt="GIF" />
 
 ![Screenshot](/Meta/Readme/logo.gif)
