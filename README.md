@@ -39,7 +39,7 @@ import Anymotion
 To install SwiftGen via [Carthage](https://github.com/Carthage/Carthage) add to your Cartfile:
 
 ```ruby
-github "agensdev/anymotion"
+github "agens-no/anymotion"
 ```
 
 ##### Import in swift
