@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     	"Mats Hauge" => "mats@agens.no"
     	}
     s.source        = {
-        :git => "git@github.com:agensdev/anymotion.git",
+        :git => "https://github.com/agens-no/Anymotion.git",
         :tag => s.version.to_s
         }
     s.frameworks    = 'CoreGraphics', 'UIKit', 'QuartzCore'
