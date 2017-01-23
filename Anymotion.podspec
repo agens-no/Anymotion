@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     	}
     s.source        = {
         :git => "git@github.com:agensdev/anymotion.git",
-        :branch => "master"
+        :tag => s.version.to_s
         }
     s.frameworks    = 'CoreGraphics', 'UIKit', 'QuartzCore'
     s.source_files  = 'Source/**/*.{h,m,mm,hpp,cpp,c}'
