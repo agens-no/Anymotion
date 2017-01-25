@@ -16,7 +16,7 @@ Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and y
 If you're using CocoaPods, you can simply add to your `Podfile`:
 
 ```ruby
-pod "Anymotion", :git => 'https://github.com/agens-no/Anymotion.git', :branch => 'master'
+pod 'Anymotion', :git => 'https://github.com/agens-no/Anymotion.git', :branch => 'master'
 ```
 
 This will download the `Anymotion` and dependencies in `Pods/` during your next `pod install` exection. You may have to say `pod repo update` first.
