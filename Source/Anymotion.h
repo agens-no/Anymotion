@@ -26,7 +26,7 @@
 #import "ANYAnimation.h"
 #import "ANYSubscriber.h"
 #import "ANYCABasic.h"
-#import "ANYCAKeyFrame.h"
+#import "ANYCAKeyframe.h"
 #import "ANYPOPBasic.h"
 #import "ANYPOPDecay.h"
 #import "ANYPOPSpring.h"
