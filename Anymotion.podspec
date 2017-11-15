@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name          = "Anymotion"
-    s.version       = "0.1"
+    s.version       = "0.1.1"
     s.summary       = "Anymotion provides one unified API for animating UIKit, CoreAnimation, POP and your library of choice."
     s.homepage      = "https://github.com/agensdev/anymotion/"
     s.license       = {
