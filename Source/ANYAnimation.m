@@ -331,7 +331,7 @@ static NSString *ANYAnimationDefaultName = @"anim";
             {
                 if (whileBlock())
                 {
-                    current = [[self repeat] subscribe:subscriber];
+                    current = [[self repeatWhile:whileBlock] subscribe:subscriber];
                 }
                 else
                 {
