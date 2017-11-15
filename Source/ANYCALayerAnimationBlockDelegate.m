@@ -25,7 +25,7 @@
 
 @interface ANYCALayerAnimationBlockDelegate ()
 
-@property (nonatomic, copy) void (^onStart)();
+@property (nonatomic, copy) void (^onStart)(void);
 @property (nonatomic, copy) void (^onStop)(BOOL finished);
 
 @end

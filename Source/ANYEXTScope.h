@@ -96,7 +96,7 @@
 #endif
 
 /*** implementation details follow ***/
-typedef void (^any_cleanupBlock_t)();
+typedef void (^any_cleanupBlock_t)(void);
 
 void any_executeCleanupBlock (__strong any_cleanupBlock_t *block);
 

@@ -26,7 +26,7 @@
 
 @interface ANYSubscriber () 
 
-@property (nonatomic, copy) void (^onCompletion)();
+@property (nonatomic, copy) void (^onCompletion)(void);
 @property (nonatomic, copy) dispatch_block_t onError;
 @property (nonatomic, assign) BOOL finalized;
 

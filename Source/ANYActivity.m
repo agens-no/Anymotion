@@ -95,7 +95,7 @@
     }
     else
     {
-        void (^current)() = self.block;
+        void (^current)(void) = self.block;
         self.block = ^{
             NSString *debugName USE_ME_TO_DEBUG = name;
             current();
